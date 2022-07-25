@@ -10,6 +10,6 @@ DB_NAME = env.str('DB_NAME', None)
 DB_USER = env.str('DB_USER', None)
 DB_PASSWORD = env.str('DB_PASSWORD', None)
 DB_HOST = env.str('DB_HOST', None)
-DB_PORT = env.int('DB_PORT', None)
+DB_PORT = env.int('DB_PORT', default=None)
 
 I18N_DOMAIN = 'mybot'
