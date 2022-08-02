@@ -1,6 +1,4 @@
 .idea
-**/.venv
+**/venv
 **/__pycache__
-**/*.sqlite
-**/.vscode
-**/.env
+**/poetry.lock
