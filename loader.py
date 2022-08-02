@@ -30,7 +30,6 @@ async def on_shutdown(dispatcher):
     logger.warning('Bot shutting down!')
     await bot.delete_my_commands(scope=types.BotCommandScopeDefault())
 
-
 # Init database type
 if DB_USER and DB_NAME and DB_PASS and DB_HOST and DB_PORT:
     from peewee import PostgresqlDatabase

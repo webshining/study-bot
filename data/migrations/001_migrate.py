@@ -83,6 +83,7 @@ def migrate(migrator: Migrator, database, fake=False, **kwargs):
         name = pw.CharField(max_length=255)
         username = pw.CharField(max_length=255)
         photo = pw.CharField(max_length=255, null=True)
+        status = pw.CharField(constraints=[SQL("DEFAULT 'user'")], default='user', max_length=255)
 
         class Meta:
             table_name = "users"

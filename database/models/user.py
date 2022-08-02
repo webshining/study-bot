@@ -7,6 +7,7 @@ class User(BaseModel):
     name = CharField()
     username = CharField()
     photo = CharField(null=True)
+    status = CharField(default='user')
 
     class Meta:
         table_name = 'users'
