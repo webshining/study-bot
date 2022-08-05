@@ -10,7 +10,7 @@ def get_subjects():
     return list(Subject.select())
 
 
-def add_subjects(name: str, audience: str = None, teacher: str = None, info: str = None):
+def add_subject(name: str, audience: str = None, teacher: str = None, info: str = None):
     return Subject.create(name=name, audience=audience, teacher=teacher, info=info)
 
 
