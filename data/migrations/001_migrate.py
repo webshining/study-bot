@@ -53,21 +53,22 @@ def migrate(migrator: Migrator, database, fake=False, **kwargs):
     @migrator.create_model
     class Subject(pw.Model):
         name = pw.CharField(max_length=255)
-        audience = pw.CharField(max_length=255, null=True)
-        teacher = pw.CharField(max_length=255, null=True)
+        audience = pw.CharField(max_length=255)
+        teacher = pw.CharField(max_length=255)
         info = pw.CharField(max_length=255, null=True)
 
         class Meta:
             table_name = "subjects"
 
     @migrator.create_model
-    class DaySubject(pw.Model):
+    class DaySubjectThrough(pw.Model):
         id = pw.AutoField()
-        day = pw.ForeignKeyField(backref='daysubject_set', column_name='day_id', field='id', model=migrator.orm['days'])
-        subject = pw.ForeignKeyField(backref='daysubject_set', column_name='subject_id', field='id', model=migrator.orm['subjects'])
+        day = pw.ForeignKeyField(backref='daysubjectthrough_set', column_name='day_id', field='id', model=migrator.orm['days'])
+        subject = pw.ForeignKeyField(backref='daysubjectthrough_set', column_name='subject_id', field='id', model=migrator.orm['subjects'])
 
         class Meta:
-            table_name = "day_subject"
+            table_name = "days_subjects_through"
+            indexes = [(('day', 'subject'), True)]
 
     @migrator.create_model
     class File(pw.Model):
@@ -99,7 +100,7 @@ def rollback(migrator: Migrator, database, fake=False, **kwargs):
 
     migrator.remove_model('files')
 
-    migrator.remove_model('day_subject')
+    migrator.remove_model('days_subjects_through')
 
     migrator.remove_model('days')
 

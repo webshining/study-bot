@@ -4,6 +4,8 @@ from loader import bot, dp, i18n
 
 
 async def on_startup(dispatcher):
+    from database import init_days
+    init_days()
     import app.middlewares, app.commands
     app.middlewares.setup_middlewares(dp)
     # await app.commands.set_default_commands()

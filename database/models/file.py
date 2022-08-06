@@ -1,4 +1,4 @@
-from peewee import PrimaryKeyField, CharField, ForeignKeyField
+from peewee import ForeignKeyField, PrimaryKeyField, CharField
 from .base import BaseModel
 from .subject import Subject
 
