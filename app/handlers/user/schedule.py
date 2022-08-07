@@ -42,7 +42,7 @@ def _get_schedule_text(week: list):
             for i, subject in enumerate(day.subjects):
                 text += f'{i + 1}) <b>{subject.name}({subject.audience})</b>\n\n'
 
-    return text if text != '' else 'Schedule is empty'
+    return text if text != '' else _('Schedule is empty')
 
 
 def _get_schedule_data():
