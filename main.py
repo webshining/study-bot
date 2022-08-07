@@ -1,6 +1,6 @@
-from aiogram import executor, types
 from utils import logger
 from loader import bot, dp, i18n
+from aiogram import executor, types
 
 
 async def on_startup(dispatcher):
