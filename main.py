@@ -8,7 +8,7 @@ async def on_startup(dispatcher):
     init_days()
     import app.middlewares, app.commands
     app.middlewares.setup_middlewares(dp)
-    # await app.commands.set_default_commands()
+    await app.commands.set_default_commands()
     logger.info('Bot started!')
 
 
@@ -21,4 +21,5 @@ async def on_shutdown(dispatcher):
 
 if __name__ == '__main__':
     import app.handlers
+
     executor.start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown, skip_updates=True)
