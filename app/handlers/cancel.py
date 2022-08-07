@@ -1,5 +1,6 @@
-from aiogram.dispatcher.filters import Command
 from aiogram.types import Message
+from aiogram.dispatcher.filters import Command
+
 from loader import dp, _
 
 

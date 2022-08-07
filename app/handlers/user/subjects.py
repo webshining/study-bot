@@ -1,7 +1,8 @@
-from aiogram.types import Message, CallbackQuery
 from aiogram.dispatcher.filters import Command
-from database import get_subject, get_subjects
+from aiogram.types import Message, CallbackQuery
+
 from loader import _, dp
+from database import get_subject, get_subjects
 from app.keyboards import get_subjects_markup, get_files_markup
 
 
