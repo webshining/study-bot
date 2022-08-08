@@ -5,7 +5,7 @@ from aiogram.dispatcher.filters import Command
 from aiogram.types import Message, CallbackQuery
 
 from loader import dp, bot, _
-from database import get_week
+from database import get_week_subjects
 from app.keyboards import get_week_markup
 
 
@@ -23,7 +23,7 @@ async def schedule_week_handler(call: CallbackQuery):
     elif call.data[9:] == 'next':
         date = datetime.now() + timedelta(weeks=1)
 
-    week_schedule = get_week(date.isocalendar()[1])
+    week_schedule = get_week_subjects(date.isocalendar()[1])
     text = _get_schedule_text(week_schedule)
     try:
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
@@ -35,11 +35,11 @@ async def schedule_week_handler(call: CallbackQuery):
 
 def _get_schedule_text(week: list):
     text = ''
-    for index, day in enumerate(week):
-        if day.subjects:
+    for index, subjects in enumerate(week):
+        if subjects:
             week_day = calendar.day_name[index]
             text += f'{week_day}:\n'
-            for i, subject in enumerate(day.subjects):
+            for i, subject in enumerate(subjects):
                 text += f'{i + 1}) <b>{subject.name}({subject.audience})</b>\n\n'
 
     return text if text != '' else _('Schedule is empty')
@@ -52,7 +52,7 @@ def _get_schedule_data():
         shift = 'next'
         now += timedelta(weeks=1)
 
-    week_schedule = get_week(now.isocalendar()[1])
+    week_schedule = get_week_subjects(now.isocalendar()[1])
 
     text = _get_schedule_text(week_schedule)
 
