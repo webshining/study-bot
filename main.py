@@ -1,4 +1,4 @@
-from utils import logger
+from utils.logging import logger
 from loader import bot, dp, i18n
 from aiogram import executor, types
 
