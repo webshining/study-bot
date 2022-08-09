@@ -17,3 +17,7 @@ def delete_subject(id: int):
     subject = get_subject(id)
     subject.delete_instance()
     return
+
+
+def get_subject_days(id: int):
+    days = Day

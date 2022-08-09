@@ -31,9 +31,9 @@ def _get_homework_text(week: list[list[Task]]):
     text = ''
     for index, day in enumerate(week):
         if day:
-            text += f'\n\n{calendar.day_name[index]}\n'
+            text += f'\n\n{calendar.day_name[index]}'
             for i, task in enumerate(day):
-                text += f'{i+1}) <b>{task.subject.name}:</b>\n{task.text}'
+                text += f'\n{i+1}) <b>{task.subject.name}:</b>\n{task.text}'
 
     return text if text != '' else _('Homework is empty')
 
