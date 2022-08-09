@@ -2,15 +2,15 @@
 name = "study-bot"
 version = "0.1.0"
 description = ""
-authors = ["Artem <artemilienkono@gmail.com>"]
+authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 aiogram = "^2.21"
+loguru = "^0.6.0"
 peewee = "^3.15.1"
 peewee-migrate = "^1.4.12"
 environs = "^9.5.0"
-loguru = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 

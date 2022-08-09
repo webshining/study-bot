@@ -8,7 +8,7 @@ from app.keyboards import get_subjects_markup, get_files_markup
 
 @dp.message_handler(Command('subjects'))
 async def info_handler(message: Message):
-    await message.answer(_('Select subject:'), reply_markup=get_subjects_markup(get_subjects()))
+    await message.answer(_('Select subject:'), reply_markup=get_subjects_markup('subjects', get_subjects()))
 
 
 @dp.callback_query_handler(lambda call: call.data.startswith('subjects'))
@@ -25,10 +25,10 @@ async def subject_file_handler(call: CallbackQuery):
 def _get_subject_text(subject):
     markup = None
     text = ''
-    text += _('<b>{}</b>\n\nAudience: {}\nTeacher: {}\n\n').format(subject.name, subject.audience, subject.teacher)
+    text += _('<b>{}</b>\n\nAudience: <b>{}</b>\nTeacher: <b>{}</b>\n\n').format(subject.name, subject.audience, subject.teacher)
     if subject.info:
-        text += subject.info
+        text += f'{subject.info}\n\n'
     if subject.files:
         markup = get_files_markup('info', subject.files)
-        text += _('\n\nDocument list:')
+        text += _('Document list:')
     return text, markup

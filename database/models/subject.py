@@ -1,4 +1,4 @@
-from peewee import PrimaryKeyField, CharField
+from peewee import PrimaryKeyField, CharField, TextField
 from .base import BaseModel
 
 
@@ -7,7 +7,7 @@ class Subject(BaseModel):
     name = CharField()
     audience = CharField()
     teacher = CharField()
-    info = CharField(null=True)
+    info = TextField(null=True)
 
     class Meta:
         table_name = 'subjects'
