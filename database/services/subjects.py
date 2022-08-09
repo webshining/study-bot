@@ -9,12 +9,11 @@ def get_subjects():
     return list(Subject.select())
 
 
-def create_subject(name: str, audience: str, teacher: str, info: str):
+def create_subject(name: str, audience: str, teacher: str, info: str = None):
     return Subject.create(name=name, audience=audience, teacher=teacher, info=info)
 
 
 def delete_subject(id: int):
     subject = get_subject(id)
-    if subject:
-        subject.delete_instance()
-    return True
+    subject.delete_instance()
+    return

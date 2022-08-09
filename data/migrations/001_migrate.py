@@ -46,6 +46,8 @@ def migrate(migrator: Migrator, database, fake=False, **kwargs):
 
     @migrator.create_model
     class Day(pw.Model):
+        id = pw.IntegerField(primary_key=True)
+        subjects = pw.CharField(constraints=[SQL("DEFAULT ''")], default='', max_length=255)
 
         class Meta:
             table_name = "days"
@@ -55,19 +57,10 @@ def migrate(migrator: Migrator, database, fake=False, **kwargs):
         name = pw.CharField(max_length=255)
         audience = pw.CharField(max_length=255)
         teacher = pw.CharField(max_length=255)
-        info = pw.CharField(max_length=255, null=True)
+        info = pw.TextField(null=True)
 
         class Meta:
             table_name = "subjects"
-
-    @migrator.create_model
-    class DaySubjectThrough(pw.Model):
-        id = pw.AutoField()
-        day = pw.ForeignKeyField(backref='daysubjectthrough_set', column_name='day_id', field='id', model=migrator.orm['days'])
-        subject = pw.ForeignKeyField(backref='daysubjectthrough_set', column_name='subject_id', field='id', model=migrator.orm['subjects'])
-
-        class Meta:
-            table_name = "days_subjects_through"
 
     @migrator.create_model
     class Task(pw.Model):
@@ -110,8 +103,6 @@ def rollback(migrator: Migrator, database, fake=False, **kwargs):
     migrator.remove_model('subjects')
 
     migrator.remove_model('files')
-
-    migrator.remove_model('days_subjects_through')
 
     migrator.remove_model('days')
 
