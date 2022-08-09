@@ -6,7 +6,7 @@ from .subject import Subject
 class Task(BaseModel):
     id = PrimaryKeyField()
     text = CharField()
-    subject = ForeignKeyField(Subject, null=True)
+    subject = ForeignKeyField(Subject, backref='tasks', null=True)
     date = DateTimeField()
 
     class Meta:
