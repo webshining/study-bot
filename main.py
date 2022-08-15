@@ -1,10 +1,8 @@
 from aiogram import executor
-from database import Subject, File, Day, init_days
-from loader import database
+from database import init_days
 
 
 async def on_startup(dispatcher):
-    database.create_tables([Subject, File, Day])
     init_days()
 
 
