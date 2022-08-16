@@ -1,33 +1,30 @@
-from datetime import date, timedelta
-from ..models import Subject, Day
+from ..models import Subject
+
+
+def create_subject(name: str, audience: str, teacher: str, info: str):
+    return Subject.create(name=name, audience=audience, teacher=teacher, info=info)
 
 
 def get_subject(id: int):
-    return Subject.get_by_id(id)
+    return Subject.get_or_none(Subject.id == id)
 
 
 def get_subjects():
-    return list(Subject.select())
+    subjects = list(Subject.select())
+    return subjects
 
 
-def _get_day_number_by_date(_date: date) -> int:
-    day = _date.weekday() + 1
-    if _date.isocalendar().week % 2 == 0:
-        day += 7
-    return day
+def delete_subject(id: int):
+    subject = get_subject(id)
+    subject.delete_instance()
+    return True
 
 
-def get_subject_dates(id: int):
-    days = [d for d in list(Day.select()) if id in [int(i) for i in d.subjects.split(',') if i.strip()]]
-    today = date.today()
-    dates_list = []
-    for day in days:
-        if day.id > _get_day_number_by_date(today):
-            days_to = day.id - _get_day_number_by_date(today)
-        else:
-            days_to = 14 - _get_day_number_by_date(today) + day.id
-
-        _date = today + timedelta(days=days_to)
-        dates_list.append(_date)
-
-    return sorted(dates_list)
+def edit_subject(id: int, name: str, audience: str, teacher: str, info: str):
+    subject = get_subject(id)
+    subject.name = name
+    subject.audience = audience
+    subject.teacher = teacher
+    subject.info = info
+    subject.save()
+    return subject
