@@ -81,10 +81,21 @@ def migrate(migrator: Migrator, database, fake=False, **kwargs):
         class Meta:
             table_name = "files"
 
+    @migrator.create_model
+    class User(pw.Model):
+        name = pw.CharField(max_length=255)
+        username = pw.CharField(max_length=255)
+        status = pw.CharField(constraints=[SQL("DEFAULT 'user'")], default='user', max_length=255)
+
+        class Meta:
+            table_name = "users"
+
 
 
 def rollback(migrator: Migrator, database, fake=False, **kwargs):
     """Write your rollback migrations here."""
+
+    migrator.remove_model('users')
 
     migrator.remove_model('tasks')
 
