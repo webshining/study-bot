@@ -23,7 +23,7 @@ async def edit_subject_route(id: int):
 
 
 @router.post('/subjects')
-async def all_subjects_route(subject: SubjectType):
+async def create_subjects_route(subject: SubjectType):
     create_subject(*subject.dict().values())
     return {"info": "Subject created!"}
 
@@ -35,6 +35,6 @@ async def edit_subject_route(id: int, subject: SubjectType):
 
 
 @router.delete('/subjects/{id}')
-async def edit_subject_route(id: int):
+async def delete_subject_route(id: int):
     delete_subject(id)
     return {"info": "Subject deleted!"}
