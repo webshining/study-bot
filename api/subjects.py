@@ -17,15 +17,15 @@ async def all_subjects_route():
     return {"subjects": [model_to_dict(s) for s in get_subjects()]}
 
 
+@router.get('/subjects/{id}')
+async def edit_subject_route(id: int):
+    return {"subject": model_to_dict(get_subject(id))}
+
+
 @router.post('/subjects')
 async def all_subjects_route(subject: SubjectType):
     create_subject(*subject.dict().values())
     return {"info": "Subject created!"}
-
-
-@router.get('/subjects/{id}')
-async def edit_subject_route(id: int):
-    return {"subject": model_to_dict(get_subject(id))}
 
 
 @router.put('/subjects/{id}')
