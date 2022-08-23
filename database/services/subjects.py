@@ -1,5 +1,5 @@
 from transliterate import translit
-from ..models import subjects
+from ..models import subjects, Subject
 
 
 def get_subject(codename: str):
@@ -9,7 +9,7 @@ def get_subject(codename: str):
 
 def get_subjects():
     _subjects = subjects.find()
-    return _subjects
+    return [User(**s) for s in _subjects]
 
 
 def create_subject(name: str, audience: str, teacher: str, info: str = ''):

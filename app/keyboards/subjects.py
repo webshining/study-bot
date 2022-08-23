@@ -5,7 +5,7 @@ def get_subjects_keyboard(data: str, subjects: list):
     markup = InlineKeyboardMarkup(row_width=2)
 
     buttons = [
-        InlineKeyboardButton(text=subject.name, callback_data=f'{data}_{subject.id}') for subject in subjects
+        InlineKeyboardButton(text=subject.name, callback_data=f'{data}_{subject.codename}') for subject in subjects
     ]
     markup.add(*buttons)
 
