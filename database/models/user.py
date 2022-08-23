@@ -1,12 +1,13 @@
-from peewee import PrimaryKeyField, CharField
-from .base import BaseModel
+from pydantic import BaseModel
+from loader import database
 
 
 class User(BaseModel):
-    id = PrimaryKeyField()
-    name = CharField()
-    username = CharField()
-    status = CharField(default='user')
+    _id: str
+    user_id: int
+    name: str
+    username: str
+    status: str
+    
 
-    class Meta:
-        table_name = 'users'
+users = database['users']

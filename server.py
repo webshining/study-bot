@@ -2,7 +2,6 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api import router
-from database import init_days
 
 app = FastAPI()
 app.include_router(router)
@@ -24,5 +23,4 @@ app.add_middleware(
 
 
 if __name__ == '__main__':
-    init_days()
     uvicorn.run("server:app", host='0.0.0.0', port=8000, reload=True)

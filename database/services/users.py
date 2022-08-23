@@ -1,35 +1,26 @@
-from ..models import User
+from ..models import users
 
 
 def get_user(id: int):
-    return User.get_or_none(User.id == id)
+    _user = users.find_one({'user_id': id})
+    return _user
 
 
 def get_users(status: str = None):
-    if status:
-        return list(User.select().where(User.status == status))
-    return list(User.select())
+    _users = users.find({'status': status}) if status else users.find()
+    return _users
 
 
-def create_user(id: int, name: str, username: str):
-    return User.create(id=id, name=name, username=username)
-
-
-def edit_status(id: int, status: str):
-    user = get_user(id)
-    user.status = status
-    user.save()
-
-    return user
+def create_user(id: int, name: str, username: str, status: str = 'user'):
+    _user = users.insert_one({'user_id': id, 'name': name, 'username': username, 'status': status})
+    return _user
 
 
 def get_or_create_user(id: int, name: str, username: str):
-    user = get_user(id)
-    if user:
-        user.name = name
-        user.username = username
-        user.save()
+    _user = get_user(id)
+    if _user:
+        _user = users.find_one_and_update({'user_id': id}, {'$set': {'name': name, 'username': username}})
     else:
-        user = create_user(id, name, username)
-
-    return user
+        _user = create_user(id, name, username)
+        
+    return _user

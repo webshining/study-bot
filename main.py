@@ -1,11 +1,7 @@
+from venv import create
 from aiogram import executor
-from database import init_days
-
-
-async def on_startup(dispatcher):
-    init_days()
 
 
 if __name__ == '__main__':
-    import app.handlers
-    executor.start_polling(app.handlers.dp, on_startup=on_startup)
+    from database import get_user, get_or_create_user
+    print(get_or_create_user(35645674, 'aboba', 'amogus'))
