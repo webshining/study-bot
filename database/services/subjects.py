@@ -4,12 +4,12 @@ from ..models import subjects, Subject
 
 def get_subject(codename: str):
     _subject = subjects.find_one({'codename': codename})
-    return _subject
+    return Subject(**_subject)
 
 
 def get_subjects():
     _subjects = subjects.find()
-    return [User(**s) for s in _subjects]
+    return [Subject(**s) for s in _subjects]
 
 
 def create_subject(name: str, audience: str, teacher: str, info: str = ''):

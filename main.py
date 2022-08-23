@@ -1,4 +1,3 @@
-from venv import create
 from aiogram import executor
 
 
