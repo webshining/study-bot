@@ -1,2 +1,2 @@
-from .user import User, users
-from .subject import Subject, subjects
+from .subject import subjects_collection
+from .day import days_collection

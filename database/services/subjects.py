@@ -1,25 +1,18 @@
-from transliterate import translit
-from ..models import subjects, Subject
-
-
-def get_subject(codename: str):
-    _subject = subjects.find_one({'codename': codename})
-    return Subject(**_subject)
+from ..models import subjects_collection
+from bson.objectid import ObjectId
 
 
 def get_subjects():
-    _subjects = subjects.find()
-    return [Subject(**s) for s in _subjects]
+    subjects = subjects_collection.find()
+    return subjects
 
 
-def create_subject(name: str, audience: str, teacher: str, info: str = ''):
-    try:
-        codename = translit(name, reversed=True).lower()
-    except:
-        codename = name.lower()
-    _subject = subjects.insert_one({'codename': codename, 'name': name, 'audience': audience, 'teacher': teacher, 'info': info})
-    return _subject
+async def create_subject(name: str, audience: str, teacher: str, info: str = ''):
+    subject = await subjects_collection.insert_one(
+        {'name': name, 'audience': audience, 'teacher': teacher, 'info': info})
+    return subject
 
 
-def delete_subject():
-    subjects.find_one_and_delete({''})
+async def update_subject(id: str, name: str, audience: str, teacher: str, info: str):
+    subject = await subjects_collection.find_one_and_update({'_id': ObjectId(id)}, {'$set': {'name': name, 'audience': audience, 'teacher': teacher, 'info': info}})
+    return subject

@@ -1,6 +1,11 @@
-from aiogram import executor
+import asyncio
+from database import init_days
 
 
-if __name__ == '__main__':
-    import app.handlers
-    executor.start_polling(app.handlers.dp)
+async def handler():
+    await init_days()
+
+
+ioloop = asyncio.new_event_loop()
+asyncio.set_event_loop(ioloop)
+ioloop.run_until_complete(handler())
