@@ -1,10 +1,9 @@
 from aiogram import executor
-from database import init_days, edit_day_subjects
+from database import init_days
 
 
 async def on_startup(dispatcher):
     await init_days()
-    await edit_day_subjects('6308bf15bd6d31b881aaf369', ['6308bd6f330a1346b4267510', '6308a9ba83558c993c5fbdf2'])
 
 
 if __name__ == '__main__':

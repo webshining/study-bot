@@ -1,10 +1,15 @@
-from ..models import subjects_collection
+from ..models import subjects_collection, Subject
 from bson.objectid import ObjectId
 
 
-def get_subjects():
+async def get_subjects():
     subjects = subjects_collection.find()
-    return subjects
+    return [Subject(**s) async for s in subjects]
+
+
+async def get_subject(id: str):
+    subject = await subjects_collection.find_one({'_id': ObjectId(id)})
+    return Subject(**subject)
 
 
 async def create_subject(name: str, audience: str, teacher: str, info: str = ''):
