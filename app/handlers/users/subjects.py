@@ -5,8 +5,10 @@ from loader import dp
 from database import get_subjects, get_subject
 
 
-@dp.message_handler(Command('subjects'))
+@dp.message_handler(Command('subjects'), status='admin')
 async def subjects_handler(message: Message):
+    if not await get_subjects():
+        return await message.answer('Subjects list is empty!')
     await message.answer('Select subject:', reply_markup=get_subjects_markup('info', await get_subjects()))
 
 
