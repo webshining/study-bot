@@ -3,7 +3,7 @@ from loader import database
 
 
 class User(BaseModel):
-    id: int = Field(default_factory=int, alias='_id')
+    id: int = Field(alias='_id')
     name: str
     username: str
     status: str
