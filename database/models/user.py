@@ -5,7 +5,7 @@ from loader import database
 class User(BaseModel):
     id: int = Field(alias='_id')
     name: str
-    username: str
+    username: str = None
     status: str
 
 
