@@ -1,3 +1,4 @@
+from datetime import date
 from pydantic import BaseModel, Field
 from .pyobjectid import PyObjectId
 from .file import File
@@ -8,6 +9,7 @@ class Task(BaseModel):
     id: PyObjectId = Field(alias='_id')
     subject: PyObjectId
     text: str
+    date: date
     files: list[File] = None
 
 
