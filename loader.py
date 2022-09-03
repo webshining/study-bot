@@ -1,6 +1,7 @@
 import motor.motor_asyncio
 from aiogram import Bot, Dispatcher, types
 from data.config import MONGO_URL, TELEGRAM_BOT_TOKEN, RD_HOST, RD_PORT, RD_DB, RD_PASS
+from app.middlewares.inter import i18n
 
 
 bot = Bot(TELEGRAM_BOT_TOKEN, parse_mode=types.ParseMode.HTML, disable_web_page_preview=True)
@@ -14,3 +15,5 @@ dp = Dispatcher(bot, storage=storage)
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
 database = client.study_bot
+
+_ = i18n.gettext

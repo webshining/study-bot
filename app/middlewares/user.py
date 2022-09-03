@@ -14,4 +14,3 @@ class UserMiddleware(BaseMiddleware):
     async def on_process_callback_query(call: CallbackQuery, data):
         from_user = call.from_user
         data['users'] = await get_or_create_user(from_user.id, from_user.full_name, from_user.username)
-        await call.answer()

@@ -22,7 +22,7 @@ async def schedule_callback_handler(call: CallbackQuery):
     try:
         await call.message.edit_text(text, reply_markup=markup)
     except:
-        await call.answer('Nothing changed', show_alert=True)
+        await call.answer('Nothing changed')
     await call.answer()
 
 

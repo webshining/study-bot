@@ -1,7 +1,10 @@
+from pathlib import Path
 from environs import Env
 
 env = Env()
 env.read_env()
+
+DIR = Path(__file__).absolute().parent.parent
 
 TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', None)
 
@@ -11,3 +14,5 @@ RD_DB = env.str('RD_DB', None)
 RD_PASS = env.str('RD_PASS', None)
 RD_HOST = env.str('RD_HOST', None)
 RD_PORT = env.int('RD_PORT', None)
+
+I18N_DOMAIN = 'bot'
