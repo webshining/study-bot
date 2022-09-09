@@ -1,27 +1,32 @@
-from .. import subjectsRouter
-from database import get_subjects, get_subject, create_subject, update_subject
-from ..models import Subject
+from api import subjectsRouter
+from pydantic import BaseModel
+from database import get_subjects, get_subject, File, create_subject
 
 
-@subjectsRouter.get('/')
-async def get_subjects_router():
-    subjects = [s.dict() for s in await get_subjects()]
-    return {'subjects': subjects}
+class Subject(BaseModel):
+    name: str
+    audience: str
+    teacher: str
+    info: str = None
+    files: list[File] = None
 
 
-@subjectsRouter.get('/{id}')
-async def get_subject_router(id: str):
-    subject = await get_subject(id)
-    return {'subject': subject.dict() if subject else None}
+@subjectsRouter.get('/subjects')
+async def get_all_subjects_router(limit: int = None):
+    subjects = await get_subjects()
+    return {'subjects': [s.dict() for s in (subjects[:limit] if limit else subjects)]}
 
 
-@subjectsRouter.put('/{id}')
-async def update_subject_router(id: str, subject: Subject):
-    await update_subject(id, *subject.dict().values())
-    return {'info': 'Subject updated!'}
+@subjectsRouter.get('/subjects/{id}')
+async def get_one_subject_router(id: str):
+    try:
+        subject = await get_subject(id)
+        return {'subject': subject.dict()} if subject else {'error': 'Subject not found!'}
+    except:
+        return {'error': "Not correct id!"}
 
 
-@subjectsRouter.post('/')
+@subjectsRouter.post('/subjects')
 async def create_subject_router(subject: Subject):
-    await create_subject(*subject.dict().values())
+    await create_subject(subject.name, subject.audience, subject.teacher, subject.info, subject.files)
     return {'info': 'Subject created!'}

@@ -1,7 +1,5 @@
 from fastapi import APIRouter
 
-usersRouter = APIRouter(prefix='/users', tags=['Users'])
-subjectsRouter = APIRouter(prefix='/subjects', tags=['Subjects'])
-daysRouter = APIRouter(prefix='/days', tags=['Days'])
+subjectsRouter = APIRouter(prefix='/api', tags=['Subjects'])
 
-from . import routes
+from .routes import *
