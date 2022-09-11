@@ -18,5 +18,6 @@ app.add_middleware(
 )
 
 
-if __name__ == '__main__':
-    uvicorn.run('server:app', reload=True, host='0.0.0.0', port=4000)
+@app.get('/')
+async def root_router():
+    return {'status': 'Aboba'}
