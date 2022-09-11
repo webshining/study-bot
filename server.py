@@ -12,11 +12,8 @@ origins = [
 ]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=['https://react-dashboard-black.vercel.app/'],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=['*'],
+    allow_headers=['*'],
 )
-
-if __name__ == '__main__':
-    uvicorn.run('server:app', host='0.0.0.0', port=4000)
