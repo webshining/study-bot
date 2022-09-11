@@ -9,11 +9,12 @@ app.include_router(subjectsRouter)
 origins = [
     "https://react-dashboard-black.vercel.app"
 ]
-app.add_middleware(
-    CORSMiddleware,
-    allow_methods=['*'],
-    allow_headers=['*'],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_credentials=True,
+#     allow_methods=['*'],
+#     allow_headers=['*'],
+# )
 
 
 @app.get('/')
