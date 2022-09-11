@@ -8,6 +8,7 @@ app = FastAPI()
 app.include_router(subjectsRouter)
 origins = [
     "http://localhost:3000",
+    "https://react-dashboard-black.vercel.app"
 ]
 app.add_middleware(
     CORSMiddleware,
