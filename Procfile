@@ -1,1 +1,2 @@
-app: nohup python server.py & python main.py
+app: python main.py
+server: python server.py
