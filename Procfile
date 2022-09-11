@@ -1,1 +1,1 @@
-app: /bin/entrypoint.sh
+app: nohup python server.py & python main.py
