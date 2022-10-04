@@ -1,3 +1,2 @@
-from .subjects import *
-from .users import *
 from .days import *
+from .subjects import *

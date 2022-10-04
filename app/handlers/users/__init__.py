@@ -1,4 +1,4 @@
-from .schedule import dp
-from .subjects import dp
+from . import start
+from . import subjects
+from . import schedule
 
-__all__ = ['dp']
