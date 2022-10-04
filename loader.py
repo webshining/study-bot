@@ -1,12 +1,17 @@
 from aiogram import Bot, Dispatcher, types
-from peewee import SqliteDatabase, PostgresqlDatabase
-from data.config import DB_HOST, DB_PASS, DB_USER, DB_PORT, DB_NAME, TELEGRAM_BOT_TOKEN
+from pymongo import MongoClient
+
+from data.config import RD_DB, RD_HOST, RD_PASS, RD_PORT, TELEGRAM_BOT_TOKEN, MONGODB_URL
 
 
 bot = Bot(TELEGRAM_BOT_TOKEN, parse_mode=types.ParseMode.HTML, disable_web_page_preview=True)
-dp = Dispatcher(bot)
-
-if DB_HOST and DB_PASS and DB_USER and DB_PORT and DB_NAME:
-    database = PostgresqlDatabase(DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+if RD_DB and RD_HOST and RD_PORT:
+    from aiogram.contrib.fsm_storage.redis import RedisStorage2
+    storage = RedisStorage2(RD_HOST, RD_PORT, RD_DB, RD_PASS)
 else:
-    database = SqliteDatabase('data/database.sqlite3')
+    from aiogram.contrib.fsm_storage.memory import MemoryStorage
+    storage = MemoryStorage()
+dp = Dispatcher(bot, storage=storage)
+
+client = MongoClient(MONGODB_URL)
+db = client['database']

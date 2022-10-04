@@ -1,5 +1,2 @@
-from .user import User
-from .subject import Subject
-from .day import Day, init_days
-from .task import Task
-from .file import File
+from .day import Day, days_collection
+from .subject import Subject, subjects_collection
