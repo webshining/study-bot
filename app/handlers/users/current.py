@@ -33,7 +33,7 @@ def _get_current_data():
     day = get_day_by_date(current_time)
     subjects = day.subjects
     subject_now = [s for s in subjects if s.time_end >= time]
-    if time >= subjects[-1].time_end:
+    if not subject_now or time >= subjects[-1].time_end:
         text = f'Classes are over!'
     elif time >= subject_now[0].time_start:
         text = f'Now class of <b>{subject_now[0].name}</b>\nTeacher: <b>{subject_now[0].teacher}</b>'
