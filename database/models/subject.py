@@ -11,6 +11,8 @@ class Subject(BaseModel):
     teacher: str
     info: str
     files: list[File]
+    time_start: str = None
+    time_end: str = None
 
 
 subjects_collection = db['subjects']
