@@ -1,7 +1,6 @@
 from bson import ObjectId
 from ..models import Subject, subjects_collection
 
-
 def get_subjects():
     return [Subject(**s) for s in subjects_collection.find()]
 

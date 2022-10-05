@@ -5,7 +5,9 @@ from utils import logger
 
 
 async def on_startup(dispatcher):
+    from database.services import init_days
     logger.info('Bot started!')
+    init_days()
 
 
 async def on_shutdown(dispatcher):

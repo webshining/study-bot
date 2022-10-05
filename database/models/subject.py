@@ -10,6 +10,8 @@ class Subject(BaseModel):
     teacher: str
     audience: str = None
     info: str = None
+    time_start: str = None
+    time_end: str = None
 
 
 subjects_collection = db['subjects']
