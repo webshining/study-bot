@@ -9,7 +9,6 @@ services:
       - redis
       - mongo
     environment:
-      MONGODB_URL: mongodb://mongo:27017
       RD_DB: 5
       RD_HOST: redis
       RD_PORT: 6379

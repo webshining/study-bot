@@ -5,6 +5,7 @@ from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResul
 from loader import dp, bot
 from .current import _get_current_data
 from .schedule import _get_schedule_data
+from .subjects import _get_subjects_data
 
 @dp.inline_handler()
 async def current_inline_handler(query: InlineQuery):
@@ -26,4 +27,13 @@ async def current_inline_handler(query: InlineQuery):
         input_message_content=InputTextMessageContent(current_text),
         reply_markup=current_markup
     )
-    await query.answer(results=[schedule, current], cache_time=1)
+    subjects_text, subjects_markup = _get_subjects_data()
+    subjects = InlineQueryResultArticle(
+        id=hashlib.md5(f'{query}{time()}'.encode()).hexdigest(),
+        thumb_url='https://cdn-icons-png.flaticon.com/512/5436/5436691.png',
+        title=f'Subjects info',
+        description='Get subjects info',
+        input_message_content=InputTextMessageContent(subjects_text),
+        reply_markup=subjects_markup
+    )
+    await query.answer(results=[schedule, current, subjects], cache_time=1)
