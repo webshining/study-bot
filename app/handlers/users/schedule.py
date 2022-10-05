@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from aiogram.types import Message, CallbackQuery
 from aiogram.dispatcher.filters import Command
 
-from loader import dp
+from loader import dp, bot
 from database.models import Day
 from database.services import get_days
 from app.keyboards import get_week_makrup
@@ -22,11 +22,14 @@ async def schedul_callback_handler(call: CallbackQuery):
         date = datetime.now() + timedelta(weeks=1)
     else:
         date = datetime.now()
-    
     days = get_days(date.isocalendar().week)
     text = _get_schedule_text(days)
+    markup = get_week_makrup('schedule', call.data[9:])
     try:
-        await call.message.edit_text(text=text, reply_markup=get_week_makrup('schedule', call.data[9:]))
+        if call.inline_message_id:
+            await bot.edit_message_text(text, message_id=call.inline_message_id, inline_message_id=call.inline_message_id, reply_markup=markup)
+        else:
+            await bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=markup)
     except:
         pass
     
@@ -40,7 +43,7 @@ def _get_schedule_text(days: list[Day]):
                 text += f'\n{i+1}) <b>{subject.name}</b>'
                 text += f'({subject.audience})' if subject.audience else ''
     
-    return text if text else 'Schedule is empty'
+    return text if text else 'Schedule is empty🫡'
 
 
 def _get_schedule_data():

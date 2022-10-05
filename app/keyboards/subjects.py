@@ -18,7 +18,7 @@ def get_back_markup(data: str):
     markup = InlineKeyboardMarkup(row_width=2)
 
     buttons = [
-        InlineKeyboardButton(text=f'Back', callback_data=f'{data}_back')
+        InlineKeyboardButton(text=f'⬅️Back', callback_data=f'{data}_back')
     ]
     
     markup.add(*buttons)
