@@ -1,18 +1,21 @@
 from aiogram import executor
-from datetime import datetime
+from aiogram.types import BotCommandScopeDefault
 
-from loader import dp
+from loader import dp, bot
 from utils import logger
 
 
 async def on_startup(dispatcher):
+    from app.commands import set_default_commands
     from database.services import init_days
+    await set_default_commands()
     logger.info('Bot started!')
     init_days()
 
 
 async def on_shutdown(dispatcher):
     logger.error('Bot shutting down!')
+    await bot.delete_my_commands(scope=BotCommandScopeDefault())
 
 
 if __name__ == '__main__':
