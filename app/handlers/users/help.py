@@ -12,5 +12,6 @@ async def help_handler(message: Message):
                       '/subjects - Get subjects info',
                       '/schedule - Get schedule',
                       '/current - Get current info',
-                      '\nCreator: <b>@webshining</b>😉'))
+                      '\nCreator: <b>@webshining</b>😉'
+                      'Sorry for the very low speed of the bot, the database servers are free as are the bot servers, so at night the bot will work slower than usual, during the day everything will be fine'))
     await message.answer(text)
