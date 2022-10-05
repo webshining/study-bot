@@ -6,7 +6,7 @@ class User(BaseModel):
     id: int = Field(default_factory=int, alias="_id")
     name: str
     username: str
-    status: str
+    status: str = None
 
 
 users_collection = db['users']
