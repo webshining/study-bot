@@ -5,4 +5,6 @@ from loader import dp
 
 @dp.message_handler(Command('start'))
 async def start_handler(message: Message):
-    await message.answer(f'Hello <b>{message.from_user.full_name}</b>')
+    text = '\n'.join((f'Hello <b>{message.from_user.full_name}</b>👋',
+                      f'Write /help to see more information'))
+    await message.answer(text)
