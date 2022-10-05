@@ -35,7 +35,7 @@ def _get_current_data():
     subject_now = [s for s in subjects if s.time_end >= time]
     if time >= subjects[-1].time_end:
         text = f'Classes are over!'
-    if time >= subject_now[0].time_start:
+    elif time >= subject_now[0].time_start:
         text = f'Now class of <b>{subject_now[0].name}</b>\nTeacher: <b>{subject_now[0].teacher}</b>'
         text += f'\nAudience: <b>{subject_now[0].audience}</b>' if subject_now[0].audience else ''
         text += f'\n\n<b>{subject_now[0].info}</b>' if subject_now[0].info else ''
