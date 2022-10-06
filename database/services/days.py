@@ -15,7 +15,7 @@ def get_days(week: int = None):
 
 def create_days(ids):
     for id in ids:
-        days_collection.insert_one({'_id': ObjectId(id), 'subjects'; []})
+        days_collection.insert_one({'_id': ObjectId(id), 'subjects': []})
     return True
 
 def init_days():
