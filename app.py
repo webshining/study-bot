@@ -10,8 +10,14 @@ async def on_startup(dispatcher):
     from database.services import init_days
     await set_default_commands()
     logger.info('Bot started!')
-    from database.services import edit_day
+    from database.services import edit_day, create_days
 
+    create_days(['633d3aa54e5ac7c0a47dcf2f', 
+                 '633d3aa64e5ac7c0a47dcf30', 
+                 '633d3aa64e5ac7c0a47dcf31', 
+                 '633d3aa64e5ac7c0a47dcf32',])
+
+    
     edit_day('633d3aa54e5ac7c0a47dcf2f', [
 
         {'_id': '633d3e67e1264e61a1988631', 'time_start': '08:20:00', 'time_end': '09:40:00'}, 
