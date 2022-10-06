@@ -13,6 +13,11 @@ def get_days(week: int = None):
         days = days[7:] if week%2!=0 else days[:7]
     return days
 
+def create_days(ids):
+    for id in ids:
+        days_collection.insert_one({'_id': ObjectId(id), 'subjects'; []})
+    return True
+
 def init_days():
     if len(get_days()) != 14:
         for i in range(14):
