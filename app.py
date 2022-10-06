@@ -12,10 +12,22 @@ async def on_startup(dispatcher):
     logger.info('Bot started!')
     from database.services import edit_day, create_days
 
-    create_days(['633d3aa54e5ac7c0a47dcf2f', 
-                 '633d3aa64e5ac7c0a47dcf30', 
-                 '633d3aa64e5ac7c0a47dcf31', 
-                 '633d3aa64e5ac7c0a47dcf32',])
+    create_days([
+        '633d3aa54e5ac7c0a47dcf2f',
+        '633d3aa64e5ac7c0a47dcf30',
+        '633d3aa64e5ac7c0a47dcf31',
+        '633d3aa64e5ac7c0a47dcf32',
+        '633d3aa64e5ac7c0a47dcf33',
+        '633d3aa64e5ac7c0a47dcf34',
+        '633d3aa64e5ac7c0a47dcf35',
+        '633d3aa64e5ac7c0a47dcf36',
+        '633d3aa64e5ac7c0a47dcf37',
+        '633d3aa64e5ac7c0a47dcf38',
+        '633d3aa64e5ac7c0a47dcf39',
+        '633d3aa64e5ac7c0a47dcf3a',
+        '633d3aa64e5ac7c0a47dcf3b',
+        '633d3aa64e5ac7c0a47dcf3c'
+    ])
 
     
     edit_day('633d3aa54e5ac7c0a47dcf2f', [
