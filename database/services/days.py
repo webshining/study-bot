@@ -7,10 +7,8 @@ from .subjects import get_subject
 
 def get_days(week: int = None):
     days = days_collection.find()
-    days = [{**d, 'subjects': [{**get_subject(s['_id']).dict(), **s} for s in d['subjects']]} for d in days]
-    days = [Day(**d) for d in days]
-    if week:
-        days = days[7:] if week%2!=0 else days[:7]
+    days = [d for d in days]
+    print(days)
     return days
 
 def create_days(ids):
