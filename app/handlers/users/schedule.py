@@ -16,7 +16,7 @@ async def schedule_handler(message: Message):
     
     
 @dp.callback_query_handler(lambda call: call.data.startswith('schedule'))
-async def schedul_callback_handler(call: CallbackQuery):
+async def schedule_callback_handler(call: CallbackQuery):
     await call.answer()
     if call.data[9:] == 'next':
         date = datetime.now() + timedelta(weeks=1)
@@ -49,11 +49,10 @@ def _get_schedule_text(days: list[Day]):
 def _get_schedule_data():
     shift = 'this'
     current_time = datetime.now()
-    date = current_time
-    if current_time.weekday() > 5:
-        date += timedelta(weeks=1)
+    if current_time.weekday() >= 5:
+        current_time += timedelta(weeks=1)
         shift = 'next'
     
-    text = _get_schedule_text(get_days(date.isocalendar().week))
+    text = _get_schedule_text(get_days(current_time.isocalendar().week))
     markup = get_week_makrup('schedule', shift)
     return text, markup
