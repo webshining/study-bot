@@ -7,6 +7,7 @@ from .objectid import PydanticObjectId
 
 class Day(BaseModel):
     id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
+    day_id: int
     subjects: list[Subject]
 
 
