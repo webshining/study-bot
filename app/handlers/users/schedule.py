@@ -1,4 +1,4 @@
-import calendar
+import calendar, pytz
 from datetime import datetime, timedelta
 from aiogram.types import Message, CallbackQuery
 from aiogram.dispatcher.filters import Command
@@ -19,9 +19,9 @@ async def schedule_handler(message: Message):
 async def schedule_callback_handler(call: CallbackQuery):
     await call.answer()
     if call.data[9:] == 'next':
-        date = datetime.now() + timedelta(weeks=1)
+        date = datetime.now(pytz.timezone('Europe/Kiev')) + timedelta(weeks=1)
     else:
-        date = datetime.now()
+        date = datetime.now(pytz.timezone('Europe/Kiev'))
     days = get_days(date.isocalendar().week)
     text = _get_schedule_text(days)
     markup = get_week_makrup('schedule', call.data[9:])
@@ -48,7 +48,7 @@ def _get_schedule_text(days: list[Day]):
 
 def _get_schedule_data():
     shift = 'this'
-    current_time = datetime.now()
+    current_time = datetime.now(pytz.timezone('Europe/Kiev'))
     if current_time.weekday() >= 5:
         current_time += timedelta(weeks=1)
         shift = 'next'
