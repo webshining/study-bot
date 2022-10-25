@@ -1,17 +1,40 @@
-from ..models import Day
-from .subjects import get_subject
+from datetime import date
+from bson import ObjectId
+
+from ..models import Day, days_collection
 
 
-def get_week(week: int):
-    days = [d for d in Day.select() if d.id in (range(8, 15) if week % 2 == 0 else range(1, 8))]
+def get_days(week: int = None):
+    days = days_collection.aggregate([
+        {"$unwind": {"path": "$subjects", "preserveNullAndEmptyArrays": True}},
+        {"$lookup": {"from": "subjects", "localField": "subjects._id", "foreignField": "_id", "as": "subjects.subject"}},
+        {"$unwind": {"path": "$subjects.subject", "preserveNullAndEmptyArrays": True}},
+        {"$group": {"_id": "$_id", "subjects": {"$push": "$subjects"}, "day_id": {"$first": "$day_id"}}},
+        {"$sort": {"day_id": 1}},
+        {"$project": {"subjects": {"$cond": {"if": {"$eq": ["$subjects", [{}]]}, "then": [], "else": "$subjects"}}}}
+    ])
+    if week:
+        days = list(days)[7:] if week%2!=0 else list(days)[:7]
+    days = [Day(**d) for d in days]
     return days
 
+def create_days(ids):
+    for id in ids:
+        days_collection.insert_one({'_id': ObjectId(id), 'subjects': []})
+    return True
 
-def get_week_subjects(week: int):
-    days = get_week(week)
-    days_subjects = []
-    for day in days:
-        subjects = [get_subject(int(s)) for s in day.subjects.split(',') if s.strip()]
-        days_subjects.append(subjects)
+def init_days():
+    if len(get_days()) != 14:
+        for i in range(14):
+            days_collection.insert_one({'subjects': []})
+    
 
-    return days_subjects
+def edit_day(id: str, subjects):
+    day = days_collection.find_one_and_update({'_id': ObjectId(id)}, {'$set': {
+        'subjects': subjects
+    }})
+    return day 
+
+
+def get_day_by_date(_date: date) -> Day:    
+    return get_days(_date.isocalendar().week)[_date.weekday()]

@@ -1,30 +1,15 @@
-from ..models import Subject
-
-
-def create_subject(name: str, audience: str, teacher: str, info: str):
-    return Subject.create(name=name, audience=audience, teacher=teacher, info=info)
-
-
-def get_subject(id: int):
-    return Subject.get_or_none(Subject.id == id)
-
+from bson import ObjectId
+from ..models import Subject, subjects_collection
 
 def get_subjects():
-    subjects = list(Subject.select())
-    return subjects
+    return [Subject(**s) for s in subjects_collection.find()]
 
 
-def delete_subject(id: int):
-    subject = get_subject(id)
-    subject.delete_instance()
-    return True
+def get_subject(id: str):
+    subject = subjects_collection.find_one({'_id': ObjectId(id)})
+    return Subject(**subject) if subject else None
 
 
-def edit_subject(id: int, name: str, audience: str, teacher: str, info: str):
-    subject = get_subject(id)
-    subject.name = name
-    subject.audience = audience
-    subject.teacher = teacher
-    subject.info = info
-    subject.save()
-    return subject
+def create_subject(name: str, teacher: str, audience: str = None, info: str = None):
+    subject = subjects_collection.insert_one({"name": name, "audience": audience, 'teacher': teacher, 'info': info})
+    return get_subject(subject.inserted_id)
