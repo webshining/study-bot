@@ -29,9 +29,9 @@ def init_days():
             days_collection.insert_one({'subjects': []})
     
 
-def edit_day(id: str, day_id: int):
-    day = days_collection.find_one_and_update({'_id': ObjectId(id)}, {'$rename': {
-        'id': "day_id"
+def edit_day(id: str, subjects):
+    day = days_collection.find_one_and_update({'_id': ObjectId(id)}, {'$set': {
+        'subjects': subjects
     }})
     return day 
 
