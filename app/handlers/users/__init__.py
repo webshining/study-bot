@@ -1,4 +1,7 @@
-from .schedule import dp
-from .subjects import dp
+from . import start
+from . import subjects
+from . import schedule
+from . import current
+from . import inline_mode
+from . import help
 
-__all__ = ['dp']
