@@ -40,8 +40,8 @@ def _get_schedule_text(days: list[Day]):
         if day.subjects:
             text += f'\n\n{calendar.day_name[index]}'
             for i, subject in enumerate(day.subjects):
-                text += f'\n{i+1}) <b>{subject.name}</b>'
-                text += f'({subject.audience})' if subject.audience else ''
+                text += f'\n{i+1}) <b>{subject.subject.name}</b>'
+                text += f'({subject.subject.audience})' if subject.subject.audience else ''
     
     return text if text else 'Schedule is empty🫡'
 
