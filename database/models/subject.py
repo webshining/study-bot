@@ -7,11 +7,9 @@ from .objectid import PydanticObjectId
 class Subject(BaseModel):
     id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
     name: str
+    audience: str
     teacher: str
-    audience: str = None
-    info: str = None
-    time_start: str = None
-    time_end: str = None
+    info: str
 
 
 subjects_collection = db['subjects']
