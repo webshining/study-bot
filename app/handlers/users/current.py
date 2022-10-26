@@ -41,7 +41,7 @@ def _get_current_data():
         text += f'\n\n<b>{subject_now[0].subject.info}</b>' if subject_now[0].subject.info else ''
         text += f'\nClass ends at {subject_now[0].subject.time_end}'
     else:
-        text = f'Break now! Next class: <b>{subject_now[0].subject.name}</b> at {subject_now[0].subject.time_start}'
+        text = f'Break now! Next class: <b>{subject_now[0].name}</b> at {subject_now[0].time_start}'
     
     markup = get_update_makrup('current')
     return text, markup
