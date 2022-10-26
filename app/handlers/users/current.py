@@ -36,12 +36,12 @@ def _get_current_data():
     if not subject_now or time >= subjects[-1].time_end:
         text = f'Classes are over!'
     elif time >= subject_now[0].time_start:
-        text = f'Now class of <b>{subject_now[0].name}</b>\nTeacher: <b>{subject_now[0].teacher}</b>'
-        text += f'\nAudience: <b>{subject_now[0].audience}</b>' if subject_now[0].audience else ''
-        text += f'\n\n<b>{subject_now[0].info}</b>' if subject_now[0].info else ''
-        text += f'\nClass ends at {subject_now[0].time_end}'
+        text = f'Now class of <b>{subject_now[0].subject.name}</b>\nTeacher: <b>{subject_now[0].subject.teacher}</b>'
+        text += f'\nAudience: <b>{subject_now[0].subject.audience}</b>' if subject_now[0].subject.audience else ''
+        text += f'\n\n<b>{subject_now[0].subject.info}</b>' if subject_now[0].subject.info else ''
+        text += f'\nClass ends at {subject_now[0].subject.time_end}'
     else:
-        text = f'Break now! Next class: <b>{subject_now[0].name}</b> at {subject_now[0].time_start}'
+        text = f'Break now! Next class: <b>{subject_now[0].subject.name}</b> at {subject_now[0].subject.time_start}'
     
     markup = get_update_makrup('current')
     return text, markup
