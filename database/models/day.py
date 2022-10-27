@@ -8,6 +8,7 @@ class DaySubject(BaseModel):
     id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
     time_start: str
     time_end: str
+    group: str = None
     subject: Subject
     
 class Day(BaseModel):

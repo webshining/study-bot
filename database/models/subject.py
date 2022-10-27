@@ -10,7 +10,6 @@ class Subject(BaseModel):
     audience: str
     teacher: str
     info: str
-    group: str = None
 
 
 subjects_collection = db['subjects']
