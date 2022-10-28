@@ -9,6 +9,8 @@ DIR = Path(__file__).absolute().parent.parent
 
 TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', None)
 
+ADMINS = env.list('ADMINS', subcast=int, default=[])
+
 MONGODB_URL = env.str('MONGODB_URL', None)
 
 RD_DB = env.int('RD_DB', None)
