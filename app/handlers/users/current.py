@@ -31,16 +31,16 @@ def _get_current_data():
     time = _current_time.time().strftime('%H:%M:%S')
     day = get_day_by_date(_current_time)
     subjects = day.subjects
-    subject_now = [s for s in subjects if s.time_end >= time]
-    if not subject_now or time >= subjects[-1].time_end:
+    subjects_now = [s for s in subjects if s.time_end >= time]
+    if not subjects_now or time >= subjects[-1].time_end:
         text = f'Classes are over!'
-    elif time >= subject_now[0].time_start:
-        text = f'Now class of <b>{subject_now[0].subject.name}</b>\nTeacher: <b>{subject_now[0].subject.teacher}</b>'
-        text += f'\nAudience: <b>{subject_now[0].subject.audience}</b>' if subject_now[0].subject.audience else ''
-        text += f'\n\n<b>{subject_now[0].subject.info}</b>' if subject_now[0].subject.info else ''
-        text += f'\nClass ends at {subject_now[0].subject.time_end}'
+    elif subjects_now[0].time_start >= time:
+        text = f'Now class of <b>{subjects_now[0].subject.name}</b>\nTeacher: <b>{subjects_now[0].subject.teacher}</b>'
+        text += f'\nAudience: <b>{subjects_now[0].subject.audience}</b>' if subjects_now[0].subject.audience else ''
+        text += f'\n\n<b>{subjects_now[0].subject.info}</b>' if subjects_now[0].subject.info else ''
+        text += f'\nClass ends at {subjects_now[0].time_end}'
     else:
-        text = f'Break now! Next class: <b>{subject_now[0].subject.name}</b> at {subject_now[0].time_start}'
+        text = f'Break now! Next class: <b>{subjects_now[0].subject.name}</b> at {subjects_now[0].time_start}'
     
     markup = get_update_makrup('current')
     return text, markup
