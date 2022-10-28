@@ -36,7 +36,6 @@ def _get_current_data():
     day = get_day_by_date(_current_time)
     _current_time = _current_time.time().strftime(_format)
     subject_now = [s for s in day.subjects if s.time_end >= _current_time]
-    print(str_to_time('00:20:00', _format) - str_to_time('10:20:00', _format))
     if not subject_now:
         text = f'Classes are over!'
     elif _current_time >= subject_now[0].time_start:
