@@ -7,7 +7,7 @@ from utils import logger
 
 async def on_startup(dispatcher):
     from app.commands import set_default_commands
-    await set_default_commands()
+    # await set_default_commands()
     logger.info('Bot started!')
 
 

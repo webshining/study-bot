@@ -1,2 +1,2 @@
 from .logging import logger
-from .current import get_current_time
+from .time import str_to_time, current_time
