@@ -1,11 +1,10 @@
-from pytz import timezone
-from datetime import datetime
 from aiogram.types import Message, CallbackQuery
 from aiogram.dispatcher.filters import Command
 
 from loader import dp, bot
 from database.services import get_day_by_date
 from app.keyboards import get_update_makrup
+from utils import get_current_time as current_time
 
 
 @dp.message_handler(Command('current'))
@@ -28,9 +27,9 @@ async def current_callback_handler(call: CallbackQuery):
 
 
 def _get_current_data():
-    current_time = datetime.now(timezone('Europe/Kiev'))
-    time = current_time.time().strftime('%H:%M:%S')
-    day = get_day_by_date(current_time)
+    _current_time = current_time()
+    time = _current_time.time().strftime('%H:%M:%S')
+    day = get_day_by_date(_current_time)
     subjects = day.subjects
     subject_now = [s for s in subjects if s.time_end >= time]
     if not subject_now or time >= subjects[-1].time_end:
