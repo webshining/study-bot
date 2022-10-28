@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 from loader import db
-from .objectid import PydanticObjectId
+from .mongo import PydanticObjectId
 
 
 class Subject(BaseModel):

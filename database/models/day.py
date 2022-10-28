@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 
 from loader import db
 from .subject import Subject
-from .objectid import PydanticObjectId
+from .mongo import PydanticObjectId
 
 class DaySubject(BaseModel):
     id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
