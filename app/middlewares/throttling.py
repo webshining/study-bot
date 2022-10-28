@@ -2,7 +2,7 @@ import asyncio
 from aiogram import Dispatcher
 from aiogram.utils.exceptions import Throttled
 from aiogram.dispatcher.middlewares import BaseMiddleware
-from aiogram.types import Message, CallbackQuery, InlineQuery
+from aiogram.types import Message, CallbackQuery
 from aiogram.dispatcher.handler import CancelHandler, current_handler
 
 from data.config import RATE_LIMIT
@@ -17,7 +17,6 @@ class ThrottlingMiddleware(BaseMiddleware):
         await self._throttled(message, data)
 
     async def on_process_callback_query(self, call: CallbackQuery, data: dict):
-        await call.answer()
         await self._throttled(call.message, data)
         
     async def _throttled(self, message: Message, throttled: Throttled):
@@ -34,6 +33,7 @@ class ThrottlingMiddleware(BaseMiddleware):
             await dispatcher.throttle(key, rate=limit)
         except Throttled as throttled:
             if throttled.exceeded_count <= 2:
-                await message.reply('Too many requests!')
-
+                message = await message.reply('Too many requests!')
+                await asyncio.sleep(3)
+                await message.delete()
             raise CancelHandler()
