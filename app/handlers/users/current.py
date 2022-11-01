@@ -42,7 +42,7 @@ def _get_current_data():
         text = _get_subject_text(subject_now[0].subject)
         text += f'\n\nСlass ends at {subject_now[0].time_end} in {str_to_time(subject_now[0].time_end, _format) - str_to_time(_current_time, _format)}'
     else:
-        text = f'No class right now! Next class: {subject_now[0].subject.name}'
+        text = f'No class right now! Next class: {subject_now[0].subject.name} at {subject_now[0].time_start} in {str_to_time(subject_now[0].time_start, _format) - str_to_time(_current_time, _format)}'
 
     markup = get_update_makrup('current')
     return text, markup
