@@ -1,7 +1,7 @@
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 
-from loader import dp
+from loader import dp, bot
 from database.models import Subject
 from database.services import get_subjects, get_subject
 from app.keyboards import get_subjects_makrup, get_files_makrup
@@ -18,7 +18,10 @@ async def subjects_callback_handler(call: CallbackQuery):
     await call.answer()
     subject = get_subject(call.data[9:])
     text, markup = _get_subject_data(subject)
-    await call.message.edit_text(text, reply_markup=markup)
+    if call.inline_message_id:
+        await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
+    else:
+        await call.message.edit_text(text, reply_markup=markup)
 
 
 def _get_subject_text(subject: Subject):
