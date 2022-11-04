@@ -1,7 +1,7 @@
 import calendar, pytz
 from datetime import datetime, timedelta
 from aiogram.types import Message, CallbackQuery
-from aiogram.dispatcher.filters import Command
+from aiogram.filters import Command
 
 from loader import dp, bot
 from database.models import Day
@@ -9,13 +9,13 @@ from database.services import get_days
 from app.keyboards import get_week_makrup
 
 
-@dp.message_handler(Command('schedule'))
+@dp.message(Command('schedule'))
 async def schedule_handler(message: Message):
     text, markup = _get_schedule_data()
     await message.answer(text=text, reply_markup=markup)
     
     
-@dp.callback_query_handler(lambda call: call.data.startswith('schedule'))
+@dp.callback_query(lambda call: call.data.startswith('schedule'))
 async def schedule_callback_handler(call: CallbackQuery):
     await call.answer()
     if call.data[9:] == 'next':

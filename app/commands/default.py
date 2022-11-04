@@ -5,10 +5,10 @@ from loader import bot
 
 def get_default_commands():
     commands = [
-        BotCommand('start', 'Start message'),
-        BotCommand('schedule', 'schedule'),
-        BotCommand('subjects', 'subjects info'),
-        BotCommand('current', 'current subject')
+        BotCommand(command='/start', description='Start message'),
+        BotCommand(command='/schedule', description='schedule'),
+        BotCommand(command='subjects', description='subjects info'),
+        BotCommand(command='current', description='current subject')
     ]
     return commands
 

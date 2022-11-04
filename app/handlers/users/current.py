@@ -1,7 +1,5 @@
-from datetime import datetime
-
 from aiogram.types import Message, CallbackQuery
-from aiogram.dispatcher.filters import Command
+from aiogram.filters import Command
 
 from loader import dp, bot
 from database.services import get_day_by_date
@@ -10,13 +8,13 @@ from .subjects import _get_subject_text
 from utils import current_time, str_to_time
 
 
-@dp.message_handler(Command('current'))
+@dp.message(Command('current'))
 async def current_handler(message: Message):
     text, markup = _get_current_data()
     await message.answer(text, reply_markup=markup)
 
 
-@dp.callback_query_handler(lambda call: call.data.startswith('current'))
+@dp.callback_query(lambda call: call.data.startswith('current'))
 async def current_callback_handler(call: CallbackQuery):
     await call.answer()
     text, markup = _get_current_data()
