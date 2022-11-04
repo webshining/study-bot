@@ -1,5 +1,5 @@
-from loader import dp
+<<<<<<< HEAD
 from .admin import AdminFilter
-
-if __name__ == '__main__':
-    dp.filters_factory.bind(AdminFilter)
+=======
+from .admin import AdminFilter
+>>>>>>> 8ac7a890d7da264576b462a0803f970fa33cd353

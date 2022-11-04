@@ -1,9 +1,9 @@
 from aiogram.types import Message
-from aiogram.dispatcher.filters import Command
+from aiogram.filters import Command
 from loader import dp
 
 
-@dp.message_handler(Command('help'))
+@dp.message(Command('help'))
 async def help_handler(message: Message):
     text = '\n'.join((f'Hello <b>{message.from_user.full_name}</b>👋',
                       f'I am a diary bot',
