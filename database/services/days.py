@@ -20,14 +20,8 @@ def get_days(week: int = None):
     return days
 
 
-def create_days(ids):
-    for id in ids:
-        days_collection.insert_one({'_id': ObjectId(id), 'subjects': []})
-    return True
-
-
 def edit_day(id: str, **kwargs):
-    day = days_collection.find_one_and_update({"_id": ObjectId(id)}, {"$set": kwargs})
+    day = days_collection.find_one_and_update({"_id": ObjectId(id)}, {"$set": kwargs}, return_document=True)
     return Day(**day)
 
 
