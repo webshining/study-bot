@@ -6,7 +6,7 @@ from .file import File
 
 
 class Subject(BaseModel):
-    id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
+    id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id") or None
     name: str
     audience: str
     teacher: str
