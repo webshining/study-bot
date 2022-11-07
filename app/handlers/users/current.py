@@ -20,8 +20,7 @@ async def current_callback_handler(call: CallbackQuery):
     text, markup = _get_current_data()
     try:
         if call.inline_message_id:
-            await bot.edit_message_text(text, message_id=call.inline_message_id,
-                                        inline_message_id=call.inline_message_id, reply_markup=markup)
+            await bot.edit_message_text(text=text, inline_message_id=call.inline_message_id, reply_markup=markup)
         else:
             await bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=markup)
     except:
