@@ -2,7 +2,6 @@ from pydantic import BaseModel, Field
 
 from loader import db
 from .mongo import PydanticObjectId
-from .file import File
 
 
 class Subject(BaseModel):
@@ -11,7 +10,6 @@ class Subject(BaseModel):
     audience: str
     teacher: str
     info: str
-    files: list[File] = None
 
 
 subjects_collection = db['subjects']
