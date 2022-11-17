@@ -4,7 +4,7 @@ from aiogram.filters import Command
 from loader import dp, bot
 from database.models import Subject
 from database.services import get_subjects, get_subject
-from app.keyboards import get_subjects_makrup, get_files_makrup
+from app.keyboards import get_subjects_makrup
 
 
 @dp.message(Command('subjects'))
@@ -37,9 +37,6 @@ def _get_subject_text(subject: Subject):
 def _get_subject_data(subject: Subject):
     text = _get_subject_text(subject)
     markup = None
-    if subject.files:
-        markup = get_files_makrup('subject', subject.files)
-
     return text, markup
 
 
