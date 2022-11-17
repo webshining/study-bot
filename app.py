@@ -13,10 +13,14 @@ async def on_startup():
 async def on_shutdown():
     logger.error('Bot shutting down!')
     await bot.delete_my_commands(scope=BotCommandScopeDefault())
-
-
-if __name__ == '__main__':
+    
+    
+def main():
     import app.handlers
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
     dp.run_polling(bot)
+
+
+if __name__ == '__main__':
+    main()
