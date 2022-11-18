@@ -9,6 +9,7 @@ class ListElement(BaseModel):
     value: str
     user_id: int
 
+
 class List(BaseModel):
     id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
     name: str

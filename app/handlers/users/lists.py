@@ -4,17 +4,18 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
 from loader import dp
-from app.keyboards import get_lists_makrup, get_update_markup, get_to_private_makrup
+from app.keyboards import get_lists_makrup, get_update_markup
 from app.states import AddToList
 from database import get_lists, get_list, push_list_element, List as ListModel
+
 
 # Get lists
 @dp.message(Command('lists'))
 async def _lists(message: Message):
     text, markup = _get_lists_data("Select a list to view:", 'lists_get')
     await message.answer(text, reply_markup=markup)
-    
-    
+
+
 @dp.callback_query(lambda call: call.data.startswith('lists_get'))
 async def _lists_list(call: CallbackQuery):
     await call.answer()
@@ -24,6 +25,7 @@ async def _lists_list(call: CallbackQuery):
         await call.message.edit_text(text, reply_markup=markup)
     except:
         pass
+
 
 # Add element to list
 @dp.message(Command("lists_set"))
@@ -77,5 +79,5 @@ def _get_list_data(list: ListModel | None):
 def _get_lists_data(text: str, data: str):
     lists = get_lists()
     markup = get_lists_makrup(data, lists) if lists else None
-    
+
     return text if lists else "Lists is empty🫡", markup
