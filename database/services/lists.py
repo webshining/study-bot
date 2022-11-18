@@ -7,6 +7,7 @@ def get_list(id: str):
     _list = lists_collection.find_one({'_id': ObjectId(id)})
     return List(**_list) if _list else None
 
+
 def create_list(name: str):
     _list = lists_collection.insert_one({'name': name, 'elements': []})
     return get_list(_list.inserted_id)
