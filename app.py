@@ -1,17 +1,16 @@
 from aiogram.types import BotCommandScopeDefault
 
 from loader import dp, bot
-from utils import logger
 
 
 async def on_startup():
     from app.commands import set_default_commands
     await set_default_commands()
-    logger.info('Bot started!')
+    print('Bot started!')
 
 
 async def on_shutdown():
-    logger.error('Bot shutting down!')
+    print('Bot shutting down!')
     await bot.delete_my_commands(scope=BotCommandScopeDefault())
     
     
