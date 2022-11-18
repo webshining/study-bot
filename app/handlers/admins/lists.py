@@ -9,7 +9,7 @@ from app.keyboards import get_lists_makrup
 from database import get_lists, get_list, create_list, edit_list, delete_list
 
 # Create list
-@dp.message(AdminFilter(), Command('create_list'))
+@dp.message(AdminFilter(), Command('lists_create'))
 async def _list_create(message: Message, state: FSMContext):
     await message.answer("Enter list name:")
     await state.set_state(CreateList.name)
@@ -22,7 +22,7 @@ async def _list_create_name(message: Message, state: FSMContext):
     await state.clear()
     
 # Edit list
-@dp.message(AdminFilter(), Command('edit_list'))
+@dp.message(AdminFilter(), Command('lists_edit'))
 async def _lists_edit(message: Message):
     lists = get_lists()
     await message.answer("Select the list you want to change:" if lists else "Lists is empty", reply_markup=get_lists_makrup('lists_ed', lists) if lists else None)
@@ -49,7 +49,7 @@ async def _list_edit_name(message: Message, state: FSMContext):
     await state.clear()
     
 # Delete list
-@dp.message(AdminFilter(), Command('delete_list'))
+@dp.message(AdminFilter(), Command('lists_delete'))
 async def _lists_delete(message: Message):
     lists = get_lists()
     await message.answer("Select list to delete:" if lists else "Lists is empty", reply_markup=get_lists_makrup("lists_del", lists) if lists else None)
@@ -58,7 +58,10 @@ async def _lists_delete(message: Message):
 @dp.callback_query(lambda call: call.data.startswith("lists_del"))
 async def _list_delete(call: CallbackQuery):
     await call.answer()
-    name = get_list(call.data[10:]).name
-    await call.message.edit_text(f"List <b>{name}</b> deleted", reply_markup=None)
-    delete_list(call.data[10:])
+    _list = get_list(call.data[10:])
+    if _list:
+        await call.message.edit_text(f"List <b>{_list.name}</b> deleted", reply_markup=None)
+        delete_list(call.data[10:])
+    else:
+        await call.message.edit_text(f"List not found or already deleted", reply_markup=None)
     
