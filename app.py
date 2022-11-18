@@ -16,6 +16,7 @@ async def on_shutdown():
     
     
 def main():
+    import app.middlewares
     import app.handlers
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
