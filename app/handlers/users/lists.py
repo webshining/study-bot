@@ -3,7 +3,7 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
-from loader import dp
+from loader import dp, bot
 from app.keyboards import get_lists_makrup
 from app.states import AddToList
 from database import get_lists, get_list, push_list_element, List as ListModel
@@ -20,6 +20,8 @@ async def _list(call: CallbackQuery):
     await call.answer()
     _list = get_list(call.data[10:])
     text = _get_list_text(_list) if _list else "List not found"
+    if call.inline_message_id:
+        return bot.edit_message_text(text=text, inline_message_id=call.inline_message_id, reply_markup=None)
     await call.message.edit_text(text=text, reply_markup=None)
 
 # Add element to list
