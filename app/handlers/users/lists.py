@@ -23,7 +23,7 @@ async def _list(call: CallbackQuery):
     await call.message.edit_text(text=text, reply_markup=None)
 
 # Add element to list
-@dp.message(Command("list_set"))
+@dp.message(Command("lists_set"))
 async def _lists_set(message: Message):
     if message.chat.type != 'private':
         return message.answer("Во избежание всего плохого просим перейти вас в лс")
