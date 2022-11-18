@@ -4,7 +4,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
 from loader import dp, bot
-from app.keyboards import get_lists_makrup, get_update_makrup
+from app.keyboards import get_lists_makrup, get_update_makrup, get_to_private_makrup
 from app.states import AddToList
 from database import get_lists, get_list, push_list_element, List as ListModel
 
@@ -37,7 +37,7 @@ async def _list(call: CallbackQuery):
 @dp.message(Command("lists_set"))
 async def _lists_set(message: Message):
     if message.chat.type != 'private':
-        return message.answer("In order to avoid all the bad, please go to private chat")
+        return message.answer("In order to avoid all the bad, please go to private chat", reply_markup=get_to_private_makrup())
     lists = get_lists()
     await message.answer("Select list:" if lists else "Lists is emty", reply_markup=get_lists_makrup('lists_set', lists) if lists else None)
 
