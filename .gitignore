@@ -1,6 +1,10 @@
 .idea
 .fleet
 .venv
+<<<<<<< HEAD
 **/__pycache__
+=======
+.idea
+>>>>>>> cc2b8dbec54561e09b0cd6ff8b07664c08108135
 **/.env
 **/logs
