@@ -46,7 +46,7 @@ async def _lists_set(message: Message):
 async def _list_set(call: CallbackQuery, state: FSMContext):
     _list = get_list(call.data[10:])
     await state.update_data(id=_list.id)
-    await call.message.edit_text("Enter your name and value <b>[Kashey Immortal - world literature]</b>:" if _list else "List not found", reply_markup=None)
+    await call.message.answer(f"<b>@{Message.from_user.full_name}</b> enter your name and value <b>[Kashey Immortal - world literature]</b>:" if _list else "List not found of deleted", reply_markup=None)
     if _list:
         await state.set_state(AddToList.text)
 
