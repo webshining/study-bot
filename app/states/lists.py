@@ -7,3 +7,6 @@ class CreateList(StatesGroup):
 class EditList(StatesGroup):
     name = State()
     
+class AddToList(StatesGroup):
+    text = State()
+    
