@@ -37,7 +37,7 @@ async def _list(call: CallbackQuery):
 @dp.message(Command("lists_set"))
 async def _lists_set(message: Message):
     if message.chat.type != 'private':
-        return message.answer("Во избежание всего плохого просим перейти вас в лс")
+        return message.answer("In order to avoid all the bad, please go to private chat")
     lists = get_lists()
     await message.answer("Select list:" if lists else "Lists is emty", reply_markup=get_lists_makrup('lists_set', lists) if lists else None)
 
