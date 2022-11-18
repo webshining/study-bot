@@ -44,6 +44,7 @@ async def _lists_set(message: Message):
 
 @dp.callback_query(lambda call: call.data.startswith('lists_set'))
 async def _list_set(call: CallbackQuery, state: FSMContext):
+    await call.answer()
     _list = get_list(call.data[10:])
     await state.update_data(id=_list.id)
     await call.message.answer(f"<b>{call.from_user.full_name}</b> enter your name and value <b>[Kashey Immortal - world literature]</b>:" if _list else "List not found of deleted", reply_markup=None)
