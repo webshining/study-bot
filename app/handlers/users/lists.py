@@ -15,19 +15,23 @@ async def _lists(message: Message):
     await message.answer(text, reply_markup=markup)
     
     
-@dp.callback_query(lambda call: call.data.startswith('lists_get'))
+@dp.callback_query(lambda call: call.data.startswith('lists_get') or call.data.startswith('lists_upd'))
 async def _list(call: CallbackQuery):
     await call.answer()
     _list = get_list(call.data[10:])
     text = _get_list_text(_list) if _list else "List not found"
-    if call.data[10:] == 'update':
-        if call.inline_message_id:
-            return bot.edit_message_text(text=text, inline_message_id=call.inline_message_id, reply_markup=None)
-        await call.message.edit_text(text=text, reply_markup=get_update_makrup('lists_get'))
-    else:
-        if call.inline_message_id:
-            return bot.edit_message_text(text=text, inline_message_id=call.inline_message_id, reply_markup=None)
-        await call.message.edit_text(text=text, reply_markup=get_update_makrup('lists_get'))
+    try:
+        markup = get_update_makrup('lists_upd', call.data[10:])
+        if call.data[6:].startswith('upd'):
+            if call.inline_message_id:
+                return await bot.edit_message_text(text=text, inline_message_id=call.inline_message_id, reply_markup=markup)
+            await call.message.edit_text(text=text, reply_markup=markup)
+        else:
+            if call.inline_message_id:
+                return await bot.edit_message_text(text=text, inline_message_id=call.inline_message_id, reply_markup=markup)
+            await call.message.edit_text(text=text, reply_markup=markup)
+    except:
+        pass
 
 # Add element to list
 @dp.message(Command("lists_set"))
