@@ -13,8 +13,8 @@ from app.keyboards import get_week_makrup
 async def schedule_handler(message: Message):
     text, markup = _get_schedule_data()
     await message.answer(text=text, reply_markup=markup)
-    
-    
+
+
 @dp.callback_query(lambda call: call.data.startswith('schedule'))
 async def schedule_callback_handler(call: CallbackQuery):
     await call.answer()
@@ -32,7 +32,7 @@ async def schedule_callback_handler(call: CallbackQuery):
             await bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=markup)
     except:
         pass
-    
+
 
 def _get_schedule_text(days: list[Day]):
     text = ''
@@ -40,10 +40,10 @@ def _get_schedule_text(days: list[Day]):
         if day.subjects:
             text += f'\n\n{calendar.day_name[index]}'
             for i, subject in enumerate(day.subjects):
-                text += f'\n{i+1}) <b>{subject.subject.name}</b>'
+                text += f'\n{i + 1}) <b>{subject.subject.name}</b>'
                 text += f'({subject.subject.audience})' if subject.subject.audience else ''
                 text += f'[{subject.group}]' if subject.group else ''
-    
+
     return text if text else 'Schedule is empty🫡'
 
 
@@ -53,7 +53,7 @@ def _get_schedule_data():
     if current_time.weekday() >= 5:
         current_time += timedelta(weeks=1)
         shift = 'next'
-    
+
     text = _get_schedule_text(get_days(current_time.isocalendar().week))
     markup = get_week_makrup('schedule', shift)
     return text, markup
