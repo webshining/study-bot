@@ -38,7 +38,7 @@ async def current_inline_handler(query: InlineQuery):
         input_message_content=InputTextMessageContent(message_text=subjects_text),
         reply_markup=subjects_markup
     )
-    lists_text, lists_markup = _get_lists_data()
+    lists_text, lists_markup = _get_lists_data('Select a list to view:', 'lists_get')
     lists = InlineQueryResultArticle(
         id=hashlib.md5(f'{query}{time()}'.encode()).hexdigest(),
         thumb_url='https://cdn-icons-png.flaticon.com/512/5814/5814457.png',

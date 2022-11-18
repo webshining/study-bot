@@ -23,7 +23,7 @@ async def help_handler(message: Message):
                            '➕ /lists_create - Create new list',
                            '✏️ /lists_edit - Edit list name',
                            '❌ /lists_delete - Delete one list'))
-    
+
     text += '\n'.join(('\n\nCreator: <b>@webshining</b>😉',
-                      'Repositofy: <b><a href="https://gitfront.io/r/user-1330244/iCWWJBwFKQEh/study-bot/">GitHub</a></b>'))
+                       'Repositofy: <b><a href="https://github.com/webshining/study-bot">GitHub</a></b>'))
     await message.answer(text, disable_web_page_preview=True)

@@ -14,7 +14,7 @@ async def current_handler(message: Message):
     await message.answer(text, reply_markup=markup)
 
 
-@dp.callback_query(lambda call: call.data.startswith('current'))
+@dp.callback_query(lambda call: call.data.startswith('current_update'))
 async def current_callback_handler(call: CallbackQuery):
     await call.answer()
     text, markup = _get_current_data()
@@ -41,5 +41,5 @@ def _get_current_data():
     else:
         text = f'No class right now! Next class: {subject_now[0].subject.name} at {subject_now[0].time_start} in {str_to_time(subject_now[0].time_start, _format) - str_to_time(_current_time, _format)}'
 
-    markup = get_update_markup('current')
+    markup = get_update_markup('current_update')
     return text, markup
