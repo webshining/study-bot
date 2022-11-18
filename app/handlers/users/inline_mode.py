@@ -6,6 +6,7 @@ from loader import dp
 from .current import _get_current_data
 from .schedule import _get_schedule_data
 from .subjects import _get_subjects_data
+from .lists import _get_lists_data
 
 
 @dp.inline_query()
@@ -37,4 +38,13 @@ async def current_inline_handler(query: InlineQuery):
         input_message_content=InputTextMessageContent(message_text=subjects_text),
         reply_markup=subjects_markup
     )
-    await query.answer(results=[schedule, current, subjects], cache_time=1)
+    lists_text, lists_markup = _get_lists_data()
+    lists = InlineQueryResultArticle(
+        id=hashlib.md5(f'{query}{time()}'.encode()).hexdigest(),
+        thumb_url='https://cdn-icons-png.flaticon.com/512/5814/5814457.png',
+        title=f'Get lists',
+        description='Get lists info',
+        input_message_content=InputTextMessageContent(message_text=lists_text),
+        reply_markup=lists_markup
+    )
+    await query.answer(results=[schedule, current, subjects, lists], cache_time=1)
