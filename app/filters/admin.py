@@ -7,4 +7,4 @@ from data.config import ADMINS
 class AdminFilter(BaseFilter):
     async def __call__(self, message: Message) -> bool:
         from_user = message.from_user
-        return from_user.id in ADMINS
+        return from_user.id in ADMINS and message.chat.type == 'private'
