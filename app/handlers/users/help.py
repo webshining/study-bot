@@ -12,8 +12,8 @@ async def help_handler(message: Message):
                       '/subjects - Get subjects info',
                       '/schedule - Get schedule',
                       '/current - Get current info',
-                      '/lists - Get lists'
-                      '/lists_set - Add an entry to the list (if you have already added data to the list, they will be changed and not added again)'
-                      '\nCreator: <b>@webshining</b>😉',
+                      '/lists - Get lists',
+                      '/lists_set - Add an entry to the list (if you have already added data to the list, they will be changed and not added again)',
+                      '\n\nCreator: <b>@webshining</b>😉',
                       'Repositofy: <b><a href="https://gitfront.io/r/user-1330244/DkqZMaFsoi7n/study-bot/">GitHub</a></b>'))
     await message.answer(text, disable_web_page_preview=True)
