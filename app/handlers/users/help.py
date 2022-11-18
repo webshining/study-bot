@@ -15,7 +15,8 @@ async def help_handler(message: Message):
                       '/schedule - Get schedule',
                       '/current - Get current info',
                       '/lists - Get lists',
-                      '/lists_set - Add an entry to the list (if you have already added data to the list, they will be changed and not added again)'))
+                      '/lists_set - Add an entry to the list (if you have already added data to the list, they will be changed and not added again)',
+                      '/cancel - Reset your state'))
     if message.from_user.id in ADMINS and message.chat.type == 'private':
         text += '\n'.join((f'\n\n👑 Congratulations you are on the list of the best administrators',
                            '<b>Commands:</b>',
