@@ -1,3 +1,4 @@
+from pymongo import UpdateOne
 from bson import ObjectId
 from ..models import List, lists_collection
 
@@ -21,9 +22,12 @@ def edit_list(id: str, name: str):
     return List(**_list)
 
 
-def edit_list_elements(id: str, name: str, value: str, user_id: int):
-    _list = lists_collection.find_one_and_update({'_id': ObjectId(id)}, {'$push': {'elements': {'name': name, 'value': value, 'user_id': user_id}}})
-    return List(**_list)
+def push_list_element(id: str, name: str, value: str, user_id: int):
+    lists_collection.bulk_write([
+        UpdateOne({'_id': ObjectId(id)}, {'$pull': {'elements': {'user_id': user_id}}}),
+        UpdateOne({'_id': ObjectId(id)}, {'$push': {'elements': {'name': name, 'value': value, 'user_id': user_id}}})
+    ])
+    return get_list(id)
 
 
 def delete_list(id: str):
