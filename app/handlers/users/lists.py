@@ -3,7 +3,7 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
-from loader import dp
+from loader import dp, bot
 from app.keyboards import get_lists_makrup, get_update_markup
 from app.states import AddToList
 from database import get_lists, get_list, push_list_element, List as ListModel
@@ -22,6 +22,8 @@ async def _lists_list(call: CallbackQuery):
     _list = get_list(call.data[10:])
     text, markup = _get_list_data(_list)
     try:
+        if call.inline_message_id:
+            return await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
         await call.message.edit_text(text, reply_markup=markup)
     except:
         pass
