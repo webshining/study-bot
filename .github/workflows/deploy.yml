@@ -9,8 +9,9 @@ jobs:
   build:
     name: Deploy
     runs-on: ununtu-latest
+    environment: server
     steps:
-    - name: Install SSH Key
+    - name: Deploy to server with ssh key
       uses: appleboy/ssh-action@master
       with:
         username: ${{ secrets.SSH_USER }}
