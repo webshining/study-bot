@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: server
     steps:
-    - name: Deploy to server with ssh
+    - name: Deploy to server with ssh and build to docker
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
