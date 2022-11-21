@@ -6,6 +6,10 @@ services:
     restart: always
     depends_on:
       - redis
+    environment:
+      - RD_DB=5
+      - RD_HOST=redis
+      - RD_PORT=6379
   redis:
     image: redis
     volumes: 
