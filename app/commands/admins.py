@@ -6,11 +6,7 @@ from .default import get_default_commands
 
 def get_admins_commands():
     commands = get_default_commands()
-    commands.extend([
-        BotCommand(command='/lists_create', description='create list'),
-        BotCommand(command='/lists_edit', description='edit list'),
-        BotCommand(command='/lists_delete', description='delete list'),
-    ])
+    commands.extend([])
     return commands
 
 

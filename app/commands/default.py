@@ -9,8 +9,6 @@ def get_default_commands():
         BotCommand(command='/schedule', description='schedule'),
         BotCommand(command='/subjects', description='subjects info'),
         BotCommand(command='/current', description='current subject'),
-        BotCommand(command='/lists', description='get lists'),
-        BotCommand(command='/lists_set', description='add an entry to the list'),
         BotCommand(command='/cancel', description='reset state'),
         BotCommand(command='/help', description='how is works'),
     ]

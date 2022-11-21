@@ -1,22 +1,11 @@
-from pydantic import BaseModel, Field
+from peewee import PrimaryKeyField, IntegerField, DeferredThroughModel, ManyToManyField
 
-from loader import db
 from .subject import Subject
-from .mongo import PydanticObjectId
+from .base import BaseModel
 
-
-class DaySubject(BaseModel):
-    id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
-    time_start: str
-    time_end: str
-    group: str = None
-    subject: Subject
+ThroughDeferred = DeferredThroughModel()
 
 
 class Day(BaseModel):
-    id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
-    subjects: list[DaySubject]
-    day_id: int = None
-
-
-days_collection = db["days"]
+    id = PrimaryKeyField()
+    day_id = IntegerField()

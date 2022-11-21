@@ -1,15 +1,11 @@
-from pydantic import BaseModel, Field
+from peewee import PrimaryKeyField, CharField, TextField
 
-from loader import db
-from .mongo import PydanticObjectId
+from .base import BaseModel
 
 
 class Subject(BaseModel):
-    id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id") or None
-    name: str
-    audience: str
-    teacher: str
-    info: str
-
-
-subjects_collection = db['subjects']
+    id = PrimaryKeyField()
+    name = CharField()
+    audience = CharField()
+    teacher = CharField()
+    info = TextField(null=True)

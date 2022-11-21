@@ -4,15 +4,17 @@ from loader import dp, bot
 
 
 async def on_startup():
-    from app.commands import set_default_commands
-    await set_default_commands()
+    # from app.commands import set_default_commands
+    # await set_default_commands()
+    from database import init_days
+    init_days()
     print('Bot started!')
 
 
 async def on_shutdown():
+    # await bot.delete_my_commands(scope=BotCommandScopeDefault())
     print('Bot shutting down!')
-    await bot.delete_my_commands(scope=BotCommandScopeDefault())
-    
+
     
 def main():
     import app.middlewares

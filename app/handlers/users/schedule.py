@@ -1,5 +1,5 @@
-import calendar, pytz
-from datetime import datetime, timedelta
+import calendar
+from datetime import timedelta
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 
@@ -7,6 +7,7 @@ from loader import dp, bot
 from database.models import Day
 from database.services import get_days
 from app.keyboards import get_week_makrup
+from utils import current_time
 
 
 @dp.message(Command('schedule'))
@@ -18,10 +19,9 @@ async def schedule_handler(message: Message):
 @dp.callback_query(lambda call: call.data.startswith('schedule'))
 async def schedule_callback_handler(call: CallbackQuery):
     await call.answer()
+    date = current_time()
     if call.data[9:] == 'next':
-        date = datetime.now(pytz.timezone('Europe/Kiev')) + timedelta(weeks=1)
-    else:
-        date = datetime.now(pytz.timezone('Europe/Kiev'))
+        date += timedelta(weeks=1)
     days = get_days(date.isocalendar().week)
     text = _get_schedule_text(days)
     markup = get_week_makrup('schedule', call.data[9:])
@@ -34,26 +34,24 @@ async def schedule_callback_handler(call: CallbackQuery):
         pass
 
 
-def _get_schedule_text(days: list[Day]):
+def _get_schedule_text(days):
     text = ''
-    for index, day in enumerate(days):
-        if day.subjects:
-            text += f'\n\n{calendar.day_name[index]}'
-            for i, subject in enumerate(day.subjects):
-                text += f'\n{i + 1}) <b>{subject.subject.name}</b>'
-                text += f'({subject.subject.audience})' if subject.subject.audience else ''
-                text += f'[{subject.group}]' if subject.group else ''
-
+    if days:
+        for day in days:
+            if day.subjects:
+                text += f'\n\n{calendar.day_name[day.day_id]}'
+                for si, subject in enumerate(day.subjects):
+                    text += f'\n{si + 1}) <b>{subject.subject.name}</b>({subject.subject.audience})'
     return text if text else 'Schedule is empty🫡'
 
 
 def _get_schedule_data():
     shift = 'this'
-    current_time = datetime.now(pytz.timezone('Europe/Kiev'))
-    if current_time.weekday() >= 5:
-        current_time += timedelta(weeks=1)
+    _current_time = current_time()
+    if _current_time.weekday() >= 5:
+        _current_time += timedelta(weeks=1)
         shift = 'next'
 
-    text = _get_schedule_text(get_days(current_time.isocalendar().week))
+    text = _get_schedule_text(get_days(_current_time.isocalendar().week))
     markup = get_week_makrup('schedule', shift)
     return text, markup
