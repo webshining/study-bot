@@ -1,21 +1,20 @@
 name: Deploy to server
 
-
 on:
   push:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   build:
     name: Deploy
-    runs-on: ununtu-latest
+    runs-on: ubuntu-latest
     environment: server
     steps:
     - name: Deploy to server with ssh
       uses: appleboy/ssh-action@master
       with:
-        username: ${{ secrets.SSH_USER }}
         host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         scripts: cd ${{ secrets.PROJECT_PATH }} && git pull && make rebuild
       
