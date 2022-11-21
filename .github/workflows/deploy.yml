@@ -1,0 +1,20 @@
+name: Deploy to server
+
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    name: Deploy
+    runs-on: ununtu-latest
+    steps:
+    - name: Install SSH Key
+      uses: appleboy/ssh-action@master
+      with:
+        username: ${{ secrets.SSH_USER }}
+        host: ${{ secrets.SSH_HOST }}
+        key: ${{ secrets.SSH_KEY }}
+        scripts: cd ${{ secrets.PROJECT_PATH }} && git pull && make rebuild
+      
