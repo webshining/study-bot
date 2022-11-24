@@ -11,3 +11,6 @@ class DaySubject(BaseModel):
     subject = ForeignKeyField(Subject, backref='days', field='id', on_delete='CASCADE')
     time_start = TimeField()
     time_end = TimeField()
+    
+    class Meta:
+        table_name = 'days_subjects'

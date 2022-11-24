@@ -9,3 +9,6 @@ class Subject(BaseModel):
     audience = CharField()
     teacher = CharField()
     info = TextField(null=True)
+    
+    class Meta:
+        table_name = 'subjects'
