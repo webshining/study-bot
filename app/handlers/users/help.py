@@ -1,28 +1,20 @@
 from aiogram.types import Message
 from aiogram.filters import Command
 
-from loader import dp
+from loader import dp, _
+from app.commands import get_default_commands, get_admins_commands
 from data.config import ADMINS
 
 
 @dp.message(Command('help'))
 async def help_handler(message: Message):
-    text = '\n'.join((f'Hello <b>{message.from_user.full_name}</b>👋',
-                      f'I am a diary bot',
-                      f'<b>\nCommands:</b>',
-                      '/help - All infos',
-                      '/subjects - Get subjects info',
-                      '/schedule - Get schedule',
-                      '/current - Get current info',
-                      '/lists - Get lists',
-                      '/lists_set - Add an entry to the list (if you have already added data to the list, they will be changed and not added again)',
-                      '/cancel - Reset your state'))
+    text = _('Hello <b>{}</b>👋\nI am a diary bot\n<b>\nCommands:</b>').format(message.from_user.full_name)
+    for command in get_default_commands(message.from_user.language_code):
+        text += f'\n{command.command} - {command.description.capitalize()}'
     if message.from_user.id in ADMINS and message.chat.type == 'private':
-        text += '\n'.join((f'\n\n👑 Congratulations you are on the list of the best administrators',
-                           '<b>Commands:</b>',
-                           '➕ /lists_create - Create new list',
-                           '✏️ /lists_edit - Edit list name',
-                           '❌ /lists_delete - Delete one list'))
+        text += _('\n\n👑 Congratulations you are on the list of the best administrators\n<b>Commands:</b>')
+        for command in get_admins_commands(message.from_user.language_code):
+            text += f'\n{command.command} - {command.description.capitalize()}'
 
     text += '\n'.join(('\n\nCreator: <b>@webshining</b>😉',
                        'Repositofy: <b><a href="https://github.com/webshining/study-bot">GitHub</a></b>'))
