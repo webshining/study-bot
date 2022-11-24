@@ -18,10 +18,12 @@ class UserMiddleware(BaseMiddleware):
             from_user = event.message.from_user
         elif event.callback_query:
             from_user = event.callback_query.from_user
+            await event.callback_query.answer()
         elif event.inline_query:
             from_user = event.inline_query.from_user
         if from_user.id in ADMINS:
             await set_admins_commands(from_user.id)
         else:
             await remove_admins_command(from_user.id)
+        data['is_admin'] = from_user.id in ADMINS
         return await handler(event, data)
