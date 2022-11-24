@@ -28,18 +28,20 @@ async def current_callback_handler(call: CallbackQuery):
 
 
 def _get_current_data():
-    _format: str = '%H:%M:%S'
     _current_time = current_time()
     day = get_day_by_date(_current_time)
-    _current_time = _current_time.time().strftime(_format)
-    subject_now = [s for s in day.subjects if s.time_end >= _current_time]
-    if not subject_now:
-        text = f'Classes are over!'
-    elif _current_time >= subject_now[0].time_start:
-        text = _get_subject_text(subject_now[0].subject)
-        text += f'\n\nСlass ends at {subject_now[0].time_end} in {str_to_time(subject_now[0].time_end, _format) - str_to_time(_current_time, _format)}'
+    subjects = day.subjects
+    if not subjects:
+        text = 'No class today'
     else:
-        text = f'No class right now! Next class: {subject_now[0].subject.name} at {subject_now[0].time_start} in {str_to_time(subject_now[0].time_start, _format) - str_to_time(_current_time, _format)}'
-
+        subjects = [s for s in subjects if s.time_end >= _current_time.time()]
+        if not subjects:
+            text = f'Classes are over!'
+        elif _current_time >= subjects[0].time_start:
+            text = _get_subject_text(subjects[0].subject)
+            text += f'\n\nСlass ends at {subjects[0].time_end} in {subjects[0].time_end - _current_time}'
+        else:
+            text = f'No class right now! Next class: {subjects[0].subject.name} at {subjects[0].time_start} in {subjects[0].time_start - _current_time}'
+    
     markup = get_update_markup('current_update')
     return text, markup
