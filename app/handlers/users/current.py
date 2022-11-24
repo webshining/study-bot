@@ -43,5 +43,5 @@ def _get_current_data():
         else:
             text = f'No class right now! Next class: {subjects[0].subject.name} at {subjects[0].time_start} in {subjects[0].time_start - _current_time}'
     
-    markup = get_update_markup('current_update')
+    markup = get_update_markup('current_update').as_markup()
     return text, markup
