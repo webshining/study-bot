@@ -1,7 +1,4 @@
-from aiogram.types import BotCommandScopeDefault
-
 from loader import dp, bot
-from data.config import ADMINS
 
 
 async def on_startup():
@@ -13,10 +10,6 @@ async def on_startup():
 
 
 async def on_shutdown():
-    from app.commands import remove_admins_command    
-    await bot.delete_my_commands(scope=BotCommandScopeDefault())
-    for admin in ADMINS:
-        await remove_admins_command(admin)
     print('Bot shutting down!')
 
     
