@@ -13,17 +13,16 @@ class UserMiddleware(BaseMiddleware):
         event: Update,
         data: Dict[str, Any],
     ) -> Any:
-        global from_user
         if event.message:
-            from_user = event.message.from_user
+            update = event.message
         elif event.callback_query:
-            from_user = event.callback_query.from_user
-            await event.callback_query.answer()
+            update = event.callback_query
+            await update.answer()
         elif event.inline_query:
-            from_user = event.inline_query.from_user
-        if from_user.id in ADMINS:
-            await set_admins_commands(from_user.id)
+            update = event.inline_query.chat_type
+        if update.from_user.id in ADMINS:
+            await set_admins_commands(update.from_user.id)
         else:
-            await remove_admins_command(from_user.id)
-        data['is_admin'] = from_user.id in ADMINS
+            await remove_admins_command(update.from_user.id)
+        data['is_admin'] = update.from_user.id in ADMINS
         return await handler(event, data)

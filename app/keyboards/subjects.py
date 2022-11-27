@@ -10,4 +10,4 @@ def get_subjects_markup(data: str, subjects: list[Subject]):
     ]
     builder.add(*buttons)
     builder.adjust(3)
-    return builder.as_markup()
+    return builder

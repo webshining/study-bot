@@ -1,7 +1,7 @@
 from ..models import List, ListElement
 
 
-def get_list(id: int) -> List or None:
+def get_list(id: int) -> List:
     list = List.select().where(List.id == id).first()
     return list
 
