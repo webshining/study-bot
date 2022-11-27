@@ -7,7 +7,7 @@ from .default import get_default_commands
 def get_admins_commands(lang: str = 'en'):
     commands = get_default_commands()
     commands.extend([
-        BotCommand(command='/list_create', description=_("create new list", locale=lang)),
+        BotCommand(command='/newlist', description=_("create new list", locale=lang)),
     ])
     return commands
 

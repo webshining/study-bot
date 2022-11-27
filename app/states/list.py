@@ -1,6 +1,7 @@
 from aiogram.fsm.state import StatesGroup, State
 
 
-class ListCreate(StatesGroup):
-    name = State()
+class List(StatesGroup):
+    create_name = State()
+    edit_name = State()
     

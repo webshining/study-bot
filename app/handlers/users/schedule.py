@@ -3,7 +3,7 @@ from datetime import timedelta
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 
-from loader import dp, bot
+from loader import dp, bot, _
 from database.models import Day
 from database.services import get_days
 from app.keyboards import get_week_markup
@@ -36,7 +36,7 @@ def _get_schedule_text(days: list[Day]):
             text += f'\n\n{calendar.day_name[day.day_id]}'
             for si, subject in enumerate(day.subjects):
                 text += f'\n{si + 1}) <b>{subject.subject.name}</b>({subject.subject.audience})'
-    return text if text else 'Schedule is empty🫡'
+    return text if text else _('Schedule is empty🫡')
 
 
 def _get_schedule_data(shift: str = None):
@@ -48,4 +48,4 @@ def _get_schedule_data(shift: str = None):
 
     text = _get_schedule_text(get_days(_current_time.isocalendar().week))
     markup = get_week_markup('schedule', shift)
-    return text, markup
+    return text, markup.as_markup()

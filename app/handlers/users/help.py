@@ -12,10 +12,9 @@ async def help_handler(message: Message):
     for command in get_default_commands(message.from_user.language_code):
         text += f'\n{command.command} - {command.description.capitalize()}'
     if message.from_user.id in ADMINS and message.chat.type == 'private':
-        text += _('\n\n👑 Congratulations you are on the list of the best administrators\n<b>Commands:</b>')
+        text += _('\n\n👑 *Admins\n<b>Commands:</b>')
         for command in get_admins_commands(message.from_user.language_code):
             text += f'\n{command.command} - {command.description.capitalize()}'
 
-    text += '\n'.join(('\n\nCreator: <b>@webshining</b>😉',
-                       'Repositofy: <b><a href="https://github.com/webshining/study-bot">GitHub</a></b>'))
+    text += _('\n\nCreator: <b>@webshining</b>😉\nRepositofy: <b><a href="https://github.com/webshining/study-bot">GitHub</a></b>')
     await message.answer(text, disable_web_page_preview=True)

@@ -1,10 +1,10 @@
 from aiogram.types import Message
 from aiogram.filters import Command
-from loader import dp
+
+from loader import dp, _
 
 
 @dp.message(Command('start'))
 async def start_handler(message: Message):
-    text = '\n'.join((f'Hello <b>{message.from_user.full_name}</b>👋',
-                      f'Write /help to see more information'))
+    text = _('Hello <b>{}</b>👋\nWrite /help to see more information').format(message.from_user.full_name)
     await message.answer(text)

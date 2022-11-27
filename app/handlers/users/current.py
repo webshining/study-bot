@@ -1,11 +1,11 @@
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 
-from loader import dp, bot
+from loader import dp, bot, _
 from database.services import get_day_by_date
 from app.keyboards import get_update_markup
 from .subjects import _get_subject_text
-from utils import current_time, str_to_time
+from utils import current_time
 
 
 @dp.message(Command('current'))
@@ -32,16 +32,16 @@ def _get_current_data():
     day = get_day_by_date(_current_time)
     subjects = day.subjects
     if not subjects:
-        text = 'No class today'
+        text = _('No class today')
     else:
         subjects = [s for s in subjects if s.time_end >= _current_time.time()]
         if not subjects:
-            text = f'Classes are over!'
+            text = _('Classes are over')
         elif _current_time >= subjects[0].time_start:
             text = _get_subject_text(subjects[0].subject)
-            text += f'\n\nСlass ends at {subjects[0].time_end} in {subjects[0].time_end - _current_time}'
+            text += _('\n\nСlass ends at {} in {}').format(subjects[0].time_end, subjects[0].time_end - _current_time)
         else:
-            text = f'No class right now! Next class: {subjects[0].subject.name} at {subjects[0].time_start} in {subjects[0].time_start - _current_time}'
+            text = _('No class right now! Next class: {} at {} in {}').format(subjects[0].subject.name, subjects[0].time_start, subjects[0].time_start - _current_time)
     
-    markup = get_update_markup('current_update').as_markup()
-    return text, markup
+    markup = get_update_markup('current_update')
+    return text, markup.as_markup()

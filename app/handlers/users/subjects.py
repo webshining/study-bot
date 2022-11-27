@@ -1,7 +1,7 @@
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 
-from loader import dp, bot
+from loader import dp, bot, _
 from database.models import Subject
 from database.services import get_subjects, get_subject
 from app.keyboards import get_subjects_markup
@@ -13,7 +13,7 @@ async def subjects_handler(message: Message):
     await message.answer(text, reply_markup=markup)
 
 
-@dp.callback_query(lambda call: call.data.startswith('subjects'))
+@dp.callback_query(lambda call: call.data.startswith('subject'))
 async def subjects_callback_handler(call: CallbackQuery):
     await call.answer()
     subject = get_subject(call.data[9:])
@@ -25,11 +25,11 @@ async def subjects_callback_handler(call: CallbackQuery):
 
 
 def _get_subject_text(subject: Subject):
-    text = 'Subject not found🫡'
+    text = _('Subject not found🫡')
     if subject:
-        text = f'<b><i>{subject.name}:</i></b>\nTeacher: <b>{subject.teacher}</b>'
+        text = _('<b>{}:</b>\nTeacher: <b>{}</b>').format(subject.name, subject.teacher)
         if subject.audience:
-            text += f'\nAudience: <b>{subject.audience}</b>'
+            text += _('\nAudience: <b>{}</b>').format(subject.audience)
         if subject.info:
             text += f'\n\n{subject.info}'
 
@@ -44,6 +44,6 @@ def _get_subject_data(subject: Subject):
 
 def _get_subjects_data():
     subjects = get_subjects()
-    markup = get_subjects_markup('subjects', subjects)
-    text = 'Select subject📚:' if subjects else "Subjects is empty🫡"
-    return text, markup
+    markup = get_subjects_markup('subject', subjects)
+    text = _('Select subject📚:') if subjects else _("Subjects is empty🫡")
+    return text, markup.as_markup()
