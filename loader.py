@@ -8,7 +8,7 @@ from app.middlewares.inter import i18n
 bot = Bot(TELEGRAM_BOT_TOKEN, parse_mode='HTML')
 if RD_DB and RD_HOST and RD_PORT:
     from aiogram.fsm.storage.redis import RedisStorage
-    from redis.client import Redis
+    from redis.asyncio.client import Redis
     storage = RedisStorage(Redis(db=RD_DB, host=RD_HOST, port=RD_PORT, password=RD_PASS))
 else:
     from aiogram.fsm.storage.memory import MemoryStorage
