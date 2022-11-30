@@ -1,4 +1,4 @@
-from peewee import PrimaryKeyField, CharField, ForeignKeyField, BooleanField
+from peewee import PrimaryKeyField, CharField, ForeignKeyField, BooleanField, IntegerField
 
 from .base import BaseModel
 
@@ -17,6 +17,7 @@ class ListElement(BaseModel):
     list_id = ForeignKeyField(List, backref='elements', on_delete='CASCADE')
     key = CharField()
     value = CharField()
+    user_id = IntegerField()
     
     class Meta:
         table_name = 'lists_elements'

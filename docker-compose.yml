@@ -6,27 +6,22 @@ services:
     restart: always
     entrypoint: ./bin/entrypoint.sh
     depends_on:
-      - redis
-      - mongo
+      - postgres
     environment:
-      MONGODB_URL: mongodb://mongo:27017
-      RD_DB: 5
-      RD_HOST: redis
-      RD_PORT: 6379
+      DB_NAME: study_bot
+      DB_USER: webshining
+      DB_PASS: admin
+      DB_HOST: postgres
+      DB_PORT: 5432
   redis:
     image: redis
-    volumes: 
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - "6379:6379"
-  mongo:
-    image: mongo
+  postgres:
+    image: postgres
     ports:
-      - "27017:27017"
-    volumes:
-      - mongo_db:/data/db
-
-volumes:
-  logs:
-  mongo_db:
-    external: true
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: webshining
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: study_bot

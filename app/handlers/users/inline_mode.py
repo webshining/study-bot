@@ -10,18 +10,18 @@ from .subjects import _get_subjects_data
 
 @dp.inline_query()
 async def current_inline_handler(query: InlineQuery):
-    schedule_text, schedule_marup = _get_schedule_data()
+    schedule_text, schedule_markup = _get_schedule_data()
     schedule = InlineQueryResultArticle(
-        id=hashlib.md5(f'{query}{time()}'.encode()).hexdigest(),
+        id=hashlib.md5(f'{query}{time()}1'.encode()).hexdigest(),
         thumb_url='https://cdn-icons-png.flaticon.com/512/1001/1001279.png',
-        title=_('Schedule'),
+        title=_('Get schedule'),
         description=_('Find out the timetable'),
         input_message_content=InputTextMessageContent(message_text=schedule_text),
-        reply_markup=schedule_marup
+        reply_markup=schedule_markup
     )
     current_text, current_markup = _get_current_data()
     current = InlineQueryResultArticle(
-        id=hashlib.md5(f'{query}{time()}'.encode()).hexdigest(),
+        id=hashlib.md5(f'{query}{time()}2'.encode()).hexdigest(),
         thumb_url='https://cdn-icons-png.flaticon.com/512/6557/6557160.png',
         title=_('Current subject'),
         description=_('Get current info'),
@@ -30,7 +30,7 @@ async def current_inline_handler(query: InlineQuery):
     )
     subjects_text, subjects_markup = _get_subjects_data()
     subjects = InlineQueryResultArticle(
-        id=hashlib.md5(f'{query}{time()}'.encode()).hexdigest(),
+        id=hashlib.md5(f'{query}{time()}3'.encode()).hexdigest(),
         thumb_url='https://cdn-icons-png.flaticon.com/512/5436/5436691.png',
         title=_('Subjects info'),
         description=_('Get subjects info'),

@@ -3,8 +3,8 @@ from aiogram.filters import Command
 
 from loader import dp, bot, _
 from database.services import get_day_by_date
-from app.keyboards import get_update_markup
-from .subjects import _get_subject_text
+from app.keyboards import update_markup
+from .subjects import _get_subject_data
 from utils import current_time
 
 
@@ -38,10 +38,10 @@ def _get_current_data():
         if not subjects:
             text = _('Classes are over')
         elif _current_time >= subjects[0].time_start:
-            text = _get_subject_text(subjects[0].subject)
-            text += _('\n\nСlass ends at {} in {}').format(subjects[0].time_end, subjects[0].time_end - _current_time)
+            text, *other = _get_subject_data(subjects[0].subject)
+            text += _('\n\nClass ends at {} in {}').format(subjects[0].time_end, subjects[0].time_end - _current_time)
         else:
             text = _('No class right now! Next class: {} at {} in {}').format(subjects[0].subject.name, subjects[0].time_start, subjects[0].time_start - _current_time)
     
-    markup = get_update_markup('current_update')
+    markup = update_markup('current_update')
     return text, markup.as_markup()
