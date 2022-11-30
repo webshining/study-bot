@@ -1,12 +1,12 @@
 from pathlib import Path
-from decouple import config, Csv
+from decouple import config
 
 
 DIR = Path(__file__).absolute().parent.parent
 
-TELEGRAM_BOT_TOKEN = config('TELEGRAM_BOT_TOKEN', cast=str)
+TELEGRAM_BOT_TOKEN = config('TELEGRAM_BOT_TOKEN', default=None)
 
-ADMINS = config('ADMINS', default=[], cast=Csv(cast=int))
+ADMINS = config('ADMINS', default='', cast=lambda v: [int(s.strip()) for s in v.split(',')])
 
 DB_NAME = config('DB_NAME', default=None)
 DB_USER = config('DB_USER', default=None)
