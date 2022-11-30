@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from loader import dp, bot, _
 from database.models import Day
 from database.services import get_days
-from app.keyboards import get_week_markup
+from app.keyboards import week_markup
 from utils import current_time
 
 
@@ -47,5 +47,5 @@ def _get_schedule_data(shift: str = None):
         shift = 'next'
 
     text = _get_schedule_text(get_days(_current_time.isocalendar().week))
-    markup = get_week_markup('schedule', shift)
+    markup = week_markup('schedule', shift)
     return text, markup.as_markup()

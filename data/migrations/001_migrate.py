@@ -85,6 +85,7 @@ def migrate(migrator: Migrator, database, fake=False, **kwargs):
         list_id = pw.ForeignKeyField(backref='elements', column_name='list_id', field='id', model=migrator.orm['lists'], on_delete='CASCADE')
         key = pw.CharField(max_length=255)
         value = pw.CharField(max_length=255)
+        user_id = pw.IntegerField()
 
         class Meta:
             table_name = "lists_elements"

@@ -27,4 +27,4 @@ compose:
 logs: 
 	docker-compose logs app
 rebuild: 
-	docker-compose up -d --build --no-deps --force-recreate
+	docker-compose up -d --no-deps --force-recreate --build app

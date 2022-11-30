@@ -3,7 +3,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from database.models import Subject
 
 
-def get_subjects_markup(data: str, subjects: list[Subject]):
+def subjects_markup(data: str, subjects: list[Subject]):
     builder = InlineKeyboardBuilder()
     buttons = [
         InlineKeyboardButton(text=subject.name, callback_data=f'{data}_{subject.id}') for subject in subjects
