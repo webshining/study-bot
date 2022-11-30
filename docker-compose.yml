@@ -24,3 +24,8 @@ services:
       POSTGRES_USER: webshining
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: study_bot
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      
+volumes:
+  postgres_data:
