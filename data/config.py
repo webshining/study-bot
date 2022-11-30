@@ -8,16 +8,18 @@ TELEGRAM_BOT_TOKEN = config('TELEGRAM_BOT_TOKEN', cast=str)
 
 ADMINS = config('ADMINS', default=[], cast=Csv(cast=int))
 
-DB_NAME = config('DB_NAME', cast=str) or None
-DB_USER = config('DB_USER', cast=str) or None
-DB_PASS = config('DB_PASS', cast=str) or None
-DB_HOST = config('DB_HOST', cast=str) or None
-DB_PORT = config('DB_PORT', cast=int) or None
+DB_NAME = config('DB_NAME', default=None)
+DB_USER = config('DB_USER', default=None)
+DB_PASS = config('DB_PASS', default=None)
+DB_HOST = config('DB_HOST', default=None)
+DB_PORT = config('DB_PORT', default=None)
+DB_PORT = int(DB_PORT) if DB_PORT else None
 
-RD_DB = config('RD_DB', cast=str) or None
-RD_HOST = config('RD_HOST', cast=str) or None
-RD_PORT = config('RD_PORT', cast=int) or None
-RD_PASS = config('RD_PASS', cast=str) or None
+RD_DB = config('RD_DB', default=None)
+RD_HOST = config('RD_HOST', default=None)
+RD_PORT = config('RD_PORT', default=None)
+RD_PORT = int(RD_PORT) if RD_PORT else None
+RD_PASS = config('RD_PASS', default=None)
 
 I18N_DOMAIN = 'bot'
 I18N_PATH = f'{DIR}/data/locales'
