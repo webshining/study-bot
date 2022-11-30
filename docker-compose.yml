@@ -4,19 +4,25 @@ services:
   app:
     build: .
     restart: always
+    entrypoint:
+      - ./bin/entrypoint.sh
     depends_on:
-      - postgres
+      - db
+      - rd
     environment:
       DB_NAME: study_bot
       DB_USER: webshining
       DB_PASS: admin
-      DB_HOST: postgres
+      DB_HOST: db
       DB_PORT: 5432
-  redis:
+      RD_DB: 5
+      RD_HOST: rd
+      RD_PORT: 6379
+  rd:
     image: redis
     ports:
       - "6379:6379"
-  postgres:
+  db:
     image: postgres
     ports:
       - "5432:5432"
