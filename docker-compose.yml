@@ -19,7 +19,7 @@ services:
       RD_HOST: rd
       RD_PORT: 6379
   rd:
-    image: redis
+    image: redis:alpine
     ports:
       - "6379:6379"
   db:
@@ -35,3 +35,4 @@ services:
       
 volumes:
   postgres_data:
+    external: true
