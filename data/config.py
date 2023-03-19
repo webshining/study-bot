@@ -1,25 +1,25 @@
 from pathlib import Path
-from decouple import config
+from environs import Env
 
+env = Env()
+env.read_env()
 
 DIR = Path(__file__).absolute().parent.parent
 
-TELEGRAM_BOT_TOKEN = config('TELEGRAM_BOT_TOKEN', default=None)
+TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', default=None)
 
-ADMINS = config('ADMINS', default='', cast=lambda v: [int(s.strip()) for s in v.split(',')])
+ADMINS = env.list('ADMINS', subcast=float, default=[])
 
-DB_NAME = config('DB_NAME', default=None)
-DB_USER = config('DB_USER', default=None)
-DB_PASS = config('DB_PASS', default=None)
-DB_HOST = config('DB_HOST', default=None)
-DB_PORT = config('DB_PORT', default=None)
-DB_PORT = int(DB_PORT) if DB_PORT else None
+DB_NAME = env.str('DB_NAME', default=None)
+DB_USER = env.str('DB_USER', default=None)
+DB_PASS = env.str('DB_PASS', default=None)
+DB_HOST = env.str('DB_HOST', default=None)
+DB_PORT = env.int('DB_PORT', default=None)
 
-RD_DB = config('RD_DB', default=None)
-RD_HOST = config('RD_HOST', default=None)
-RD_PORT = config('RD_PORT', default=None)
-RD_PORT = int(RD_PORT) if RD_PORT else None
-RD_PASS = config('RD_PASS', default=None)
+RD_DB = env.str('RD_DB', default=None)
+RD_HOST = env.str('RD_HOST', default=None)
+RD_PORT = env.int('RD_PORT', default=None)
+RD_PASS = env.str('RD_PASS', default=None)
 
 I18N_DOMAIN = 'bot'
 I18N_PATH = f'{DIR}/data/locales'

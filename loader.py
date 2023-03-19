@@ -15,7 +15,7 @@ else:
     storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
 
-database = SqliteDatabase(f'{DIR}/data/database.sqlite3')
+database = SqliteDatabase('database.sqlite3', pragmas={'foreign_keys': 1})
 if DB_NAME and DB_USER and DB_PASS and DB_HOST and DB_PORT:
     database = PostgresqlDatabase(DB_NAME, user=DB_USER, host=DB_HOST, port=DB_PORT, password=DB_PASS)
 

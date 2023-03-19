@@ -1,5 +1,5 @@
 DATABASE_URL := $(shell python _get_database_url.py)
-MIGRATIONS_PATH := ./data/migrations
+MIGRATIONS_PATH := ./migrations
 LOCALES_PATH := ./data/locales
 LOCALES_DOMAIN := bot
 
@@ -7,7 +7,7 @@ LOCALES_DOMAIN := bot
 run:
 	python main.py
 pw_create:
-	pw_migrate create --auto --database ${DATABASE_URL} --directory ${MIGRATIONS_PATH} migrate
+	pw_migrate create --auto --auto-source database.models --database ${DATABASE_URL} --directory ${MIGRATIONS_PATH} migrate
 pw_migrate:
 	pw_migrate migrate --database ${DATABASE_URL} --directory ${MIGRATIONS_PATH}
 pw_rollback:
@@ -27,4 +27,4 @@ compose:
 logs: 
 	docker-compose logs app
 rebuild: 
-	docker-compose up -d --no-deps --force-recreate --build app
+	docker-compose up -d --no-deps --force-recreate --build

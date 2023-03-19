@@ -2,8 +2,6 @@ from loader import dp, bot
 
 
 async def on_startup():
-    from database import init_days
-    init_days()
     from app.commands import set_default_commands
     await set_default_commands()
     print('Bot started!')
