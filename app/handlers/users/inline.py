@@ -1,14 +1,14 @@
-from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArticle
+from aiogram.types import (InlineQuery, InlineQueryResultArticle,
+                           InputTextMessageContent)
 
+from loader import _, dp
 
-from loader import dp, _
 from .schedule import _get_schedule_data
-from database.models import Chat
 
 
 @dp.inline_query()
-async def _inline(query: InlineQuery, chat: Chat):
-    schedule_text, schedule_marup = _get_schedule_data(chat) if chat else (_("U haven't chosen the timetable yet!"), None)
+async def _inline(query: InlineQuery):
+    schedule_text, schedule_marup = _get_schedule_data()
     schedule = InlineQueryResultArticle(
         id=1,
         title=f'Schedule',

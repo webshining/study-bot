@@ -19,11 +19,13 @@ services:
       RD_HOST: rd
       RD_PORT: 6379
   rd:
-    image: redis
+    image: redis:alpine
+    restart: always
     ports:
       - "6379:6379"
   db:
-    image: postgres
+    image: postgres:alpine
+    restart: always
     ports:
       - "5432:5432"
     environment:

@@ -1,9 +1,8 @@
-from typing import Callable, Dict, Any, Awaitable
+from typing import Any, Awaitable, Callable, Dict
+
 from aiogram import BaseMiddleware
 from aiogram.types import Update
 
-from database.services import get_chat
-from data.config import ADMINS
 
 class UserMiddleware(BaseMiddleware):
     async def __call__(
@@ -12,22 +11,16 @@ class UserMiddleware(BaseMiddleware):
         event: Update,
         data: Dict[str, Any],
     ) -> Any:
-        is_admin = False
         global chatId
         if event.message:
-            update = event.message
-            chatId = update.chat.id
-            is_admin = update.from_user.id in ADMINS
+            chatId = event.message.chat.id
         elif event.callback_query:
             update = event.callback_query
             if update.inline_message_id:
                 chatId = update.from_user.id
             else:
                 chatId = update.message.chat.id
-                is_admin = update.from_user.id in ADMINS
         elif event.inline_query:
-            update = event.inline_query
-            chatId = update.from_user.id
-        data['is_admin'] = is_admin
-        data['chat'] = get_chat(chatId)
+            chatId = event.inline_query.from_user.id
+        data['chat'] = chatId
         return await handler(event, data)

@@ -1,12 +1,11 @@
 from aiogram.types import BotCommand, BotCommandScopeDefault
 
-from loader import bot, i18n, _
+from loader import _, bot, i18n
 
 
 def get_default_commands(lang: str = 'en'):
     commands = [
         BotCommand(command='/start', description=_('start message', locale=lang)),
-        BotCommand(command='/select_timetable', description=_('select your timetable', locale=lang)),
         BotCommand(command='/schedule', description=_('get schedule', locale=lang)),
         BotCommand(command='/cancel', description=_('reset state', locale=lang)),
         BotCommand(command='/help', description=_('how is works', locale=lang)),

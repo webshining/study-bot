@@ -1,43 +1,38 @@
-from aiogram.types import Message, CallbackQuery
-from aiogram.filters import Command
 from calendar import day_name
 
-from loader import dp, _, bot
-from utils import get_timetable, get_faculties, Day, week_start_end, current_time, timedelta
-from app.keyboards import select_markup, week_markup
+from aiogram.filters import Command
+from aiogram.types import CallbackQuery, Message
+
+from app.keyboards import week_markup
+from loader import _, bot, dp
+from utils import Day, current_time, get_timetable, timedelta, week_start_end
+
 
 @dp.message(Command('schedule'))
-async def _schedule(message: Message, chat):
-    if chat:
-        text, markup = _get_schedule_data(chat)
-        await message.answer(text, reply_markup=markup)
-    else:
-        await message.answer(_("Looks like u have not chosen a schedule.\nSelect faculty:"), reply_markup=select_markup('faculty', get_faculties(), 'fullName', 'id'))
+async def _schedule(message: Message):
+    text, markup = _get_schedule_data()
+    await message.answer(text, reply_markup=markup)
         
 @dp.callback_query(lambda call: call.data.startswith('schedule'))
-async def _schedule_week(call: CallbackQuery, chat):
-    text, markup = _get_schedule_data(chat, call.data[9:])
+async def _schedule_week(call: CallbackQuery):
+    text, markup = _get_schedule_data(call.data[9:])
     try:
         if call.inline_message_id:
-            if not chat:
-                return await call.answer(_("U haven't chosen the timetable yet!"), show_alert=True)
             await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
         else:
-            text, markup = _get_schedule_data(chat, call.data[9:])
+            text, markup = _get_schedule_data(call.data[9:])
             await call.message.edit_text(text=text, reply_markup=markup)
     except: 
         await call.answer()
 
 
-def _get_schedule_data(chat, shift: str = 'this'):
-    if chat:
-        timetable = get_timetable(chat.groupId)
-        if shift == 'next':
-            timetable = get_timetable(chat.groupId, week_start_end(current_time()+timedelta(days=7)))
-        markup = week_markup('schedule', shift)
-        text = _get_schedule_text(timetable)
-        return text, markup
-    return None, None
+def _get_schedule_data(shift: str = 'this'):
+    timetable = get_timetable()
+    if shift == 'next':
+        timetable = get_timetable(week_start_end(current_time()+timedelta(days=7)))
+    markup = week_markup('schedule', shift)
+    text = _get_schedule_text(timetable)
+    return text, markup
     
 def _get_schedule_text(timetable: list[Day]):
     text = ''
