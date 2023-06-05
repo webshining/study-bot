@@ -1,1 +1,1 @@
-from . import help, inline, schedule, start
+from . import call_schedule, current_lesson, help, inline, schedule, start
