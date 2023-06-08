@@ -13,7 +13,7 @@ class UserMiddleware(BaseMiddleware):
         event: Update,
         data: Dict[str, Any],
     ) -> Any:
-        global chat_id
+        global chat_id, id, name
         if event.message:
             id = event.message.from_user.id
             chat_id = event.message.chat.id
