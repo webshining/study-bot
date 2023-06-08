@@ -9,6 +9,7 @@ def get_default_commands(lang: str = 'en'):
         BotCommand(command='/schedule', description=_('get schedule', locale=lang)),
         BotCommand(command='/call_schedule', description=_('get call schedule', locale=lang)),
         BotCommand(command='/current_lesson', description=_('get current lesson', locale=lang)),
+        BotCommand(command='/call_all', description=_('urgently call everyone', locale=lang)),
         BotCommand(command='/cancel', description=_('reset state', locale=lang)),
         BotCommand(command='/help', description=_('how is works', locale=lang)),
     ]
