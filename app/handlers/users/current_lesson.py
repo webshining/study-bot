@@ -2,7 +2,7 @@ from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
 from app.keyboards import update_markup
-from loader import _, dp
+from loader import _, bot, dp
 from utils import current_time, get_timetable
 
 
@@ -16,6 +16,8 @@ async def current_lesson_handler(message: Message):
 async def current_lesson_handler(call: CallbackQuery):
     text, markup = _get_current_lesson_data()
     try:
+        if call.inline_message_id:
+            return await bot.edit_message_text(text, inline_message_id=call.inline_message_id, reply_markup=markup)
         await call.message.edit_text(text, reply_markup=markup)
     except:
         pass
