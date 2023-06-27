@@ -1,8 +1,8 @@
 from aiogram import Bot, Dispatcher
 from pymongo import MongoClient
 
-from data.config import RD_DB, RD_HOST, RD_PASS, RD_PORT, TELEGRAM_BOT_TOKEN, MONGODB_URL
-
+from data.config import (MONGODB_URL, RD_DB, RD_HOST, RD_PASS, RD_PORT,
+                         TELEGRAM_BOT_TOKEN)
 
 bot = Bot(TELEGRAM_BOT_TOKEN, parse_mode='HTML')
 if RD_DB and RD_HOST and RD_PORT:

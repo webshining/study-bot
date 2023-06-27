@@ -1,9 +1,10 @@
-from aiogram.types import Message
 from aiogram.filters import Command
-from loader import dp
+from aiogram.types import Message
+
+from app.routers import user_router as router
 
 
-@dp.message(Command('start'))
+@router.message(Command('start'))
 async def start_handler(message: Message):
     text = '\n'.join((f'Hello <b>{message.from_user.full_name}</b>👋',
                       f'Write /help to see more information'))

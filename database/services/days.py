@@ -1,4 +1,5 @@
 from datetime import date
+
 from bson import ObjectId
 
 from ..models import Day, days_collection
@@ -25,6 +26,8 @@ def edit_day(id: str, **kwargs):
     return Day(**day)
 
 
-def get_day_by_date(_date: date) -> Day:
-    day = get_days(_date.isocalendar().week)[_date.weekday()]
+def get_day_by_date(_date: date) -> Day | None:
+    day = get_days(_date.isocalendar().week)
+    if day:
+        day = day[_date.weekday()]
     return day

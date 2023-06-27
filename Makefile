@@ -1,5 +1,5 @@
 run: 
-	python app.py
+	python main.py
 compose: 
 	docker-compose up -d
 logs: 

@@ -1,6 +1,9 @@
+import asyncio
+
 from aiogram.types import BotCommandScopeDefault
 
-from loader import dp, bot
+from app import setup_handlers, setup_middlewares
+from loader import bot, dp
 
 
 async def on_startup():
@@ -14,13 +17,13 @@ async def on_shutdown():
     await bot.delete_my_commands(scope=BotCommandScopeDefault())
     
     
-def main():
-    import app.middlewares
-    import app.handlers
+async def main():
+    setup_middlewares()
+    setup_handlers(dp)
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
-    dp.run_polling(bot)
+    await dp.start_polling(bot)
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())

@@ -1,6 +1,7 @@
-from loader import dp
+from app.routers import user_router
+
 from .user import UserMiddleware
 
 
-if __name__ == 'app.middlewares':
-    dp.update.middleware(UserMiddleware())
+def setup_middlewares():
+    user_router.message.middleware(UserMiddleware())

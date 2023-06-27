@@ -1,38 +1,33 @@
-import calendar, pytz
-from datetime import datetime, timedelta
-from aiogram.types import Message, CallbackQuery
-from aiogram.filters import Command
+import calendar
+from datetime import timedelta
 
-from loader import dp, bot
+from aiogram.filters import Command
+from aiogram.types import CallbackQuery, Message
+
+from app.keyboards import get_week_makrup
+from app.routers import user_router as router
 from database.models import Day
 from database.services import get_days
-from app.keyboards import get_week_makrup
+from utils.time import get_current_time
 
 
-@dp.message(Command('schedule'))
+@router.message(Command('schedule'))
 async def schedule_handler(message: Message):
     text, markup = _get_schedule_data()
     await message.answer(text=text, reply_markup=markup)
 
 
-@dp.callback_query(lambda call: call.data.startswith('schedule'))
+@router.callback_query(lambda call: call.data.startswith('schedule'))
 async def schedule_callback_handler(call: CallbackQuery):
     await call.answer()
-    if call.data[9:] == 'next':
-        date = datetime.now(pytz.timezone('Europe/Kiev')) + timedelta(weeks=1)
-    else:
-        date = datetime.now(pytz.timezone('Europe/Kiev'))
-    days = get_days(date.isocalendar().week)
-    text = _get_schedule_text(days)
-    markup = get_week_makrup('schedule', call.data[9:])
+    text, markup = _get_schedule_data(call.data[9:])
     try:
         if call.inline_message_id:
-            await bot.edit_message_text(text=text, inline_message_id=call.inline_message_id, reply_markup=markup)
+            await call.message.edit_text(text=text, inline_message_id=call.inline_message_id, reply_markup=markup)
         else:
-            await bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=markup)
+            await call.message.edit_text(text=text, reply_markup=markup)
     except:
         pass
-
 
 def _get_schedule_text(days: list[Day]):
     text = ''
@@ -46,13 +41,10 @@ def _get_schedule_text(days: list[Day]):
 
     return text if text else 'Schedule is empty🫡'
 
-
-def _get_schedule_data():
-    shift = 'this'
-    current_time = datetime.now(pytz.timezone('Europe/Kiev'))
-    if current_time.weekday() >= 5:
+def _get_schedule_data(shift: str = 'this'):
+    current_time = get_current_time()
+    if shift == 'next':
         current_time += timedelta(weeks=1)
-        shift = 'next'
 
     text = _get_schedule_text(get_days(current_time.isocalendar().week))
     markup = get_week_makrup('schedule', shift)

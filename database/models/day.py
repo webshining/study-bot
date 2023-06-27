@@ -1,16 +1,24 @@
-from pydantic import BaseModel, Field
+from datetime import time
+
+from pydantic import BaseModel, Field, validator
 
 from loader import db
-from .subject import Subject
+from utils import str_to_time
+
 from .mongo import PydanticObjectId
+from .subject import Subject
 
 
 class DaySubject(BaseModel):
     id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
-    time_start: str
-    time_end: str
+    time_start: time
+    time_end: time
     group: str = None
     subject: Subject
+
+    @validator('time_start', 'time_end', pre=True)
+    def parse_time(cls, v):
+        return str_to_time(v, "%H:%M").time()
 
 
 class Day(BaseModel):
