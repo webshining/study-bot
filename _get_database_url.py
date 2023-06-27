@@ -1,4 +1,4 @@
-from data.config import DIR, DB_HOST, DB_PASS, DB_PORT, DB_USER, DB_NAME
+from data.config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER, DIR
 
 database = f'sqlite:///{DIR}/data/database.sqlite3'
 if DB_NAME and DB_USER and DB_PASS and DB_HOST and DB_PORT:

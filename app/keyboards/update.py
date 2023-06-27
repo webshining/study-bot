@@ -12,4 +12,4 @@ def update_markup(data: str, *buttons: InlineKeyboardButton):
     ]
     builder.add(*_buttons)
     builder.adjust(2)
-    return builder
+    return builder.as_markup()

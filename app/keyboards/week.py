@@ -12,4 +12,4 @@ def week_markup(data: str, shift: str):
     ]
     builder.add(*buttons)
     builder.adjust(3)
-    return builder
+    return builder.as_markup()

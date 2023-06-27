@@ -1,11 +1,12 @@
-from aiogram.types import Message
 from aiogram.filters import Command
+from aiogram.types import Message
 
-from loader import dp, _
-from app.commands import get_default_commands, get_admins_commands
+from app.commands import get_admins_commands, get_default_commands
+from app.routers import user_router as router
+from loader import _
 
 
-@dp.message(Command('help'))
+@router.message(Command('help'))
 async def help_handler(message: Message, is_admin: bool):
     text = _('Hello <b>{}</b>👋\nI am a diary bot\n<b>\nCommands:</b>').format(message.from_user.full_name)
     for command in get_admins_commands(message.from_user.language_code) if is_admin else get_default_commands(message.from_user.language_code):

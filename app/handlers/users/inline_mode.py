@@ -1,14 +1,18 @@
 import hashlib
 from time import time
-from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArticle
 
-from loader import dp, _
+from aiogram.types import (InlineQuery, InlineQueryResultArticle,
+                           InputTextMessageContent)
+
+from app.routers import user_router as router
+from loader import _
+
 from .current import _get_current_data
 from .schedule import _get_schedule_data
 from .subjects import _get_subjects_data
 
 
-@dp.inline_query()
+@router.inline_query()
 async def current_inline_handler(query: InlineQuery):
     schedule_text, schedule_markup = _get_schedule_data()
     schedule = InlineQueryResultArticle(

@@ -1,28 +1,30 @@
-from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
+from aiogram.types import CallbackQuery, Message
 
-from loader import dp, bot, _
-from database.services import get_day_by_date
 from app.keyboards import update_markup
-from .subjects import _get_subject_data
+from app.routers import user_router as router
+from database.services import get_day_by_date
+from loader import _
 from utils import current_time
 
+from .subjects import _get_subject_data
 
-@dp.message(Command('current'))
+
+@router.message(Command('current'))
 async def current_handler(message: Message):
     text, markup = _get_current_data()
     await message.answer(text, reply_markup=markup)
 
 
-@dp.callback_query(lambda call: call.data.startswith('current_update'))
+@router.callback_query(lambda call: call.data.startswith('current_update'))
 async def current_callback_handler(call: CallbackQuery):
     await call.answer()
     text, markup = _get_current_data()
     try:
         if call.inline_message_id:
-            await bot.edit_message_text(text=text, inline_message_id=call.inline_message_id, reply_markup=markup)
+            await call.message.edit_text(text=text, inline_message_id=call.inline_message_id, reply_markup=markup)
         else:
-            await bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=markup)
+            await call.message.edit_text(text=text, reply_markup=markup)
     except:
         pass
 
@@ -44,4 +46,4 @@ def _get_current_data():
             text = _('No class right now! Next class: {} at {} in {}').format(subjects[0].subject.name, subjects[0].time_start, subjects[0].time_start - _current_time)
     
     markup = update_markup('current_update')
-    return text, markup.as_markup()
+    return text, markup

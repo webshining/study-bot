@@ -1,13 +1,13 @@
 from aiogram.types import BotCommand, BotCommandScopeChat
 
-from loader import bot, i18n, _
-from .default import get_default_commands, set_default_commands
+from loader import _, bot, i18n
+
+from .default import get_default_commands
 
 
 def get_admins_commands(lang: str = 'en'):
     commands = get_default_commands()
     commands.extend([
-        BotCommand(command='/newlist', description=_("create new list", locale=lang)),
     ])
     return commands
 
