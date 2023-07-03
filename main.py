@@ -5,7 +5,7 @@ from loader import bot, dp
 
 
 async def on_startup():
-    from database import init_days
+    from database.services import init_days
     init_days()
     from app.commands import set_default_commands
     await set_default_commands()

@@ -7,9 +7,9 @@ from loader import _
 
 
 @router.message(Command('help'))
-async def help_handler(message: Message, is_admin: bool):
-    text = _('Hello <b>{}</b>👋\nI am a diary bot\n<b>\nCommands:</b>').format(message.from_user.full_name)
-    for command in get_admins_commands(message.from_user.language_code) if is_admin else get_default_commands(message.from_user.language_code):
+async def help_handler(message: Message, user):
+    text = _('Hello <b>{}</b>👋\nI am a diary bot\n<b>\n\nCommands:</b>').format(message.from_user.full_name)
+    for command in get_admins_commands(message.from_user.language_code) if user.status == 'admin' else get_default_commands(message.from_user.language_code):
         text += f'\n{command.command} - {command.description.capitalize()}'
 
     text += _('\n\nCreator: <b>@webshining</b>😉\nRepositofy: <b><a href="https://github.com/webshining/study-bot">GitHub</a></b>')

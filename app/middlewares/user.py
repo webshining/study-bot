@@ -5,6 +5,7 @@ from aiogram.types import Message
 
 from app.commands import remove_admins_command, set_admins_commands
 from data.config import ADMINS
+from database.services import get_or_create_user
 
 
 class UserMiddleware(BaseMiddleware):
@@ -18,5 +19,5 @@ class UserMiddleware(BaseMiddleware):
             await set_admins_commands(event.from_user.id)
         else:
             await remove_admins_command(event.from_user.id)
-        data['is_admin'] = event.from_user.id in ADMINS
+        data['user'] = get_or_create_user(event.from_user.id, event.from_user.full_name, event.from_user.username)
         return await handler(event, data)

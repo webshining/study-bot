@@ -8,6 +8,7 @@ from .default import get_default_commands
 def get_admins_commands(lang: str = 'en'):
     commands = get_default_commands()
     commands.extend([
+        BotCommand(command='/users', description='get users list [admin]')
     ])
     return commands
 
