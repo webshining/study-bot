@@ -4,7 +4,7 @@ from aiogram import BaseMiddleware
 from aiogram.types import Message
 
 from app.commands import remove_admins_command, set_admins_commands
-from data.config import ADMINS
+from database.services import get_or_create_user
 
 
 class UserMiddleware(BaseMiddleware):
@@ -14,8 +14,10 @@ class UserMiddleware(BaseMiddleware):
         event: Message,
         data: Dict[str, Any],
     ) -> Any:
-        if event.from_user.id in ADMINS:
+        user = get_or_create_user(user_id=event.from_user.id, name=event.from_user.full_name, username=event.from_user.username)
+        if user.status == 'admin':
             await set_admins_commands(event.from_user.id)
         else:
             await remove_admins_command(event.from_user.id)
+        data['user'] = user
         return await handler(event, data)

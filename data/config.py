@@ -1,5 +1,6 @@
-from environs import Env
 from pathlib import Path
+
+from environs import Env
 
 env = Env()
 env.read_env()
@@ -8,8 +9,6 @@ env.read_env()
 DIR = Path(__file__).absolute().parent.parent
 
 TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', None)
-
-ADMINS = env.list('ADMINS', subcast=int, default=[])
 
 MONGODB_URL = env.str('MONGODB_URL', None)
 

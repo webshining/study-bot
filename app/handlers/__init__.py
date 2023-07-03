@@ -3,6 +3,7 @@ from aiogram import Dispatcher
 from app.routers import admin_router, user_router
 
 from . import cancel
+from .admins import users
 from .users import current, help, inline_mode, schedule, start, subjects
 
 
