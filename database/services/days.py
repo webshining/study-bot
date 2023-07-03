@@ -21,6 +21,13 @@ def get_days(week: int = None):
     return days
 
 
+def init_days():
+    if len(get_days()) < 14:
+        for i in range(14):
+            days_collection.insert_many([{"day_id": i, "subjects": []}])
+    return True
+
+
 def edit_day(id: str, **kwargs):
     day = days_collection.find_one_and_update({"_id": ObjectId(id)}, {"$set": kwargs}, return_document=True)
     return Day(**day)

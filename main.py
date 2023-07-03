@@ -8,6 +8,8 @@ from loader import bot, dp
 
 async def on_startup():
     from app.commands import set_default_commands
+    from database.services import init_days
+    init_days()
     await set_default_commands()
     print('Bot started!')
 
