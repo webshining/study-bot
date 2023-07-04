@@ -1,11 +1,11 @@
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
-from app.keyboards import update_markup
+from app.keyboards import get_update_markup
 from app.routers import user_router as router
 from database.services import get_day_by_date
 from loader import _
-from utils import current_time
+from utils import get_current_time
 
 from .subjects import _get_subject_data
 
@@ -30,7 +30,7 @@ async def current_callback_handler(call: CallbackQuery):
 
 
 def _get_current_data():
-    _current_time = current_time()
+    _current_time = get_current_time()
     day = get_day_by_date(_current_time)
     subjects = day.subjects
     if not subjects:
@@ -45,5 +45,5 @@ def _get_current_data():
         else:
             text = _('No class right now! Next class: {} at {} in {}').format(subjects[0].subject.name, subjects[0].time_start, subjects[0].time_start - _current_time)
     
-    markup = update_markup('current_update')
+    markup = get_update_markup('current_update')
     return text, markup

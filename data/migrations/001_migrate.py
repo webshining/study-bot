@@ -68,6 +68,7 @@ def migrate(migrator: Migrator, database: pw.Database, *, fake=False):
         subject = pw.ForeignKeyField(column_name='subject_id', field='id', model=migrator.orm['subjects'], on_delete='CASCADE')
         time_start = pw.TimeField()
         time_end = pw.TimeField()
+        group = pw.CharField(max_length=255, null=True)
 
         class Meta:
             table_name = "days_subjects"

@@ -1,7 +1,7 @@
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
-from app.keyboards import subjects_markup
+from app.keyboards import get_subjects_markup
 from app.routers import user_router as router
 from database.models import Subject
 from database.services import get_subject, get_subjects
@@ -37,6 +37,6 @@ def _get_subject_data(subject: Subject):
 
 def _get_subjects_data():
     subjects = get_subjects()
-    markup = subjects_markup('subject', subjects)
+    markup = get_subjects_markup('subject', subjects)
     text = _('Select subject📚:') if subjects else _("Subjects is empty🫡")
     return text, markup

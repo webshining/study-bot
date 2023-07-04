@@ -4,7 +4,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from loader import _
 
 
-def week_markup(data: str, shift: str):
+def get_week_markup(data: str, shift: str):
     builder = InlineKeyboardBuilder()
     buttons = [
         InlineKeyboardButton(text=_('This week') + ('*' if shift == 'this' else ''), callback_data=f'{data}_this'),

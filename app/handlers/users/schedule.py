@@ -4,12 +4,12 @@ from datetime import timedelta
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
-from app.keyboards import week_markup
+from app.keyboards import get_week_markup
 from app.routers import user_router as router
 from database.models import Day
 from database.services import get_days
 from loader import _
-from utils import current_time
+from utils import get_current_time
 
 
 @router.message(Command('schedule'))
@@ -42,10 +42,10 @@ def _get_schedule_text(days: list[Day]):
 
 
 def _get_schedule_data(shift: str = 'this'):
-    _current_time = current_time()
+    _current_time = get_current_time()
     if shift == 'next':
         _current_time += timedelta(weeks=1)
 
     text = _get_schedule_text(get_days(_current_time.isocalendar().week))
-    markup = week_markup('schedule', shift)
+    markup = get_week_markup('schedule', shift)
     return text, markup
