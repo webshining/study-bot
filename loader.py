@@ -1,6 +1,7 @@
 from aiogram import Bot, Dispatcher
 from pymongo import MongoClient
 
+from app.middlewares.inter import i18n
 from data.config import (MONGODB_URL, RD_DB, RD_HOST, RD_PASS, RD_PORT,
                          TELEGRAM_BOT_TOKEN)
 
@@ -16,3 +17,5 @@ dp = Dispatcher(storage=storage)
 
 client = MongoClient(MONGODB_URL)
 db = client['database']
+
+_ = i18n.gettext

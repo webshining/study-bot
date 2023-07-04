@@ -1,12 +1,14 @@
 from aiogram.types import InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from loader import _
 
-def get_update_markup(data: str, value: str = None):
+
+def get_update_markup(data: str):
     builder = InlineKeyboardBuilder()
-    buttons = [
-        InlineKeyboardButton(text='🔄Update', callback_data=f'{data}{f"_{value}" if value else ""}'),
+    _buttons = [
+        InlineKeyboardButton(text=_('🔄Update'), callback_data=data),
     ]
-    builder.add(*buttons)
-    builder.adjust(3)
+    builder.add(*_buttons)
+    builder.adjust(1)
     return builder.as_markup()
