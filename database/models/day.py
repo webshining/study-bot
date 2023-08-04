@@ -1,9 +1,6 @@
-from peewee import PrimaryKeyField, IntegerField, DeferredThroughModel, ManyToManyField
+from peewee import IntegerField, PrimaryKeyField
 
-from .subject import Subject
 from .base import BaseModel
-
-ThroughDeferred = DeferredThroughModel()
 
 
 class Day(BaseModel):

@@ -1,9 +1,10 @@
 from aiogram import Bot, Dispatcher
+from aiogram.utils.i18n import I18n
 from peewee import PostgresqlDatabase, SqliteDatabase
 
-from app.middlewares.inter import i18n
 from data.config import (DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER, DIR,
-                         RD_DB, RD_HOST, RD_PASS, RD_PORT, TELEGRAM_BOT_TOKEN)
+                         I18N_DOMAIN, I18N_PATH, RD_DB, RD_HOST, RD_PASS,
+                         RD_PORT, TELEGRAM_BOT_TOKEN)
 
 bot = Bot(TELEGRAM_BOT_TOKEN, parse_mode='HTML')
 if RD_DB and RD_HOST and RD_PORT:
@@ -19,4 +20,5 @@ database = SqliteDatabase(f'{DIR}/data/database.sqlite3')
 if DB_NAME and DB_USER and DB_PASS and DB_HOST and DB_PORT:
     database = PostgresqlDatabase(DB_NAME, user=DB_USER, host=DB_HOST, port=DB_PORT, password=DB_PASS)
 
+i18n = I18n(path=I18N_PATH, domain=I18N_DOMAIN)
 _ = i18n.gettext

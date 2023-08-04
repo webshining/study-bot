@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBot AdminPanel</title>
+</head>
+<body>
+    <script async src="https://telegram.org/js/telegram-widget.js?22" 
+    data-telegram-login="{{ bot_username }}" 
+    data-size="large" 
+    data-auth-url="{{ request.url_for('login_redirect') }}" 
+    data-request-access="write"></script>
+</body>
+</html>
