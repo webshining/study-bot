@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse, RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
 from playhouse.shortcuts import model_to_dict
 
-from api.services import generate_tokens
+from api.services import generate_tokens, not_enough_rights
 from database.services import get_user
 from loader import bot
 
@@ -23,6 +23,8 @@ async def login(request: Request):
 @router.get('/redirect')
 async def login_redirect(id: int, redirect: str = None):
     user = get_user(id)
+    if not user or user.status not in ('admin', 'super_admin'):
+        raise not_enough_rights
     access_token, refresh_token = generate_tokens({'id': id},{'id': id})
     if redirect:
         response = RedirectResponse(url=redirect + json.dumps({'user': model_to_dict(user), 'accessToken': access_token}))
