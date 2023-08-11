@@ -22,6 +22,12 @@ def edit_user(id: int, name: str, username: str) -> User:
     user.save()
     return user
 
+def update_user_status(id: int, status: str):
+    user = get_user(id)
+    user.status = status
+    user.save()
+    return user
+
 def get_or_create_user(id: int, name: str, username: str) -> User:
     user = get_user(id)
     if user:

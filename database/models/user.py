@@ -11,5 +11,14 @@ class User(BaseModel):
     username = CharField(null=True)
     status = CharField(default='user')
     
+    @property
+    def statuses_to_edit(self):
+        statuses = []
+        if self.status == 'admin':
+            statuses.extend(('user', 'banned'))
+        if self.status == 'super_admin':
+            statuses.extend(('admin', 'banned'))
+        return statuses
+    
     class Meta:
         table_name = 'users'
