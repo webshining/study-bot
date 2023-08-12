@@ -1,4 +1,4 @@
-from peewee import PrimaryKeyField, CharField, TextField
+from peewee import CharField, PrimaryKeyField, TextField
 
 from .base import BaseModel
 

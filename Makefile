@@ -5,7 +5,7 @@ LOCALES_DOMAIN := bot
 
 
 run:
-	python main.py
+	./bin/entrypoint.sh
 pw_create:
 	pw_migrate create --auto --database ${DATABASE_URL} --directory ${MIGRATIONS_PATH} migrate
 pw_migrate:

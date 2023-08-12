@@ -17,6 +17,18 @@ def delete_subject(id: int):
     return True
 
 
+def update_subject(id: int, name: str, audience: str, teacher: str, info: str):
+    subject = get_subject(id)
+    if not subject:
+        return None 
+    subject.name = name
+    subject.audience = audience
+    subject.teacher = teacher
+    subject.info = info
+    subject.save()
+    return subject
+
+
 def create_subject(name: str, teacher: str, audience: str, info: str = None) -> Subject:
     subject = Subject.create(name=name, teacher=teacher, audience=audience, info=info)
     return subject

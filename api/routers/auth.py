@@ -11,9 +11,7 @@ from loader import bot
 
 router = APIRouter()
 
-
 templates = Jinja2Templates(directory="api/templates")
-
 
 @router.get('/')
 async def login(request: Request):
@@ -25,7 +23,7 @@ async def login_redirect(id: int, redirect: str = None):
     user = get_user(id)
     if not user or user.status not in ('admin', 'super_admin'):
         raise not_enough_rights
-    access_token, refresh_token = generate_tokens({'id': id},{'id': id})
+    access_token, refresh_token = await generate_tokens({'id': id},{'id': id})
     if redirect:
         response = RedirectResponse(url=redirect + json.dumps({'user': model_to_dict(user), 'accessToken': access_token}))
     else:

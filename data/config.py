@@ -25,8 +25,8 @@ RD_PASS = env.str('RD_PASS', default=None)
 
 ACCESS_SECRET_KEY = env.str('ACCESS_SECRET_KEY', default='access_secret_key')
 REFRESH_SECRET_KEY = env.str('REFRESH_SECRET_KEY', default='refresh_secret_key')
-ACCESS_TOKEN_EXPIRE_MINUTES = env.float('ACCESS_TOKEN_EXPIRE_MINUTES', default=3)
-REFRESH_TOKEN_EXPIRE_MINUTES = env.float('REFRESH_TOKEN_EXPIRE_MINUTES', default=60*3)
+ACCESS_TOKEN_EXPIRE_MINUTES = env.int('ACCESS_TOKEN_EXPIRE_MINUTES', default=3)
+REFRESH_TOKEN_EXPIRE_MINUTES = env.int('REFRESH_TOKEN_EXPIRE_MINUTES', default=60*3)
 
 I18N_DOMAIN = 'bot'
 I18N_PATH = f'{DIR}/data/locales'
