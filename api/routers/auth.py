@@ -1,6 +1,6 @@
 import json
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Query, Request
 from fastapi.responses import JSONResponse, RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
 from playhouse.shortcuts import model_to_dict
@@ -14,15 +14,13 @@ router = APIRouter()
 templates = Jinja2Templates(directory="api/templates")
 
 @router.get('/')
-async def login(request: Request):
+async def login(request: Request, redirect: str):
     bot_username = (await bot.get_me()).username
     return templates.TemplateResponse('login.html', {"bot_username": bot_username, "request": request})
 
 @router.get('/redirect')
 async def login_redirect(id: int, redirect: str = None):
     user = get_user(id)
-    if not user or user.status not in ('admin', 'super_admin'):
-        raise not_enough_rights
     access_token, refresh_token = await generate_tokens({'id': id},{'id': id})
     if redirect:
         response = RedirectResponse(url=redirect + json.dumps({'user': model_to_dict(user), 'accessToken': access_token}))

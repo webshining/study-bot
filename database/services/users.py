@@ -24,6 +24,8 @@ def update_user(id: int, name: str, username: str) -> User:
 
 def update_user_status(id: int, status: str):
     user = get_user(id)
+    if not user:
+        return None
     user.status = status
     user.save()
     return user

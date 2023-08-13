@@ -1,8 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Body
 from playhouse.shortcuts import model_to_dict
 
 from api.services import notfound
-from database.services import get_user, get_users
+from database.services import get_user, get_users, update_user_status
 
 router = APIRouter()
 
@@ -13,4 +13,9 @@ async def users():
 @router.get('/{id}')
 async def user(id: int):
     user = get_user(id)
+    return model_to_dict(user) if user else notfound
+
+@router.patch('/{id}')
+async def user(id: int, status: str = Body(..., embed=True)):
+    user = update_user_status(id, status)
     return model_to_dict(user) if user else notfound

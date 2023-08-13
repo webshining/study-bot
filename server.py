@@ -9,6 +9,7 @@ origins = [
     "http://localhost:3000",
     "https://localhost",
     "https://localhost:3000",
+    "https://react-dashboard-murex.vercel.app"
 ]
 
 app = FastAPI()
