@@ -3,7 +3,7 @@ version: "3.9"
 services:
   app:
     build: .
-    restart: always
+    restart: on-failure
     entrypoint:
       - ./bin/entrypoint.sh
     depends_on:
@@ -20,7 +20,7 @@ services:
       RD_PORT: 6379
   rd:
     image: redis:alpine
-    restart: always
+    restart: on-failure
     ports:
       - "6379:6379"
   db:
@@ -38,8 +38,8 @@ services:
     image: dpage/pgadmin4
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_DEFAULT_EMAIL: webshinings@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: artem8808123
     ports:
       - "5050:80"
       

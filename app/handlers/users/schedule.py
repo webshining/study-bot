@@ -16,14 +16,15 @@ async def _schedule(message: Message):
 @dp.callback_query(lambda call: call.data.startswith('schedule'))
 async def _schedule_week(call: CallbackQuery):
     text, markup = _get_schedule_data(call.data[9:])
+    await call.answer()
     try:
         if call.inline_message_id:
             await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
         else:
             text, markup = _get_schedule_data(call.data[9:])
             await call.message.edit_text(text=text, reply_markup=markup)
-    except: 
-        await call.answer()
+    except:
+        pass
 
 
 def _get_schedule_data(shift: str = 'this'):

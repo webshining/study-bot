@@ -8,15 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     environment: server
     steps:
-    - name: Deploy to server with ssh and build to docker
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          cd ${{ secrets.PROJECT_PATH }}
-          git stash
-          git pull origin postgres
-          git checkout postgres
-          make rebuild
+      - name: Deploy to server with ssh and build to docker
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ secrets.PROJECT_PATH }}
+            git stash
+            git pull origin dteu --rebase
+            make rebuild
