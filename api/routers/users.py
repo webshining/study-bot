@@ -1,10 +1,10 @@
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, Depends
 from playhouse.shortcuts import model_to_dict
 
-from api.services import notfound
+from api.services import get_current_user, notfound
 from database.services import get_user, get_users, update_user_status
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
 @router.get('/')
 async def users():

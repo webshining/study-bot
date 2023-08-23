@@ -1,4 +1,4 @@
-FROM python
+FROM python:alpine
 
 WORKDIR /app
 
@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT ["/bin/entrypoint.sh"]
+ENTRYPOINT ["./bin/entrypoint.sh"]

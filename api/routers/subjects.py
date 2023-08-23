@@ -1,11 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from playhouse.shortcuts import model_to_dict
 
 from api.models import SubjectPatch
-from api.services import notfound
+from api.services import get_current_user, notfound
 from database.services import get_subject, get_subjects, update_subject
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
 @router.get('/')
 async def subjects():
