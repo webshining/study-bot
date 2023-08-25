@@ -42,7 +42,8 @@ def _get_schedule_text(timetable: list[Day]):
             text += f'\n\n{day_name[day.date.weekday()]}'
             for lesson in day.lessons:
                 period = lesson.periods[0]
-                text += f'\n{lesson.number}) <b>{period.disciplineFullName}</b>({period.classroom})'
+                teachersName = ', '.join([p.teachersName for p in lesson.periods])    
+                text += f'\n{lesson.number}) <b>{period.disciplineFullName}</b>\n({teachersName})'
     if not text: text = _("Schedule is empty!")
     return text
     

@@ -43,7 +43,7 @@ def get_timetable(dateRange: list[date] = week_start_end()) -> list[Day]:
     dateStart = dateRange[0].strftime("%Y-%m-%d")
     dateEnd = dateRange[1].strftime("%Y-%m-%d")
     r = requests.post('https://mia.mobil.knute.edu.ua/time-table/group', {"groupId": 1009, "dateStart": dateStart, "dateEnd": dateEnd}, headers={"Accept-Language": "uk-UA,uk;"})
-    return [Day(**i) for i in json.loads(r.text)]
+    return [Day(**i) for i in json.loads(r.text) if [l for l in i['lessons'] if [p for p in l['periods'] if p['timeStart']]]]
 
 def get_timetable_call() -> list[Call]:
     r = requests.post('https://mia.mobil.knute.edu.ua/time-table/call-schedule')
