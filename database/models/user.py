@@ -1,6 +1,9 @@
-from peewee import BigIntegerField, CharField, IntegerField, PrimaryKeyField
+from peewee import (BigIntegerField, CharField, DeferredThroughModel,
+                    IntegerField, PrimaryKeyField)
 
 from .base import BaseModel
+
+ThroughDeferred = DeferredThroughModel()
 
 
 class User(BaseModel):

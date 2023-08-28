@@ -4,33 +4,33 @@ from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
 from app.keyboards import week_markup
-from loader import _, bot, dp
-from utils import Day, current_time, get_timetable, timedelta, week_start_end
+from app.routers import user_router as router
+from loader import _, bot
+from utils import (Day, get_current_time, get_timetable, timedelta,
+                   week_start_end)
 
 
-@dp.message(Command('schedule'))
+@router.message(Command('schedule'))
 async def _schedule(message: Message):
     text, markup = _get_schedule_data()
     await message.answer(text, reply_markup=markup)
         
-@dp.callback_query(lambda call: call.data.startswith('schedule'))
+@router.callback_query(lambda call: call.data.startswith('schedule'))
 async def _schedule_week(call: CallbackQuery):
     text, markup = _get_schedule_data(call.data[9:])
-    await call.answer()
+    start_end = week_start_end(get_current_time()+timedelta(days=7)) if call.data[9:] == 'next' else week_start_end()
+    await call.answer(' <-> '.join([str(i.date()) for i in start_end]))
     try:
         if call.inline_message_id:
-            await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
-        else:
-            text, markup = _get_schedule_data(call.data[9:])
-            await call.message.edit_text(text=text, reply_markup=markup)
+            return await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
+        await call.message.edit_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
     except:
         pass
 
-
-def _get_schedule_data(shift: str = 'this'):
+def _get_schedule_data(shift: str = 'this') -> (str, any):
     timetable = get_timetable()
     if shift == 'next':
-        timetable = get_timetable(week_start_end(current_time()+timedelta(days=7)))
+        timetable = get_timetable(week_start_end(get_current_time()+timedelta(days=7)))
     markup = week_markup('schedule', shift)
     text = _get_schedule_text(timetable)
     return text, markup

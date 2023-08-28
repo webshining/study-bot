@@ -8,7 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN chown root:root ./bin/entrypoint.sh
-RUN chmod 4755 ./bin/entrypoint.sh
+RUN chmod +x ./bin/entrypoint.sh
 
 ENTRYPOINT ["./bin/entrypoint.sh"]

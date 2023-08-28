@@ -2,38 +2,39 @@ from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
 from app.keyboards import update_markup
-from loader import _, bot, dp
-from utils import current_time, get_timetable
+from app.routers import user_router as router
+from loader import _, bot
+from utils import get_current_time, get_timetable
 
 
-@dp.message(Command('current_lesson'))
+@router.message(Command('current_lesson'))
 async def current_lesson_handler(message: Message):
     text, markup = _get_current_lesson_data()
     await message.answer(text, reply_markup=markup)
 
 
-@dp.callback_query(lambda call: call.data.startswith('current'))
+@router.callback_query(lambda call: call.data.startswith('current'))
 async def current_lesson_handler(call: CallbackQuery):
     text, markup = _get_current_lesson_data()
+    await call.answer()
     try:
         if call.inline_message_id:
-            return await bot.edit_message_text(text, inline_message_id=call.inline_message_id, reply_markup=markup)
-        await call.message.edit_text(text, reply_markup=markup)
+            return await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
+        await call.message.edit_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
     except:
         pass
-    await call.answer()
 
 
-def _get_current_lesson_data() -> str:
+def _get_current_lesson_data() -> (str, any):
     timetable = get_timetable()
-    now = current_time()
+    now = get_current_time()
     today = [i for i in timetable if i.date == now.date()]
     lessons = [i for i in today[0].lessons if i and i.periods[0].timeEnd > now.time()] if today else None
     if lessons:
         current = lessons[0].periods[0]
-        text = f'Now <b>{current.disciplineFullName}</b>'
-        text += f'\nEnd at <b>{current.timeEnd.strftime("%H:%M")}</b>' if current.timeStart <= now.time() else f'\nStart at <b>{current.timeStart.strftime("%H:%M")}</b>'
+        text = _('Now <b>{}</b>').format(current.disciplineFullName)
+        text = _('\nEnd at <b>{}</b>').format(current.timeEnd.strftime("%H:%M")) if current.timeStart <= now.time() else _('\nStart at <b>{}</b>').format(current.timeStart.strftime("%H:%M"))
     else:
-        text = "No more lessons today"
+        text = _("No more lessons today")
     markup = update_markup('current')
     return text, markup

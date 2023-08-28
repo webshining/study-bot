@@ -1,94 +1,91 @@
 # Translations template for PROJECT.
-# Copyright (C) 2022 ORGANIZATION
+# Copyright (C) 2023 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-11-30 04:16+0200\n"
+"POT-Creation-Date: 2023-08-28 21:44+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Generated-By: Babel 2.9.1\n"
 
-#: app/commands/admins.py:10
-msgid "create new list"
+#: app/commands/admins.py:11
+msgid "get users list [admin]"
+msgstr ""
+
+#: app/commands/admins.py:12
+msgid "call everyone [admin]"
 msgstr ""
 
 #: app/commands/default.py:8
 msgid "start message"
 msgstr ""
 
-#: app/commands/default.py:9
+#: app/commands/default.py:9 app/handlers/users/inline.py:18
 msgid "get schedule"
 msgstr ""
 
 #: app/commands/default.py:10
-msgid "get subjects info"
+msgid "get call schedule"
 msgstr ""
 
-#: app/commands/default.py:11
-msgid "current class"
+#: app/commands/default.py:11 app/handlers/users/inline.py:33
+msgid "get current lesson"
 msgstr ""
 
 #: app/commands/default.py:12
-msgid "get lists"
-msgstr ""
-
-#: app/commands/default.py:13
 msgid "reset state"
 msgstr ""
 
-#: app/commands/default.py:14
+#: app/commands/default.py:13
 msgid "how is works"
 msgstr ""
 
-#: app/handlers/cancel.py:12
+#: app/handlers/cancel.py:11
 msgid "State reset"
 msgstr ""
 
-#: app/handlers/admins/lists.py:15
-msgid "Enter list name:"
+#: app/handlers/admins/call_all.py:12
+msgid "Listen to everyone!"
 msgstr ""
 
-#: app/handlers/admins/lists.py:23
-msgid "List <b>{}</b> created"
+#: app/handlers/admins/users.py:25
+msgid "Users is empty🫡"
 msgstr ""
 
-#: app/handlers/admins/lists.py:52
-msgid "List deleted🫡"
+#: app/handlers/users/call_schedule.py:23
+msgid "Call timetable is empty!"
 msgstr ""
 
-#: app/handlers/admins/lists.py:61
-msgid "List renamed🫡"
+#: app/handlers/users/current_lesson.py:35
+msgid "Now <b>{}</b>"
 msgstr ""
 
-#: app/handlers/users/current.py:35
-msgid "No class today"
-msgstr ""
-
-#: app/handlers/users/current.py:39
-msgid "Classes are over"
-msgstr ""
-
-#: app/handlers/users/current.py:42
+#: app/handlers/users/current_lesson.py:36
 msgid ""
 "\n"
+"End at <b>{}</b>"
+msgstr ""
+
+#: app/handlers/users/current_lesson.py:36
+msgid ""
 "\n"
-"Class ends at {} in {}"
+"Start at <b>{}</b>"
 msgstr ""
 
-#: app/handlers/users/current.py:44
-msgid "No class right now! Next class: {} at {} in {}"
+#: app/handlers/users/current_lesson.py:38
+msgid "No more lessons today"
 msgstr ""
 
-#: app/handlers/users/help.py:10
+#: app/handlers/users/help.py:11
 msgid ""
 "Hello <b>{}</b>👋\n"
 "I am a diary bot\n"
@@ -96,7 +93,7 @@ msgid ""
 "Commands:</b>"
 msgstr ""
 
-#: app/handlers/users/help.py:14
+#: app/handlers/users/help.py:15
 msgid ""
 "\n"
 "\n"
@@ -105,109 +102,34 @@ msgid ""
 "bot\">GitHub</a></b>"
 msgstr ""
 
-#: app/handlers/users/inline_mode.py:17
-msgid "Get schedule"
+#: app/handlers/users/inline.py:17
+msgid "Schedule"
 msgstr ""
 
-#: app/handlers/users/inline_mode.py:18
-msgid "Find out the timetable"
+#: app/handlers/users/inline.py:25
+msgid "Call schedule"
 msgstr ""
 
-#: app/handlers/users/inline_mode.py:26
-msgid "Current subject"
+#: app/handlers/users/inline.py:26
+msgid "get call timetable"
 msgstr ""
 
-#: app/handlers/users/inline_mode.py:27
-msgid "Get current info"
+#: app/handlers/users/inline.py:32
+msgid "Current lesson"
 msgstr ""
 
-#: app/handlers/users/inline_mode.py:35
-msgid "Subjects info"
+#: app/handlers/users/schedule.py:47
+msgid "Schedule is empty!"
 msgstr ""
 
-#: app/handlers/users/inline_mode.py:36
-msgid "Get subjects info"
-msgstr ""
-
-#: app/handlers/users/lists.py:32
-msgid "Send a Key - Value format message:"
-msgstr ""
-
-#: app/handlers/users/lists.py:52
-msgid "Entry added to the list"
-msgstr ""
-
-#: app/handlers/users/lists.py:57
-msgid "You entered an invalid string, please try again"
-msgstr ""
-
-#: app/handlers/users/lists.py:61
-msgid "List not found🫡"
-msgstr ""
-
-#: app/handlers/users/lists.py:73
-msgid "Select list:"
-msgstr ""
-
-#: app/handlers/users/lists.py:73
-msgid "Lists is empty🫡"
-msgstr ""
-
-#: app/handlers/users/schedule.py:39
-msgid "Schedule is empty🫡"
-msgstr ""
-
-#: app/handlers/users/start.py:9
+#: app/handlers/users/start.py:10
 msgid ""
 "Hello <b>{}</b>👋\n"
 "Write /help to see more information"
 msgstr ""
 
-#: app/handlers/users/subjects.py:28
-msgid "Subject not found🫡"
-msgstr ""
-
-#: app/handlers/users/subjects.py:31
-msgid ""
-"<b>{}:</b>\n"
-"Teacher: <b>{}</b>\n"
-"Audience: <b>{}</b>"
-msgstr ""
-
-#: app/handlers/users/subjects.py:40
-msgid "Select subject📚:"
-msgstr ""
-
-#: app/handlers/users/subjects.py:40
-msgid "Subjects is empty🫡"
-msgstr ""
-
-#: app/keyboards/lists.py:21
-msgid "➕Write"
-msgstr ""
-
-#: app/keyboards/lists.py:22 app/keyboards/update.py:10
+#: app/keyboards/update.py:10
 msgid "🔄Update"
-msgstr ""
-
-#: app/keyboards/lists.py:23
-msgid "⬅️Back"
-msgstr ""
-
-#: app/keyboards/lists.py:27
-msgid "Turn off"
-msgstr ""
-
-#: app/keyboards/lists.py:27
-msgid "Turn on"
-msgstr ""
-
-#: app/keyboards/lists.py:28
-msgid "✏️Rename"
-msgstr ""
-
-#: app/keyboards/lists.py:29
-msgid "❌Delete"
 msgstr ""
 
 #: app/keyboards/week.py:10
@@ -216,5 +138,9 @@ msgstr ""
 
 #: app/keyboards/week.py:11
 msgid "Next week"
+msgstr ""
+
+#: app/middlewares/admin.py:21
+msgid "Not enough rights🚫"
 msgstr ""
 
