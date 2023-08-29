@@ -34,13 +34,6 @@ services:
       POSTGRES_DB: study_bot
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: webshinings@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: artem8808123
-    ports:
-      - "80:80"
       
 volumes:
   postgres_data:
