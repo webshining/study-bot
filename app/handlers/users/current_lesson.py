@@ -33,7 +33,7 @@ def _get_current_lesson_data() -> (str, any):
     if lessons:
         current = lessons[0].periods[0]
         text = _('Now <b>{}</b>').format(current.disciplineFullName)
-        text = _('\nEnd at <b>{}</b>').format(current.timeEnd.strftime("%H:%M")) if current.timeStart <= now.time() else _('\nStart at <b>{}</b>').format(current.timeStart.strftime("%H:%M"))
+        text += _('\nEnd at <b>{}</b>').format(current.timeEnd.strftime("%H:%M")) if current.timeStart <= now.time() else _('\nStart at <b>{}</b>').format(current.timeStart.strftime("%H:%M"))
     else:
         text = _("No more lessons today")
     markup = update_markup('current')
