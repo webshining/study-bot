@@ -9,7 +9,6 @@ def get_admins_commands(lang: str = 'en'):
     commands = get_default_commands(lang)
     commands.extend([
         BotCommand(command='/users', description=_('get users list [admin]', locale=lang)),
-        BotCommand(command='/call_all', description=_('call everyone [admin]', locale=lang)),
     ])
     return commands
 

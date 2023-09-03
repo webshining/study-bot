@@ -10,8 +10,8 @@ from .schedule import _get_schedule_data
 
 
 @router.inline_query()
-async def _inline(query: InlineQuery):
-    schedule_text, schedule_marup = _get_schedule_data()
+async def _inline(query: InlineQuery, user):
+    schedule_text, schedule_marup = _get_schedule_data(user.group_id)
     schedule = InlineQueryResultArticle(
         id='1',
         title=_('Schedule'),
@@ -26,7 +26,7 @@ async def _inline(query: InlineQuery):
         description=_('get call timetable'),
         input_message_content=InputTextMessageContent(message_text=call_schedule_text),
     )
-    current_lesson_text, current_lesson_markup = _get_current_lesson_data()
+    current_lesson_text, current_lesson_markup = _get_current_lesson_data(user.group_id)
     current_lesson = InlineQueryResultArticle(
         id='3',
         title=_('Current lesson'),

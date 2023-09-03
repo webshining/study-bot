@@ -7,25 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-28 21:44+0300\n"
+"POT-Creation-Date: 2023-09-03 20:42+0300\n"
 "PO-Revision-Date: 2023-08-28 20:44+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.12.1\n"
 
 #: app/commands/admins.py:11
 msgid "get users list [admin]"
 msgstr "получить список пользователей [admin]"
-
-#: app/commands/admins.py:12
-msgid "call everyone [admin]"
-msgstr "позвать всех[admin]"
 
 #: app/commands/default.py:8
 msgid "start message"
@@ -36,42 +32,42 @@ msgid "get schedule"
 msgstr "получить расписание"
 
 #: app/commands/default.py:10
+msgid "select your group"
+msgstr "выбрать свою группу"
+
+#: app/commands/default.py:11
 msgid "get call schedule"
 msgstr "получить расписание звонков"
 
-#: app/commands/default.py:11 app/handlers/users/inline.py:33
+#: app/commands/default.py:12 app/handlers/users/inline.py:33
 msgid "get current lesson"
 msgstr "какой сейчас предмет"
 
-#: app/commands/default.py:12
+#: app/commands/default.py:13
 msgid "reset state"
 msgstr "сбросить состояние"
 
-#: app/commands/default.py:13
+#: app/commands/default.py:14
 msgid "how is works"
 msgstr "помощь"
 
 #: app/handlers/cancel.py:11
-msgid "State reset"
-msgstr "Состояние сброшено"
-
-#: app/handlers/admins/call_all.py:12
-msgid "Listen to everyone!"
-msgstr "Внимание-внимание!"
+msgid "State reset🫡"
+msgstr "Состояние сброшено🫡"
 
 #: app/handlers/admins/users.py:25
 msgid "Users is empty🫡"
 msgstr "Список пользователей пуст🫡"
 
 #: app/handlers/users/call_schedule.py:23
-msgid "Call timetable is empty!"
-msgstr "Расписания звонков нету!"
+msgid "Call schedule is empty🫡"
+msgstr "Расписания нету🫡"
 
-#: app/handlers/users/current_lesson.py:35
+#: app/handlers/users/current_lesson.py:41
 msgid "Now <b>{}</b>"
 msgstr "Сейчас <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:36
+#: app/handlers/users/current_lesson.py:42
 msgid ""
 "\n"
 "End at <b>{}</b>"
@@ -79,7 +75,7 @@ msgstr ""
 "\n"
 "Конец в <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:36
+#: app/handlers/users/current_lesson.py:42
 msgid ""
 "\n"
 "Start at <b>{}</b>"
@@ -87,9 +83,9 @@ msgstr ""
 "\n"
 "Начало в <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:38
-msgid "No more lessons today"
-msgstr "Сегодня предметов больше не будет"
+#: app/handlers/users/current_lesson.py:44
+msgid "No more lessons today🫡"
+msgstr "Сегодня предметов больше не будет🫡"
 
 #: app/handlers/users/help.py:11
 msgid ""
@@ -103,7 +99,7 @@ msgstr ""
 "<b>\n"
 "Команды:</b>"
 
-#: app/handlers/users/help.py:15
+#: app/handlers/users/help.py:16
 msgid ""
 "\n"
 "\n"
@@ -133,9 +129,29 @@ msgstr "получить расписание звонков"
 msgid "Current lesson"
 msgstr "Текущий предмет"
 
-#: app/handlers/users/schedule.py:47
-msgid "Schedule is empty!"
-msgstr "Расписания нету!"
+#: app/handlers/users/schedule.py:44
+msgid "Monday Tuesday Wednesday Thursday Friday Saturday Sunday"
+msgstr "Понедельник Вторник Среда Четверг Пятница Субота Воскресенье"
+
+#: app/handlers/users/schedule.py:52
+msgid "Schedule is empty🫡"
+msgstr "Расписания нету🫡"
+
+#: app/handlers/users/select_group.py:16
+msgid "Select faculty:"
+msgstr "Выберите факультет:"
+
+#: app/handlers/users/select_group.py:21
+msgid "Select course:"
+msgstr "Выберите курс:"
+
+#: app/handlers/users/select_group.py:28
+msgid "Select group:"
+msgstr "Выберите группу:"
+
+#: app/handlers/users/select_group.py:32
+msgid "Success"
+msgstr "Готово"
 
 #: app/handlers/users/start.py:10
 msgid ""

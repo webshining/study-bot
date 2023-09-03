@@ -6,16 +6,22 @@ from app.routers import user_router as router
 from loader import _, bot
 from utils import get_current_time, get_timetable
 
+from .select_group import group_handler
+
 
 @router.message(Command('current_lesson'))
-async def current_lesson_handler(message: Message):
-    text, markup = _get_current_lesson_data()
+async def current_lesson_handler(message: Message, group_id):
+    if not group_id:
+        return await group_handler(message)
+    text, markup = _get_current_lesson_data(group_id)
     await message.answer(text, reply_markup=markup)
 
 
 @router.callback_query(lambda call: call.data.startswith('current'))
-async def current_lesson_handler(call: CallbackQuery):
-    text, markup = _get_current_lesson_data()
+async def current_lesson_handler(call: CallbackQuery, group_id):
+    if not group_id:
+        return await group_handler(call.message)
+    text, markup = _get_current_lesson_data(group_id)
     await call.answer()
     try:
         if call.inline_message_id:
@@ -25,8 +31,8 @@ async def current_lesson_handler(call: CallbackQuery):
         pass
 
 
-def _get_current_lesson_data() -> (str, any):
-    timetable = get_timetable()
+def _get_current_lesson_data(group_id: int) -> (str, any):
+    timetable = get_timetable(group_id)
     now = get_current_time()
     today = [i for i in timetable if i.date == now.date()]
     lessons = [i for i in today[0].lessons if i and i.periods[0].timeEnd > now.time()] if today else None
@@ -35,6 +41,6 @@ def _get_current_lesson_data() -> (str, any):
         text = _('Now <b>{}</b>').format(current.disciplineFullName)
         text += _('\nEnd at <b>{}</b>').format(current.timeEnd.strftime("%H:%M")) if current.timeStart <= now.time() else _('\nStart at <b>{}</b>').format(current.timeStart.strftime("%H:%M"))
     else:
-        text = _("No more lessons today")
+        text = _("No more lessons today🫡")
     markup = update_markup('current')
     return text, markup

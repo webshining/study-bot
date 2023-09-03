@@ -20,4 +20,4 @@ def _get_call_schedule_text(calls: list[Call]) -> str:
     text = ''
     for i, v in enumerate(calls):
         text += f'\n{i+1})\t {v.timeStart.strftime("%H:%M")} - {v.timeEnd.strftime("%H:%M")}'
-    return text or _("Call timetable is empty!")
+    return text or _("Call schedule is empty🫡")

@@ -8,8 +8,8 @@ from .user import UserMiddleware
 
 
 def setup_middleware(dp: Dispatcher):
-    user_router.message.middleware(UserMiddleware())
-    user_router.message.middleware(i18n_middleware)
+    dp.update.middleware(UserMiddleware())
     admin_router.message.middleware(AdminMiddleware())
+    admin_router.callback_query.middleware(AdminMiddleware())
     dp.update.middleware(i18n_middleware)
     

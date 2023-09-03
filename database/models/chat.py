@@ -6,9 +6,7 @@ from .base import BaseModel
 ThroughDeferred = DeferredThroughModel()
 
 
-class User(BaseModel):
+class Chat(BaseModel):
     id = PrimaryKeyField()
-    name = CharField()
-    username = CharField(null=True)
-    user_id = IntegerField(unique=True)
-    status = CharField(null=True, default='user')
+    chat_id = IntegerField(unique=True)
+    group_id = CharField(null=True)
