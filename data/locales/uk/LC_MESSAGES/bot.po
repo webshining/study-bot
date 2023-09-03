@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-03 20:42+0300\n"
+"POT-Creation-Date: 2023-09-03 23:12+0300\n"
 "PO-Revision-Date: 2023-08-28 20:44+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
@@ -21,13 +21,13 @@ msgstr ""
 
 #: app/commands/admins.py:11
 msgid "get users list [admin]"
-msgstr "отримати список користувачів [admin]"
+msgstr "список користувачів [admin]"
 
 #: app/commands/default.py:8
 msgid "start message"
 msgstr "почати"
 
-#: app/commands/default.py:9 app/handlers/users/inline.py:18
+#: app/commands/default.py:9 app/handlers/users/inline.py:26
 msgid "get schedule"
 msgstr "отримати розклад"
 
@@ -37,23 +37,11 @@ msgstr "обрати свою групу"
 
 #: app/commands/default.py:11
 msgid "get call schedule"
-msgstr "отримати розклад дзвінків"
+msgstr "дзвінки"
 
-#: app/commands/default.py:12 app/handlers/users/inline.py:33
+#: app/commands/default.py:12 app/handlers/users/inline.py:41
 msgid "get current lesson"
-msgstr "який зараз предмет"
-
-#: app/commands/default.py:13
-msgid "reset state"
-msgstr "скинути стан"
-
-#: app/commands/default.py:14
-msgid "how is works"
-msgstr "що робити"
-
-#: app/handlers/cancel.py:11
-msgid "State reset🫡"
-msgstr "Стан скинуто🫡"
+msgstr "яка пара зараз"
 
 #: app/handlers/admins/users.py:25
 msgid "Users is empty🫡"
@@ -85,47 +73,25 @@ msgstr ""
 
 #: app/handlers/users/current_lesson.py:44
 msgid "No more lessons today🫡"
-msgstr "Сьогодні занять більше не буде🫡"
+msgstr "На сьогодня пари закінчились🫡"
 
-#: app/handlers/users/help.py:11
-msgid ""
-"Hello <b>{}</b>👋\n"
-"I am a diary bot\n"
-"<b>\n"
-"Commands:</b>"
-msgstr ""
-"Привіт <b>{}</b>👋\n"
-"Я бот-щоденник\n"
-"<b>\n"
-"Команди:</b>"
+#: app/handlers/users/inline.py:17 app/handlers/users/inline.py:18
+msgid "You haven't selected a group yet🫡"
+msgstr "Ви ще не обрали групу🫡"
 
-#: app/handlers/users/help.py:16
-msgid ""
-"\n"
-"\n"
-"Creator: <b>@webshining</b>😉\n"
-"Repositofy: <b><a href=\"https://github.com/webshining/study-"
-"bot\">GitHub</a></b>"
-msgstr ""
-"\n"
-"\n"
-"Автор: <b>@webshining</b>😉\n"
-"Репозиторій: <b><a href=\"https://github.com/webshining/study-"
-"bot\">GitHub</a></b>"
-
-#: app/handlers/users/inline.py:17
+#: app/handlers/users/inline.py:25
 msgid "Schedule"
 msgstr "Розклад"
 
-#: app/handlers/users/inline.py:25
+#: app/handlers/users/inline.py:33
 msgid "Call schedule"
-msgstr "Розкдал дзвінків"
+msgstr "Дзвінки"
 
-#: app/handlers/users/inline.py:26
+#: app/handlers/users/inline.py:34
 msgid "get call timetable"
-msgstr "отримати розкзад дзвінків"
+msgstr "дзвінки"
 
-#: app/handlers/users/inline.py:32
+#: app/handlers/users/inline.py:40
 msgid "Current lesson"
 msgstr "Який зараз предмет"
 
@@ -149,17 +115,35 @@ msgstr "Оберіть курс:"
 msgid "Select group:"
 msgstr "Оберіть групу:"
 
-#: app/handlers/users/select_group.py:32
+#: app/handlers/users/select_group.py:39
 msgid "Success"
 msgstr "Готово"
 
-#: app/handlers/users/start.py:10
+#: app/handlers/users/start.py:11
 msgid ""
 "Hello <b>{}</b>👋\n"
-"Write /help to see more information"
+"I am a diary bot\n"
+"<b>\n"
+"Commands:</b>"
 msgstr ""
 "Привіт <b>{}</b>👋\n"
-"Напши /help що б отримати більше інформації"
+"Я щоденник\n"
+"<b>\n"
+"Команди:</b>"
+
+#: app/handlers/users/start.py:16
+msgid ""
+"\n"
+"\n"
+"Creator: <b>@webshining</b>😉\n"
+"Repositofy: <b><a href=\"https://github.com/webshining/study-"
+"bot\">GitHub</a></b>"
+msgstr ""
+"\n"
+"\n"
+"Автор: <b>@webshining</b>😉\n"
+"Репозиторій: <b><a href=\"https://github.com/webshining/study-"
+"bot\">GitHub</a></b>"
 
 #: app/keyboards/update.py:10
 msgid "🔄Update"
@@ -167,12 +151,13 @@ msgstr "🔄Оновити"
 
 #: app/keyboards/week.py:10
 msgid "This week"
-msgstr "Ця неділя"
+msgstr "Цей тиждень"
 
 #: app/keyboards/week.py:11
 msgid "Next week"
-msgstr "Наступна неділя"
+msgstr "Наступний тиждень"
 
-#: app/middlewares/admin.py:21
+#: app/middlewares/admin.py:27
 msgid "Not enough rights🚫"
-msgstr "Не достатньо прав🚫"
+msgstr "Немає доступу🚫"
+

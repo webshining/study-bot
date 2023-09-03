@@ -20,7 +20,7 @@ async def _schedule(message: Message, group_id):
 @router.callback_query(lambda call: call.data.startswith('schedule'))
 async def _schedule_week(call: CallbackQuery, group_id):
     if not group_id:
-        return await group_handler(call.message)
+        return await call.answer(_("You haven't selected a group yet🫡"))
     text, markup = _get_schedule_data(group_id, call.data[9:])
     start_end = week_start_end(get_current_time()+timedelta(days=7)) if call.data[9:] == 'next' else week_start_end()
     await call.answer(' <-> '.join([str(i.date()) for i in start_end]))
@@ -51,5 +51,3 @@ def _get_schedule_text(timetable: list[Day]):
                 text += f'\n{lesson.number}) <b>{period.disciplineFullName}</b>\n({teachersName})'
     if not text: text = _("Schedule is empty🫡")
     return text
-    
-        

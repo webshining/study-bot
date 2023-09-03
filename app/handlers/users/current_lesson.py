@@ -20,9 +20,9 @@ async def current_lesson_handler(message: Message, group_id):
 @router.callback_query(lambda call: call.data.startswith('current'))
 async def current_lesson_handler(call: CallbackQuery, group_id):
     if not group_id:
-        return await group_handler(call.message)
-    text, markup = _get_current_lesson_data(group_id)
+        return await call.answer(_("You haven't selected a group yet🫡"))
     await call.answer()
+    text, markup = _get_current_lesson_data(group_id)
     try:
         if call.inline_message_id:
             return await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)

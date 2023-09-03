@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-03 20:42+0300\n"
+"POT-Creation-Date: 2023-09-03 23:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "start message"
 msgstr ""
 
-#: app/commands/default.py:9 app/handlers/users/inline.py:18
+#: app/commands/default.py:9 app/handlers/users/inline.py:26
 msgid "get schedule"
 msgstr ""
 
@@ -37,20 +37,8 @@ msgstr ""
 msgid "get call schedule"
 msgstr ""
 
-#: app/commands/default.py:12 app/handlers/users/inline.py:33
+#: app/commands/default.py:12 app/handlers/users/inline.py:41
 msgid "get current lesson"
-msgstr ""
-
-#: app/commands/default.py:13
-msgid "reset state"
-msgstr ""
-
-#: app/commands/default.py:14
-msgid "how is works"
-msgstr ""
-
-#: app/handlers/cancel.py:11
-msgid "State reset🫡"
 msgstr ""
 
 #: app/handlers/admins/users.py:25
@@ -81,36 +69,23 @@ msgstr ""
 msgid "No more lessons today🫡"
 msgstr ""
 
-#: app/handlers/users/help.py:11
-msgid ""
-"Hello <b>{}</b>👋\n"
-"I am a diary bot\n"
-"<b>\n"
-"Commands:</b>"
-msgstr ""
-
-#: app/handlers/users/help.py:16
-msgid ""
-"\n"
-"\n"
-"Creator: <b>@webshining</b>😉\n"
-"Repositofy: <b><a href=\"https://github.com/webshining/study-"
-"bot\">GitHub</a></b>"
-msgstr ""
-
-#: app/handlers/users/inline.py:17
-msgid "Schedule"
+#: app/handlers/users/inline.py:17 app/handlers/users/inline.py:18
+msgid "You haven't selected a group yet🫡"
 msgstr ""
 
 #: app/handlers/users/inline.py:25
+msgid "Schedule"
+msgstr ""
+
+#: app/handlers/users/inline.py:33
 msgid "Call schedule"
 msgstr ""
 
-#: app/handlers/users/inline.py:26
+#: app/handlers/users/inline.py:34
 msgid "get call timetable"
 msgstr ""
 
-#: app/handlers/users/inline.py:32
+#: app/handlers/users/inline.py:40
 msgid "Current lesson"
 msgstr ""
 
@@ -134,14 +109,25 @@ msgstr ""
 msgid "Select group:"
 msgstr ""
 
-#: app/handlers/users/select_group.py:32
+#: app/handlers/users/select_group.py:39
 msgid "Success"
 msgstr ""
 
-#: app/handlers/users/start.py:10
+#: app/handlers/users/start.py:11
 msgid ""
 "Hello <b>{}</b>👋\n"
-"Write /help to see more information"
+"I am a diary bot\n"
+"<b>\n"
+"Commands:</b>"
+msgstr ""
+
+#: app/handlers/users/start.py:16
+msgid ""
+"\n"
+"\n"
+"Creator: <b>@webshining</b>😉\n"
+"Repositofy: <b><a href=\"https://github.com/webshining/study-"
+"bot\">GitHub</a></b>"
 msgstr ""
 
 #: app/keyboards/update.py:10
@@ -156,7 +142,7 @@ msgstr ""
 msgid "Next week"
 msgstr ""
 
-#: app/middlewares/admin.py:21
+#: app/middlewares/admin.py:27
 msgid "Not enough rights🚫"
 msgstr ""
 

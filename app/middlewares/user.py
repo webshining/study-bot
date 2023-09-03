@@ -18,7 +18,10 @@ class UserMiddleware(BaseMiddleware):
             chat_id = message.chat.id
         elif event.callback_query:
             message = event.callback_query
-            chat_id = message.message.chat.id
+            if message.inline_message_id:
+                chat_id = message.from_user.id
+            else:
+                chat_id = message.message.chat.id
         elif event.inline_query:
             message = event.inline_query
             chat_id = message.from_user.id

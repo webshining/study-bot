@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-03 20:42+0300\n"
+"POT-Creation-Date: 2023-09-03 23:12+0300\n"
 "PO-Revision-Date: 2023-08-28 20:44+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: app/commands/admins.py:11
 msgid "get users list [admin]"
-msgstr "получить список пользователей [admin]"
+msgstr "список пользователей [admin]"
 
 #: app/commands/default.py:8
 msgid "start message"
 msgstr "начать"
 
-#: app/commands/default.py:9 app/handlers/users/inline.py:18
+#: app/commands/default.py:9 app/handlers/users/inline.py:26
 msgid "get schedule"
-msgstr "получить расписание"
+msgstr "расписание"
 
 #: app/commands/default.py:10
 msgid "select your group"
@@ -37,23 +37,11 @@ msgstr "выбрать свою группу"
 
 #: app/commands/default.py:11
 msgid "get call schedule"
-msgstr "получить расписание звонков"
+msgstr "звонки"
 
-#: app/commands/default.py:12 app/handlers/users/inline.py:33
+#: app/commands/default.py:12 app/handlers/users/inline.py:41
 msgid "get current lesson"
-msgstr "какой сейчас предмет"
-
-#: app/commands/default.py:13
-msgid "reset state"
-msgstr "сбросить состояние"
-
-#: app/commands/default.py:14
-msgid "how is works"
-msgstr "помощь"
-
-#: app/handlers/cancel.py:11
-msgid "State reset🫡"
-msgstr "Состояние сброшено🫡"
+msgstr "текущая пара"
 
 #: app/handlers/admins/users.py:25
 msgid "Users is empty🫡"
@@ -61,7 +49,7 @@ msgstr "Список пользователей пуст🫡"
 
 #: app/handlers/users/call_schedule.py:23
 msgid "Call schedule is empty🫡"
-msgstr "Расписания нету🫡"
+msgstr "Расписания нет🫡"
 
 #: app/handlers/users/current_lesson.py:41
 msgid "Now <b>{}</b>"
@@ -85,49 +73,27 @@ msgstr ""
 
 #: app/handlers/users/current_lesson.py:44
 msgid "No more lessons today🫡"
-msgstr "Сегодня предметов больше не будет🫡"
+msgstr "На сегодня пары закончились🫡"
 
-#: app/handlers/users/help.py:11
-msgid ""
-"Hello <b>{}</b>👋\n"
-"I am a diary bot\n"
-"<b>\n"
-"Commands:</b>"
-msgstr ""
-"Привет <b>{}</b>👋\n"
-"Я бот дневник\n"
-"<b>\n"
-"Команды:</b>"
+#: app/handlers/users/inline.py:17 app/handlers/users/inline.py:18
+msgid "You haven't selected a group yet🫡"
+msgstr "Вы еще не выбрали групу🫡"
 
-#: app/handlers/users/help.py:16
-msgid ""
-"\n"
-"\n"
-"Creator: <b>@webshining</b>😉\n"
-"Repositofy: <b><a href=\"https://github.com/webshining/study-"
-"bot\">GitHub</a></b>"
-msgstr ""
-"\n"
-"\n"
-"Автор: <b>@webshining</b>😉\n"
-"Репозиторий: <b><a href=\"https://github.com/webshining/study-"
-"bot\">GitHub</a></b>"
-
-#: app/handlers/users/inline.py:17
+#: app/handlers/users/inline.py:25
 msgid "Schedule"
 msgstr "Расписание"
 
-#: app/handlers/users/inline.py:25
+#: app/handlers/users/inline.py:33
 msgid "Call schedule"
-msgstr "Расписание звонков"
+msgstr "Звонки"
 
-#: app/handlers/users/inline.py:26
+#: app/handlers/users/inline.py:34
 msgid "get call timetable"
-msgstr "получить расписание звонков"
+msgstr "Звонки"
 
-#: app/handlers/users/inline.py:32
+#: app/handlers/users/inline.py:40
 msgid "Current lesson"
-msgstr "Текущий предмет"
+msgstr "Текущая пара"
 
 #: app/handlers/users/schedule.py:44
 msgid "Monday Tuesday Wednesday Thursday Friday Saturday Sunday"
@@ -135,7 +101,7 @@ msgstr "Понедельник Вторник Среда Четверг Пятн
 
 #: app/handlers/users/schedule.py:52
 msgid "Schedule is empty🫡"
-msgstr "Расписания нету🫡"
+msgstr "Расписания нет🫡"
 
 #: app/handlers/users/select_group.py:16
 msgid "Select faculty:"
@@ -149,17 +115,35 @@ msgstr "Выберите курс:"
 msgid "Select group:"
 msgstr "Выберите группу:"
 
-#: app/handlers/users/select_group.py:32
+#: app/handlers/users/select_group.py:39
 msgid "Success"
 msgstr "Готово"
 
-#: app/handlers/users/start.py:10
+#: app/handlers/users/start.py:11
 msgid ""
 "Hello <b>{}</b>👋\n"
-"Write /help to see more information"
+"I am a diary bot\n"
+"<b>\n"
+"Commands:</b>"
 msgstr ""
 "Привет <b>{}</b>👋\n"
-"Напиши /help чтобы увидеть больше информации"
+"Я дневник\n"
+"<b>\n"
+"Команды:</b>"
+
+#: app/handlers/users/start.py:16
+msgid ""
+"\n"
+"\n"
+"Creator: <b>@webshining</b>😉\n"
+"Repositofy: <b><a href=\"https://github.com/webshining/study-"
+"bot\">GitHub</a></b>"
+msgstr ""
+"\n"
+"\n"
+"Автор: <b>@webshining</b>😉\n"
+"Репозиторий: <b><a href=\"https://github.com/webshining/study-"
+"bot\">GitHub</a></b>"
 
 #: app/keyboards/update.py:10
 msgid "🔄Update"
@@ -173,6 +157,7 @@ msgstr "Эта неделя"
 msgid "Next week"
 msgstr "Следующая неделя"
 
-#: app/middlewares/admin.py:21
+#: app/middlewares/admin.py:27
 msgid "Not enough rights🚫"
-msgstr "Не достаточно прав🚫"
+msgstr "Нет доступа🚫"
+
