@@ -1,12 +1,9 @@
-from peewee import (CharField, DeferredThroughModel, IntegerField,
-                    PrimaryKeyField)
+from peewee import BigIntegerField, IntegerField, PrimaryKeyField
 
 from .base import BaseModel
-
-ThroughDeferred = DeferredThroughModel()
 
 
 class Chat(BaseModel):
     id = PrimaryKeyField()
-    chat_id = IntegerField(unique=True)
-    group_id = CharField(null=True)
+    chat_id = BigIntegerField(unique=True, )
+    group_id = IntegerField(null=True)

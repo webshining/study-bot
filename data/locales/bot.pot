@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-03 23:12+0300\n"
+"POT-Creation-Date: 2023-09-06 00:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,11 @@ msgstr ""
 msgid "Call schedule is empty🫡"
 msgstr ""
 
+#: app/handlers/users/current_lesson.py:23 app/handlers/users/inline.py:17
+#: app/handlers/users/inline.py:18 app/handlers/users/schedule.py:23
+msgid "You haven't selected a group yet🫡"
+msgstr ""
+
 #: app/handlers/users/current_lesson.py:41
 msgid "Now <b>{}</b>"
 msgstr ""
@@ -56,21 +61,17 @@ msgstr ""
 #: app/handlers/users/current_lesson.py:42
 msgid ""
 "\n"
-"End at <b>{}</b>"
+"End in <b>{}</b>"
 msgstr ""
 
 #: app/handlers/users/current_lesson.py:42
 msgid ""
 "\n"
-"Start at <b>{}</b>"
+"Start in <b>{}</b>"
 msgstr ""
 
 #: app/handlers/users/current_lesson.py:44
 msgid "No more lessons today🫡"
-msgstr ""
-
-#: app/handlers/users/inline.py:17 app/handlers/users/inline.py:18
-msgid "You haven't selected a group yet🫡"
 msgstr ""
 
 #: app/handlers/users/inline.py:25
@@ -142,7 +143,7 @@ msgstr ""
 msgid "Next week"
 msgstr ""
 
-#: app/middlewares/admin.py:27
+#: app/middlewares/admin.py:21
 msgid "Not enough rights🚫"
 msgstr ""
 

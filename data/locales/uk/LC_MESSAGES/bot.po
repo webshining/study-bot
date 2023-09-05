@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-03 23:12+0300\n"
+"POT-Creation-Date: 2023-09-06 00:30+0300\n"
 "PO-Revision-Date: 2023-08-28 20:44+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
@@ -51,6 +51,11 @@ msgstr "Список користувачів порожній🫡"
 msgid "Call schedule is empty🫡"
 msgstr "Роздкладу немає🫡"
 
+#: app/handlers/users/current_lesson.py:23 app/handlers/users/inline.py:17
+#: app/handlers/users/inline.py:18 app/handlers/users/schedule.py:23
+msgid "You haven't selected a group yet🫡"
+msgstr "Ви ще не обрали групу🫡"
+
 #: app/handlers/users/current_lesson.py:41
 msgid "Now <b>{}</b>"
 msgstr "Зараз <b>{}</b>"
@@ -58,7 +63,7 @@ msgstr "Зараз <b>{}</b>"
 #: app/handlers/users/current_lesson.py:42
 msgid ""
 "\n"
-"End at <b>{}</b>"
+"End in <b>{}</b>"
 msgstr ""
 "\n"
 "Кінець о <b>{}</b>"
@@ -66,7 +71,7 @@ msgstr ""
 #: app/handlers/users/current_lesson.py:42
 msgid ""
 "\n"
-"Start at <b>{}</b>"
+"Start in <b>{}</b>"
 msgstr ""
 "\n"
 "Початок о <b>{}</b>"
@@ -74,10 +79,6 @@ msgstr ""
 #: app/handlers/users/current_lesson.py:44
 msgid "No more lessons today🫡"
 msgstr "На сьогодня пари закінчились🫡"
-
-#: app/handlers/users/inline.py:17 app/handlers/users/inline.py:18
-msgid "You haven't selected a group yet🫡"
-msgstr "Ви ще не обрали групу🫡"
 
 #: app/handlers/users/inline.py:25
 msgid "Schedule"
@@ -157,7 +158,7 @@ msgstr "Цей тиждень"
 msgid "Next week"
 msgstr "Наступний тиждень"
 
-#: app/middlewares/admin.py:27
+#: app/middlewares/admin.py:21
 msgid "Not enough rights🚫"
 msgstr "Немає доступу🚫"
 

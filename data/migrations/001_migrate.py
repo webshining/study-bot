@@ -46,8 +46,8 @@ def migrate(migrator: Migrator, database: pw.Database, *, fake=False):
 
     @migrator.create_model
     class Chat(pw.Model):
-        chat_id = pw.IntegerField(unique=True)
-        group_id = pw.CharField(max_length=255, null=True)
+        chat_id = pw.BigIntegerField(unique=True)
+        group_id = pw.IntegerField(null=True)
 
         class Meta:
             table_name = "chat"

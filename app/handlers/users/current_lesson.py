@@ -35,11 +35,11 @@ def _get_current_lesson_data(group_id: int) -> (str, any):
     timetable = get_timetable(group_id)
     now = get_current_time()
     today = [i for i in timetable if i.date == now.date()]
-    lessons = [i for i in today[0].lessons if i and i.periods[0].timeEnd > now.time()] if today else None
+    lessons = [i for i in today[0].lessons if i and i.periods[0].timeEnd.time() > now.time()] if today else None
     if lessons:
         current = lessons[0].periods[0]
         text = _('Now <b>{}</b>').format(current.disciplineFullName)
-        text += _('\nEnd at <b>{}</b>').format(current.timeEnd.strftime("%H:%M")) if current.timeStart <= now.time() else _('\nStart at <b>{}</b>').format(current.timeStart.strftime("%H:%M"))
+        text += _('\nEnd in <b>{}</b>').format(str(current.timeEnd - now).split(".")[0]) if current.timeStart.time() <= now.time() else _('\nStart in <b>{}</b>').format(str(current.timeStart - now).split(".")[0])
     else:
         text = _("No more lessons today🫡")
     markup = update_markup('current')

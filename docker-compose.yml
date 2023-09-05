@@ -16,18 +16,14 @@ services:
       RD_DB: 5
       RD_HOST: rd
       RD_PORT: 6379
-    ports:
-      - "4000:4000"
   rd:
     image: redis:alpine
-    restart: on-failure
-    ports:
-      - "6379:6379"
+    restart: unless-stopped
   db:
     image: postgres:alpine
     restart: always
     ports:
-      - "5432:5432"
+      - "54321:5432"
     environment:
       POSTGRES_USER: webshining
       POSTGRES_PASSWORD: admin

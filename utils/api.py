@@ -4,7 +4,7 @@ from datetime import date, datetime, time
 import requests
 from pydantic import BaseModel, Field, StrictStr, validator
 
-from .time import week_start_end
+from .time import get_current_time, week_start_end
 
 
 class Group(BaseModel):
@@ -26,13 +26,13 @@ class Course(BaseModel):
 class Period(BaseModel):
     disciplineFullName: str
     classroom: str
-    timeStart: time
-    timeEnd: time
+    timeStart: datetime
+    timeEnd: datetime
     teachersName: str
 
     @validator('timeStart', 'timeEnd', pre=True)
     def parse_time(cls, v):
-        return datetime.strptime(v, "%H:%M").time()
+        return datetime.combine(get_current_time().date(), datetime.strptime(v, "%H:%M").time())
 
 class Lesson(BaseModel):
     number: int

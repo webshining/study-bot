@@ -29,7 +29,7 @@ async def course_callback(call: CallbackQuery, state: FSMContext):
 
 @router.callback_query(lambda call: call.data.startswith('group'))
 async def group_callback(call: CallbackQuery):
-    if call.message.chat.type == 'group':
+    if 'group' in call.message.chat.type:
         if call.from_user.id in [i.user.id for i in await call.message.chat.get_administrators()]:
             update_chat(call.message.chat.id, call.data[6:])
         else:
