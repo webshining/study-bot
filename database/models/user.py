@@ -1,5 +1,5 @@
-from peewee import (CharField, DeferredThroughModel, IntegerField,
-                    PrimaryKeyField)
+from peewee import (AutoField, BigIntegerField, CharField,
+                    DeferredThroughModel, IntegerField)
 
 from .base import BaseModel
 
@@ -7,8 +7,8 @@ ThroughDeferred = DeferredThroughModel()
 
 
 class User(BaseModel):
-    id = PrimaryKeyField()
+    id = AutoField()
     name = CharField()
     username = CharField(null=True)
-    user_id = IntegerField(unique=True)
+    user_id = BigIntegerField(unique=True)
     status = CharField(null=True, default='user')

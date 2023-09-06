@@ -46,6 +46,7 @@ def migrate(migrator: Migrator, database: pw.Database, *, fake=False):
 
     @migrator.create_model
     class Chat(pw.Model):
+        id = pw.AutoField()
         chat_id = pw.BigIntegerField(unique=True)
         group_id = pw.IntegerField(null=True)
 
@@ -54,9 +55,10 @@ def migrate(migrator: Migrator, database: pw.Database, *, fake=False):
 
     @migrator.create_model
     class User(pw.Model):
+        id = pw.AutoField()
         name = pw.CharField(max_length=255)
         username = pw.CharField(max_length=255, null=True)
-        user_id = pw.IntegerField(unique=True)
+        user_id = pw.BigIntegerField(unique=True)
         status = pw.CharField(default='user', max_length=255, null=True)
 
         class Meta:

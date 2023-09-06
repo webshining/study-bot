@@ -66,7 +66,7 @@ msgid ""
 "End in <b>{}</b>"
 msgstr ""
 "\n"
-"Кінець о <b>{}</b>"
+"Кінець через <b>{}</b>"
 
 #: app/handlers/users/current_lesson.py:42
 msgid ""
@@ -74,7 +74,7 @@ msgid ""
 "Start in <b>{}</b>"
 msgstr ""
 "\n"
-"Початок о <b>{}</b>"
+"Початок через <b>{}</b>"
 
 #: app/handlers/users/current_lesson.py:44
 msgid "No more lessons today🫡"

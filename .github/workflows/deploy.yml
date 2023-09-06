@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [dteu]
+    branches: [dteu_multi]
 
 jobs:
   build:
@@ -17,5 +17,5 @@ jobs:
           script: |
             cd ${{ secrets.PROJECT_PATH }}
             git stash
-            git pull origin dteu --rebase
+            git pull origin dteu_multi --rebase
             make rebuild

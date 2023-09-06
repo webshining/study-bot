@@ -1,9 +1,9 @@
-from peewee import BigIntegerField, IntegerField, PrimaryKeyField
+from peewee import AutoField, BigIntegerField, IntegerField
 
 from .base import BaseModel
 
 
 class Chat(BaseModel):
-    id = PrimaryKeyField()
+    id = AutoField()
     chat_id = BigIntegerField(unique=True, )
     group_id = IntegerField(null=True)
