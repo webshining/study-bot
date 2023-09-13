@@ -3,15 +3,16 @@ import asyncio
 from app import setup_handlers, setup_middleware
 from app.commands import set_default_commands
 from loader import bot, dp
+from utils import logger
 
 
 async def on_startup():
     await set_default_commands()
-    print('Bot started!')
+    logger.info("Bot started!")
 
 
 async def on_shutdown():
-    print('Bot shutting down!')
+    logger.info('Bot shutting down!')
 
     
 async def main():
@@ -24,3 +25,4 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
+    

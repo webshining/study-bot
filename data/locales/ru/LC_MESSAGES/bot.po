@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-06 00:30+0300\n"
+"POT-Creation-Date: 2023-09-13 23:35+0300\n"
 "PO-Revision-Date: 2023-08-28 20:44+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -47,7 +47,17 @@ msgstr "текущая пара"
 msgid "Users is empty🫡"
 msgstr "Список пользователей пуст🫡"
 
-#: app/handlers/users/call_schedule.py:23
+#: app/handlers/users/call_schedule.py:18
+#: app/handlers/users/current_lesson.py:36 app/handlers/users/schedule.py:36
+#: app/handlers/users/select_group.py:19 app/handlers/users/select_group.py:26
+#: app/handlers/users/select_group.py:36
+msgid ""
+"It seems the servers are not responding, and there is no saved data for "
+"you🫡"
+msgstr ""
+"Похоже сервер не отвечает, сохраненных данных для вас нет🫡"
+
+#: app/handlers/users/call_schedule.py:26
 msgid "Call schedule is empty🫡"
 msgstr "Расписания нет🫡"
 
@@ -56,11 +66,11 @@ msgstr "Расписания нет🫡"
 msgid "You haven't selected a group yet🫡"
 msgstr "Вы еще не выбрали групу🫡"
 
-#: app/handlers/users/current_lesson.py:41
+#: app/handlers/users/current_lesson.py:43
 msgid "Now <b>{}</b>"
 msgstr "Сейчас <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:42
+#: app/handlers/users/current_lesson.py:44
 msgid ""
 "\n"
 "End in <b>{}</b>"
@@ -68,7 +78,7 @@ msgstr ""
 "\n"
 "Конец через <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:42
+#: app/handlers/users/current_lesson.py:44
 msgid ""
 "\n"
 "Start in <b>{}</b>"
@@ -76,7 +86,7 @@ msgstr ""
 "\n"
 "Начало через <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:44
+#: app/handlers/users/current_lesson.py:46
 msgid "No more lessons today🫡"
 msgstr "На сегодня пары закончились🫡"
 
@@ -96,11 +106,11 @@ msgstr "Звонки"
 msgid "Current lesson"
 msgstr "Текущая пара"
 
-#: app/handlers/users/schedule.py:44
+#: app/handlers/users/schedule.py:46
 msgid "Monday Tuesday Wednesday Thursday Friday Saturday Sunday"
 msgstr "Понедельник Вторник Среда Четверг Пятница Субота Воскресенье"
 
-#: app/handlers/users/schedule.py:52
+#: app/handlers/users/schedule.py:54
 msgid "Schedule is empty🫡"
 msgstr "Расписания нет🫡"
 
@@ -108,15 +118,15 @@ msgstr "Расписания нет🫡"
 msgid "Select faculty:"
 msgstr "Выберите факультет:"
 
-#: app/handlers/users/select_group.py:21
+#: app/handlers/users/select_group.py:27
 msgid "Select course:"
 msgstr "Выберите курс:"
 
-#: app/handlers/users/select_group.py:28
+#: app/handlers/users/select_group.py:37
 msgid "Select group:"
 msgstr "Выберите группу:"
 
-#: app/handlers/users/select_group.py:39
+#: app/handlers/users/select_group.py:48
 msgid "Success"
 msgstr "Готово"
 

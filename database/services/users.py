@@ -2,7 +2,7 @@ from ..models import User
 
 
 def get_users() -> list[User]:
-    users = User.select()
+    users = User.select().order_by(User.id)
     return list(users)
 
 def get_or_create_user(name: str, user_id: int, username: str = None) -> User:

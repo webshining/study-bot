@@ -33,14 +33,16 @@ async def current_lesson_handler(call: CallbackQuery, group_id):
 
 def _get_current_lesson_data(group_id: int) -> (str, any):
     timetable = get_timetable(group_id)
-    now = get_current_time()
-    today = [i for i in timetable if i.date == now.date()]
-    lessons = [i for i in today[0].lessons if i and i.periods[0].timeEnd.time() > now.time()] if today else None
-    if lessons:
-        current = lessons[0].periods[0]
-        text = _('Now <b>{}</b>').format(current.disciplineFullName)
-        text += _('\nEnd in <b>{}</b>').format(str(current.timeEnd - now).split(".")[0]) if current.timeStart.time() <= now.time() else _('\nStart in <b>{}</b>').format(str(current.timeStart - now).split(".")[0])
-    else:
-        text = _("No more lessons today🫡")
+    text = _("It seems the servers are not responding, and there is no saved data for you🫡")
+    if timetable:
+        now = get_current_time()
+        today = [i for i in timetable if i.date == now.date()]
+        lessons = [i for i in today[0].lessons if i and i.periods[0].timeEnd.time() > now.time()] if today else None
+        if lessons:
+            current = lessons[0].periods[0]
+            text = _('Now <b>{}</b>').format(current.disciplineFullName)
+            text += _('\nEnd in <b>{}</b>').format(str(current.timeEnd - now).split(".")[0]) if current.timeStart.time() <= now.time() else _('\nStart in <b>{}</b>').format(str(current.timeStart - now).split(".")[0])
+        else:
+            text = _("No more lessons today🫡")
     markup = update_markup('current')
     return text, markup

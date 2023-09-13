@@ -33,10 +33,12 @@ async def _schedule_week(call: CallbackQuery, group_id):
 
 def _get_schedule_data(group_id: int, shift: str = 'this') -> (str, any):
     timetable = get_timetable(group_id)
-    if shift == 'next':
-        timetable = get_timetable(group_id, week_start_end(get_current_time()+timedelta(days=7)))
+    text = _("It seems the servers are not responding, and there is no saved data for you🫡")
+    if timetable:
+        if shift == 'next':
+            timetable = get_timetable(group_id, week_start_end(get_current_time()+timedelta(days=7)))
+        text = _get_schedule_text(timetable)
     markup = week_markup('schedule', shift)
-    text = _get_schedule_text(timetable)
     return text, markup
     
 def _get_schedule_text(timetable: list[Day]):

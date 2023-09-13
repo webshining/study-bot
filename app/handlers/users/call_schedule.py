@@ -13,7 +13,10 @@ async def call_schedule_handler(message: Message):
 
 
 def _get_call_schedule_data() -> str:
-    return _get_call_schedule_text(get_timetable_call())
+    timetable_call = get_timetable_call()
+    if not timetable_call:
+        return _("It seems the servers are not responding, and there is no saved data for you🫡")
+    return _get_call_schedule_text(timetable_call)
 
 
 def _get_call_schedule_text(calls: list[Call]) -> str:
