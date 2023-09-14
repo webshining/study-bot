@@ -10,7 +10,7 @@ from .schedule import _get_schedule_data
 
 
 @router.inline_query()
-async def _inline(query: InlineQuery, group_id):
+async def inline_handler(query: InlineQuery, group_id):
     if not group_id:
         no_group = InlineQueryResultArticle(
             id='1',

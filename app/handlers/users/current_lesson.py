@@ -1,4 +1,5 @@
 from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from app.keyboards import update_markup
@@ -10,15 +11,15 @@ from .select_group import group_handler
 
 
 @router.message(Command('current_lesson'))
-async def current_lesson_handler(message: Message, group_id):
+async def current_lesson_handler(message: Message, group_id, state: FSMContext):
     if not group_id:
-        return await group_handler(message)
+        return await group_handler(message, state, _get_current_lesson_data)
     text, markup = _get_current_lesson_data(group_id)
     await message.answer(text, reply_markup=markup)
 
 
 @router.callback_query(lambda call: call.data.startswith('current'))
-async def current_lesson_handler(call: CallbackQuery, group_id):
+async def current_lesson_callback(call: CallbackQuery, group_id):
     if not group_id:
         return await call.answer(_("You haven't selected a group yet🫡"))
     await call.answer(str(get_current_time().date()))
