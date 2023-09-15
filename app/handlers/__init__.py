@@ -1,10 +1,7 @@
 from aiogram import Dispatcher
 
-from app.routers import admin_router, user_router
-
-from .admins import users
-from .users import (call_schedule, current_lesson, inline, schedule,
-                    select_group, start)
+from .admins import router as admin_router
+from .users import router as user_router
 
 
 def setup_handlers(dp: Dispatcher):

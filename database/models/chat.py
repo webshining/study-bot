@@ -5,5 +5,5 @@ from .base import BaseModel
 
 class Chat(BaseModel):
     id = AutoField()
-    chat_id = BigIntegerField(unique=True, )
+    chat_id = BigIntegerField(unique=True)
     group_id = IntegerField(null=True)

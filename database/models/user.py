@@ -1,9 +1,8 @@
-from peewee import (AutoField, BigIntegerField, CharField,
-                    DeferredThroughModel, IntegerField)
+from peewee import AutoField, BigIntegerField, CharField, DateField
+
+from utils import get_current_time
 
 from .base import BaseModel
-
-ThroughDeferred = DeferredThroughModel()
 
 
 class User(BaseModel):
@@ -12,3 +11,4 @@ class User(BaseModel):
     username = CharField(null=True)
     user_id = BigIntegerField(unique=True)
     status = CharField(null=True, default='user')
+    updated_at = DateField(default=get_current_time().date())
