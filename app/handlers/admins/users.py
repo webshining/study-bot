@@ -7,7 +7,9 @@ from loader import _
 
 
 @router.message(Command('users'))
-async def users_handler(message: Message):
+async def users_handler(message: Message, is_super_admin: bool):
+    if not is_super_admin:
+        return await message.answer(_("Not enough rights🚫"))
     users = get_users()
     text = get_users_text(users)
     await message.answer(text)

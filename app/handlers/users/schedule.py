@@ -12,6 +12,7 @@ from .select_group import group_handler
 
 
 @router.message(Command('schedule'))
+@router.message(lambda message: message.text == _('Schedule 📖'))
 async def schedule_handler(message: Message, group_id, state: FSMContext):
     if not group_id:
         return await group_handler(message, state, _get_schedule_data)

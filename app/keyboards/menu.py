@@ -7,9 +7,11 @@ from loader import _
 def get_menu_markup():
     builder = ReplyKeyboardBuilder()
     buttons = [
-        KeyboardButton(text=_('Schedule')),
-        KeyboardButton(text=_('Call schedule')),
+        KeyboardButton(text=_('Schedule 📖')),
+        KeyboardButton(text=_('Call schedule 🔔')),
+        KeyboardButton(text=_('Current lesson 🔎')),
+        KeyboardButton(text=_('Select Group 👥')),
     ]
     builder.add(*buttons)
-    builder.adjust(3)
+    builder.adjust(2)
     return builder.as_markup(resize_keyboard=True)

@@ -1,5 +1,6 @@
 import re
 from datetime import date
+from utils import logger
 
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
@@ -17,6 +18,7 @@ from .select_group import group_handler
 async def create_task_handler(message: Message, state: FSMContext, group_id):
     if not group_id:
         return await group_handler(message=message, state=state, redirect=_get_create_task_data)
+    await state.clear()
     text, markup = await _get_create_task_data(state=state)
     await message.answer(text, reply_markup=markup)
 
@@ -30,15 +32,15 @@ async def create_task_name(message: Message, state: FSMContext):
 
 @router.message(CreateTaskState.text, lambda message: message.content_type == ContentType.TEXT)
 async def create_task_text(message: Message, state: FSMContext):
-    message = await message.answer(_("Enter task date:"))
-    await state.update_data(test=message.text)
+    await message.answer(_("Enter task date:"))
+    await state.update_data(text=message.text)
     await state.set_state(CreateTaskState.date)
 
 
 @router.message(CreateTaskState.date,
                 lambda message: message.content_type == ContentType.TEXT)
 async def create_task_date(message: Message, state: FSMContext, group_id, user):
-    match = re.match('(\d{4})-(\d{2})-(\d{2})', message.text)
+    match = re.match('^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$', message.text)
     if not match:
         return await message.answer(_("Invalid date format (YYYY-MM-DD)"))
     data = await state.get_data()

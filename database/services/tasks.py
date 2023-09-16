@@ -9,14 +9,14 @@ def get_task(id: int) -> Task | None:
     return task
 
 
-def get_tasks(group_id: int = None, date_range: [date] = None, confirmed: bool = True) -> [Task]:
+def get_tasks(group_id: int = None, date_range: [date] = None, status: str = None) -> [Task]:
     tasks = Task.select()
     if group_id:
         tasks = tasks.where(Task.group_id == group_id)
     if date_range:
         tasks = tasks.where((Task.date >= date_range[0]) & (Task.date <= date_range[1]))
-    if confirmed:
-        tasks = tasks.where(Task.confirmed == confirmed)
+    if status is not None:
+        tasks = tasks.where(Task.status == status)
     return list(tasks)
 
 

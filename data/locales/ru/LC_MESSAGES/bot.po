@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-13 23:35+0300\n"
+"POT-Creation-Date: 2023-09-16 02:59+0300\n"
 "PO-Revision-Date: 2023-08-28 20:44+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,58 +19,123 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/commands/admins.py:11
-msgid "get users list [admin]"
-msgstr "список пользователей [admin]"
-
 #: app/commands/default.py:8
 msgid "start message"
 msgstr "начать"
 
-#: app/commands/default.py:9 app/handlers/users/inline.py:26
+#: app/commands/default.py:9 app/handlers/users/inline.py:27
 msgid "get schedule"
 msgstr "расписание"
 
-#: app/commands/default.py:10
-msgid "select your group"
-msgstr "выбрать свою группу"
-
-#: app/commands/default.py:11
+#: app/commands/default.py:10 app/handlers/users/inline.py:35
 msgid "get call schedule"
 msgstr "звонки"
 
-#: app/commands/default.py:12 app/handlers/users/inline.py:41
+#: app/commands/default.py:11 app/handlers/users/inline.py:42
 msgid "get current lesson"
 msgstr "текущая пара"
 
-#: app/handlers/admins/users.py:25
-msgid "Users is empty🫡"
-msgstr "Список пользователей пуст🫡"
+#: app/commands/default.py:12 app/handlers/users/inline.py:50
+msgid "get tasks"
+msgstr "задания"
 
-#: app/handlers/users/call_schedule.py:18
-#: app/handlers/users/current_lesson.py:36 app/handlers/users/schedule.py:36
-#: app/handlers/users/select_group.py:19 app/handlers/users/select_group.py:26
-#: app/handlers/users/select_group.py:36
+#: app/commands/default.py:13
+msgid "select your group"
+msgstr "выбрать свою группу"
+
+#: app/commands/default.py:14
+msgid "cancel"
+msgstr "завершить"
+
+#: app/commands/default.py:15
+msgid "menu off"
+msgstr "выключить меню"
+
+#: app/commands/default.py:16
+msgid "menu on"
+msgstr "включить меню"
+
+#: app/commands/super_admins.py:11
+msgid "get users list [admin]"
+msgstr "список пользователей [admin]"
+
+#: app/handlers/cancel.py:10
+msgid "Canceled"
+msgstr "Завершено"
+
+#: app/handlers/admins/confirm_tasks.py:28 app/handlers/users/tasks.py:41
+msgid "Tasks is empty🫡"
+msgstr "Заданий нету🫡"
+
+#: app/handlers/admins/users.py:12 app/middlewares/admin.py:25
+msgid "Not enough rights🚫"
+msgstr "Нет доступа🚫"
+
+#: app/handlers/admins/users.py:27
+msgid "Users is empty🫡"
+msgstr "Пользователей нету🫡"
+
+#: app/handlers/users/call_schedule.py:10 app/keyboards/menu.py:11
+msgid "Call schedule 🔔"
+msgstr "Звонки 🔔"
+
+#: app/handlers/users/call_schedule.py:19
+#: app/handlers/users/current_lesson.py:38 app/handlers/users/schedule.py:43
+#: app/handlers/users/select_group.py:19 app/handlers/users/select_group.py:31
+#: app/handlers/users/select_group.py:44
 msgid ""
 "It seems the servers are not responding, and there is no saved data for "
 "you🫡"
-msgstr ""
-"Похоже сервер не отвечает, сохраненных данных для вас нет🫡"
+msgstr "Похоже сервер не отвечает, сохраненных данных для вас нет🫡"
 
-#: app/handlers/users/call_schedule.py:26
+#: app/handlers/users/call_schedule.py:27
 msgid "Call schedule is empty🫡"
-msgstr "Расписания нет🫡"
+msgstr "Расписания нету🫡"
 
-#: app/handlers/users/current_lesson.py:23 app/handlers/users/inline.py:17
-#: app/handlers/users/inline.py:18 app/handlers/users/schedule.py:23
+#: app/handlers/users/create_task.py:28
+msgid "Enter text for <b>{}</b>:"
+msgstr "Введите текст для <b>{}</b>:"
+
+#: app/handlers/users/create_task.py:35
+msgid "Enter task date:"
+msgstr "Введите дату задания:"
+
+#: app/handlers/users/create_task.py:45
+msgid "Invalid date format (YYYY-MM-DD)"
+msgstr "Невалидная дата (YYYY-MM-DD)"
+
+#: app/handlers/users/create_task.py:50
+msgid "Send files:"
+msgstr "Отправте файлы:"
+
+#: app/handlers/users/create_task.py:69 app/keyboards/finish.py:10
+msgid "Finish"
+msgstr "Завершить"
+
+#: app/handlers/users/create_task.py:71 app/handlers/users/menu.py:11
+#: app/handlers/users/menu.py:16 app/handlers/users/select_group.py:60
+msgid "Success"
+msgstr "Готово"
+
+#: app/handlers/users/create_task.py:78
+msgid "Enter task name:"
+msgstr "Введите название задания:"
+
+#: app/handlers/users/current_lesson.py:13 app/keyboards/menu.py:12
+msgid "Current lesson 🔎"
+msgstr "Текущая пара 🔎"
+
+#: app/handlers/users/current_lesson.py:24 app/handlers/users/inline.py:18
+#: app/handlers/users/inline.py:19 app/handlers/users/schedule.py:26
+#: app/handlers/users/tasks.py:26
 msgid "You haven't selected a group yet🫡"
 msgstr "Вы еще не выбрали групу🫡"
 
-#: app/handlers/users/current_lesson.py:43
+#: app/handlers/users/current_lesson.py:45
 msgid "Now <b>{}</b>"
 msgstr "Сейчас <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:44
+#: app/handlers/users/current_lesson.py:46
 msgid ""
 "\n"
 "End in <b>{}</b>"
@@ -78,7 +143,7 @@ msgstr ""
 "\n"
 "Конец через <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:44
+#: app/handlers/users/current_lesson.py:47
 msgid ""
 "\n"
 "Start in <b>{}</b>"
@@ -86,51 +151,51 @@ msgstr ""
 "\n"
 "Начало через <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:46
+#: app/handlers/users/current_lesson.py:50
 msgid "No more lessons today🫡"
 msgstr "На сегодня пары закончились🫡"
 
-#: app/handlers/users/inline.py:25
+#: app/handlers/users/inline.py:26
 msgid "Schedule"
 msgstr "Расписание"
 
-#: app/handlers/users/inline.py:33
+#: app/handlers/users/inline.py:34
 msgid "Call schedule"
 msgstr "Звонки"
 
-#: app/handlers/users/inline.py:34
-msgid "get call timetable"
-msgstr "Звонки"
-
-#: app/handlers/users/inline.py:40
+#: app/handlers/users/inline.py:41
 msgid "Current lesson"
 msgstr "Текущая пара"
 
-#: app/handlers/users/schedule.py:46
-msgid "Monday Tuesday Wednesday Thursday Friday Saturday Sunday"
-msgstr "Понедельник Вторник Среда Четверг Пятница Субота Воскресенье"
+#: app/handlers/users/inline.py:49
+msgid "Tasks"
+msgstr "Задания"
 
-#: app/handlers/users/schedule.py:54
+#: app/handlers/users/schedule.py:15 app/keyboards/menu.py:10
+msgid "Schedule 📖"
+msgstr "Расписание 📖"
+
+#: app/handlers/users/schedule.py:47
 msgid "Schedule is empty🫡"
-msgstr "Расписания нет🫡"
+msgstr "Расписания нету🫡"
+
+#: app/handlers/users/select_group.py:14 app/keyboards/menu.py:13
+msgid "Select Group 👥"
+msgstr "Выберите группу 👥"
 
 #: app/handlers/users/select_group.py:16
 msgid "Select faculty:"
 msgstr "Выберите факультет:"
 
-#: app/handlers/users/select_group.py:27
+#: app/handlers/users/select_group.py:32
 msgid "Select course:"
 msgstr "Выберите курс:"
 
-#: app/handlers/users/select_group.py:37
+#: app/handlers/users/select_group.py:45
 msgid "Select group:"
 msgstr "Выберите группу:"
 
-#: app/handlers/users/select_group.py:48
-msgid "Success"
-msgstr "Готово"
-
-#: app/handlers/users/start.py:11
+#: app/handlers/users/start.py:12
 msgid ""
 "Hello <b>{}</b>👋\n"
 "I am a diary bot\n"
@@ -142,7 +207,7 @@ msgstr ""
 "<b>\n"
 "Команды:</b>"
 
-#: app/handlers/users/start.py:16
+#: app/handlers/users/start.py:19
 msgid ""
 "\n"
 "\n"
@@ -168,7 +233,6 @@ msgstr "Эта неделя"
 msgid "Next week"
 msgstr "Следующая неделя"
 
-#: app/middlewares/admin.py:21
-msgid "Not enough rights🚫"
-msgstr "Нет доступа🚫"
-
+#: utils/time.py:16
+msgid "Monday Tuesday Wednesday Thursday Friday Saturday Sunday"
+msgstr "Понедельник Вторник Среда Четверг Пятница Субота Воскресенье"

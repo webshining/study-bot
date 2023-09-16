@@ -10,6 +10,7 @@ from .select_group import group_handler
 
 
 @router.message(Command('current_lesson'))
+@router.message(lambda message: message.text == _('Current lesson 🔎'))
 async def current_lesson_handler(message: Message, group_id, state: FSMContext):
     if not group_id:
         return await group_handler(message, state, _get_current_lesson_data)
@@ -29,6 +30,7 @@ async def current_lesson_callback(call: CallbackQuery, group_id):
         await call.message.edit_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
     except:
         pass
+    await call.answer()
 
 
 async def _get_current_lesson_data(group_id: int, *args, **kwargs) -> (str, any):
