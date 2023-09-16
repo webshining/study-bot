@@ -3,9 +3,8 @@ from aiogram.types import CallbackQuery, Message
 
 from app.keyboards import get_subjects_markup
 from app.routers import user_router as router
-from database.models import Subject
 from database.services import get_subject, get_subjects
-from loader import _
+from loader import _, bot
 
 
 @router.message(Command('subjects'))
@@ -16,23 +15,22 @@ async def subjects_handler(message: Message):
 
 @router.callback_query(lambda call: call.data.startswith('subject'))
 async def subjects_callback_handler(call: CallbackQuery):
-    await call.answer()
-    subject = get_subject(call.data[9:])
-    text, markup = _get_subject_data(subject)
+    text, markup = _get_subject_data(call.data[9:])
     if call.inline_message_id:
-        await call.message.edit_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
-    else:
-        await call.message.edit_text(text, reply_markup=markup)
+        return await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
+    await call.message.edit_text(text, reply_markup=markup)
+    await call.answer()
 
 
-def _get_subject_data(subject: Subject):
-    text = _('Subject not found🫡')
-    markup = None
-    if subject:
-        text = _('<b>{}:</b>\nTeacher: <b>{}</b>\nAudience: <b>{}</b>').format(subject.name, subject.teacher, subject.audience)
-        if subject.info:
-            text += f'\n\n{subject.info}'
-    return text, markup
+def _get_subject_data(id: str):
+    subject = get_subject(id)
+    if not subject:
+        return _('Subject not found🫡'), None
+    text = _('<b>{}:</b>\nTeacher: <b>{}</b>\nAudience: <b>{}</b>').format(subject.name, subject.teacher,
+                                                                           subject.audience)
+    if subject.info:
+        text += f'\n\n{subject.info}'
+    return text, None
 
 
 def _get_subjects_data():

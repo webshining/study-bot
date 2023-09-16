@@ -1,20 +1,20 @@
 from aiogram.types import BotCommand, BotCommandScopeDefault
 
-from loader import bot
+from loader import _, i18n, bot
 
 
-def get_default_commands():
+def get_default_commands(lang: str = 'en'):
     commands = [
-        BotCommand(command='/start', description='start message'),
-        BotCommand(command='/schedule', description='schedule'),
-        BotCommand(command='/subjects', description='subjects info'),
-        BotCommand(command='/current', description='current subject'),
-        BotCommand(command='/cancel', description='reset state'),
-        BotCommand(command='/help', description='how is works'),
+        BotCommand(command='/start', description=_('start message', locale=lang)),
+        BotCommand(command='/schedule', description=_('get schedule', locale=lang)),
+        BotCommand(command='/subjects', description=_('get subjects info', locale=lang)),
+        BotCommand(command='/current', description=_('get current lesson', locale=lang)),
+        BotCommand(command='/cancel', description=_('cancel', locale=lang)),
     ]
     return commands
 
 
 async def set_default_commands():
     await bot.set_my_commands(get_default_commands(), scope=BotCommandScopeDefault())
-    
+    for lang in i18n.available_locales:
+        await bot.set_my_commands(get_default_commands(lang), scope=BotCommandScopeDefault(), language_code=lang)

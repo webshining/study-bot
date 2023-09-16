@@ -6,6 +6,6 @@ from loader import _, dp
 
 
 @dp.message(Command('cancel'))
-async def _cancel(message: Message, state: FSMContext):
-    await state.clear()
+async def cancel_handler(message: Message, state: FSMContext):
+    await state.set_state(None)
     await message.answer(_("State reset"))

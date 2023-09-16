@@ -5,8 +5,9 @@ from environs import Env
 env = Env()
 env.read_env()
 
-
 DIR = Path(__file__).absolute().parent.parent
+
+TIMEZONE = env.str('TIMEZONE', 'Europe/Kyiv')
 
 TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', None)
 

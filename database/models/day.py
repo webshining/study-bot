@@ -1,4 +1,4 @@
-from datetime import time
+from datetime import datetime
 
 from pydantic import BaseModel, Field, validator
 
@@ -11,14 +11,14 @@ from .subject import Subject
 
 class DaySubject(BaseModel):
     id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
-    time_start: time
-    time_end: time
+    time_start: datetime
+    time_end: datetime
     group: str = None
     subject: Subject
 
     @validator('time_start', 'time_end', pre=True)
     def parse_time(cls, v):
-        return str_to_time(v, "%H:%M").time()
+        return str_to_time(v, "%H:%M")
 
 
 class Day(BaseModel):

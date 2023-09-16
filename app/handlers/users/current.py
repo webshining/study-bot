@@ -4,7 +4,7 @@ from aiogram.types import CallbackQuery, Message
 from app.keyboards import get_update_markup
 from app.routers import user_router as router
 from database.services import get_day_by_date
-from loader import _
+from loader import _, bot
 from utils import get_current_time
 
 from .subjects import _get_subject_data
@@ -18,15 +18,14 @@ async def current_handler(message: Message):
 
 @router.callback_query(lambda call: call.data.startswith('current_update'))
 async def current_callback_handler(call: CallbackQuery):
-    await call.answer()
     text, markup = _get_current_data()
     try:
         if call.inline_message_id:
-            await call.message.edit_text(text=text, inline_message_id=call.inline_message_id, reply_markup=markup)
-        else:
-            await call.message.edit_text(text=text, reply_markup=markup)
+            return await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
+        await call.message.edit_text(text=text, reply_markup=markup)
     except:
         pass
+    await call.answer()
 
 
 def _get_current_data():
@@ -36,14 +35,17 @@ def _get_current_data():
     if not subjects:
         text = _('No class today')
     else:
-        subjects = [s for s in subjects if s.time_end >= _current_time.time()]
+        subjects = [s for s in subjects if s.time_end.time() >= _current_time.time()]
         if not subjects:
             text = _('Classes are over')
         elif _current_time >= subjects[0].time_start:
             text, *other = _get_subject_data(subjects[0].subject)
             text += _('\n\nClass ends at {} in {}').format(subjects[0].time_end, subjects[0].time_end - _current_time)
         else:
-            text = _('No class right now! Next class: {} at {} in {}').format(subjects[0].subject.name, subjects[0].time_start, subjects[0].time_start - _current_time)
-    
-    markup = get_update_markup('current_update')
+            text = _('No class right now! Next class: <b>{}</b> at {} in {}').format(subjects[0].subject.name,
+                                                                                     subjects[0].time_start,
+                                                                                     subjects[
+                                                                                         0].time_start - _current_time)
+
+    markup = get_update_markup('current')
     return text, markup

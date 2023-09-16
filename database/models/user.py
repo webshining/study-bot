@@ -9,7 +9,7 @@ class User(BaseModel):
     id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id") or None
     user_id: int
     name: str
-    username: str = None
+    username: str or None
     status: str
 
 

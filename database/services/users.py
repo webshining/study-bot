@@ -1,5 +1,3 @@
-from bson import ObjectId
-
 from ..models import User, users_collection
 
 
@@ -21,7 +19,8 @@ def edit_user(user_id: int, **kwargs) -> User:
     user = users_collection.find_one_and_update({'user_id': user_id}, {'$set': kwargs}, return_document=True)
     return User(**user)
 
-def get_or_create_user(user_id: int, name: str, username: str = None) -> User:
+
+def get_or_create_user(user_id: int, name: str, username: str or None) -> User:
     user = get_user(user_id)
     if not user:
         user = create_user(user_id=user_id, name=name, username=username)

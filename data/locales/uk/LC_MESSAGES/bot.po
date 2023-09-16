@@ -1,14 +1,14 @@
 # Ukrainian translations for PROJECT.
-# Copyright (C) 2022 ORGANIZATION
+# Copyright (C) 2023 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-11-30 04:16+0200\n"
-"PO-Revision-Date: 2022-11-30 04:17+0200\n"
+"POT-Creation-Date: 2023-09-17 00:05+0300\n"
+"PO-Revision-Date: 2023-09-17 00:05+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
 "Language-Team: uk <LL@li.org>\n"
@@ -17,95 +17,97 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Generated-By: Babel 2.12.1\n"
 
 #: app/commands/admins.py:10
-msgid "create new list"
-msgstr "створити новий список"
+msgid "get users list [admin]"
+msgstr ""
 
 #: app/commands/default.py:8
 msgid "start message"
-msgstr "почати"
+msgstr ""
 
 #: app/commands/default.py:9
 msgid "get schedule"
-msgstr "отримати розклад"
+msgstr ""
 
 #: app/commands/default.py:10
 msgid "get subjects info"
-msgstr "отримати список предметів"
+msgstr ""
 
 #: app/commands/default.py:11
-msgid "current class"
-msgstr "поточна пара"
+msgid "get current lesson"
+msgstr ""
 
 #: app/commands/default.py:12
-msgid "get lists"
-msgstr "отримати списки"
+msgid "cancel"
+msgstr ""
 
-#: app/commands/default.py:13
-msgid "reset state"
-msgstr "скинути стан"
-
-#: app/commands/default.py:14
-msgid "how is works"
-msgstr "як це працює"
-
-#: app/handlers/cancel.py:12
+#: app/handlers/cancel.py:11
 msgid "State reset"
-msgstr "Стан скинуто"
+msgstr ""
 
-#: app/handlers/admins/lists.py:15
-msgid "Enter list name:"
-msgstr "Введіть назву списка:"
+#: app/handlers/admins/users.py:18
+msgid "Users is empty🫡"
+msgstr ""
 
-#: app/handlers/admins/lists.py:23
-msgid "List <b>{}</b> created"
-msgstr "Список <b>{}</b> створено"
-
-#: app/handlers/admins/lists.py:52
-msgid "List deleted🫡"
-msgstr "Список видалено🫡"
-
-#: app/handlers/admins/lists.py:61
-msgid "List renamed🫡"
-msgstr "Список перейменовано🫡"
-
-#: app/handlers/users/current.py:35
+#: app/handlers/users/current.py:36
 msgid "No class today"
-msgstr "Сьогодні пар немає"
+msgstr ""
 
-#: app/handlers/users/current.py:39
+#: app/handlers/users/current.py:40
 msgid "Classes are over"
-msgstr "Пари закінчились"
+msgstr ""
 
-#: app/handlers/users/current.py:42
+#: app/handlers/users/current.py:43
 msgid ""
 "\n"
 "\n"
 "Class ends at {} in {}"
 msgstr ""
-"\n"
-"\n"
-"Пара закінчиться о {} через {}"
 
-#: app/handlers/users/current.py:44
-msgid "No class right now! Next class: {} at {} in {}"
-msgstr "Зараз пар немає! Наступна: {} о {} через {}"
+#: app/handlers/users/current.py:45
+msgid "No class right now! Next class: <b>{}</b> at {} in {}"
+msgstr ""
 
-#: app/handlers/users/help.py:10
+#: app/handlers/users/inline_mode.py:21
+msgid "Get schedule"
+msgstr ""
+
+#: app/handlers/users/inline_mode.py:22
+msgid "Find out the timetable"
+msgstr ""
+
+#: app/handlers/users/inline_mode.py:30
+msgid "Current subject"
+msgstr ""
+
+#: app/handlers/users/inline_mode.py:31
+msgid "Get current info"
+msgstr ""
+
+#: app/handlers/users/inline_mode.py:39
+msgid "Subjects info"
+msgstr ""
+
+#: app/handlers/users/inline_mode.py:40
+msgid "Get subjects info"
+msgstr ""
+
+#: app/handlers/users/schedule.py:40
+msgid "Schedule is empty🫡"
+msgstr ""
+
+#: app/handlers/users/start.py:11
 msgid ""
 "Hello <b>{}</b>👋\n"
 "I am a diary bot\n"
 "<b>\n"
+"\n"
 "Commands:</b>"
 msgstr ""
-"Привіт <b>{}</b>👋\n"
-"Я бот щоденник\n"
-"<b>\n"
-"Команди:</b>"
 
-#: app/handlers/users/help.py:14
+#: app/handlers/users/start.py:15
 msgid ""
 "\n"
 "\n"
@@ -113,127 +115,39 @@ msgid ""
 "Repositofy: <b><a href=\"https://github.com/webshining/study-"
 "bot\">GitHub</a></b>"
 msgstr ""
-"\n"
-"\n"
-"Автор: <b>@webshining</b>😉\n"
-"Репозиторій: <b><a href=\"https://github.com/webshining/study-"
-"bot\">GitHub</a></b>"
-
-#: app/handlers/users/inline_mode.py:17
-msgid "Get schedule"
-msgstr "Розклад"
-
-#: app/handlers/users/inline_mode.py:18
-msgid "Find out the timetable"
-msgstr "Отримати розклад"
-
-#: app/handlers/users/inline_mode.py:26
-msgid "Current subject"
-msgstr "Поточна пара"
-
-#: app/handlers/users/inline_mode.py:27
-msgid "Get current info"
-msgstr "Яка зараз пара"
-
-#: app/handlers/users/inline_mode.py:35
-msgid "Subjects info"
-msgstr "Список предметів"
-
-#: app/handlers/users/inline_mode.py:36
-msgid "Get subjects info"
-msgstr "Отримати список предметів"
-
-#: app/handlers/users/lists.py:32
-msgid "Send a Key - Value format message:"
-msgstr "Відправте текст формату Ключ - Значення:"
-
-#: app/handlers/users/lists.py:52
-msgid "Entry added to the list"
-msgstr "Запис додано до списку"
-
-#: app/handlers/users/lists.py:57
-msgid "You entered an invalid string, please try again"
-msgstr "Ви ввели текст не правильного формату, спробуйте ще раз"
-
-#: app/handlers/users/lists.py:61
-msgid "List not found🫡"
-msgstr "Список не знайдено🫡"
-
-#: app/handlers/users/lists.py:73
-msgid "Select list:"
-msgstr "Оберіть список:"
-
-#: app/handlers/users/lists.py:73
-msgid "Lists is empty🫡"
-msgstr "Списків немає🫡"
-
-#: app/handlers/users/schedule.py:39
-msgid "Schedule is empty🫡"
-msgstr "Розклад пустий🫡"
-
-#: app/handlers/users/start.py:9
-msgid ""
-"Hello <b>{}</b>👋\n"
-"Write /help to see more information"
-msgstr ""
-"Привіт <b>{}</b>👋\n"
-"Напиши /help щоб побачити більше інформації"
 
 #: app/handlers/users/subjects.py:28
 msgid "Subject not found🫡"
-msgstr "Предмет не знайдено🫡"
+msgstr ""
 
-#: app/handlers/users/subjects.py:31
+#: app/handlers/users/subjects.py:29
 msgid ""
 "<b>{}:</b>\n"
 "Teacher: <b>{}</b>\n"
 "Audience: <b>{}</b>"
 msgstr ""
-"<b>{}:</b>\n"
-"Вчитель: <b>{}</b>\n"
-"Аудиторія: <b>{}</b>"
 
-#: app/handlers/users/subjects.py:40
+#: app/handlers/users/subjects.py:39
 msgid "Select subject📚:"
-msgstr "Оберіть Предмет📚:"
+msgstr ""
 
-#: app/handlers/users/subjects.py:40
+#: app/handlers/users/subjects.py:39
 msgid "Subjects is empty🫡"
-msgstr "Предметів немає🫡"
+msgstr ""
 
-#: app/keyboards/lists.py:21
-msgid "➕Write"
-msgstr "➕Записати"
-
-#: app/keyboards/lists.py:22 app/keyboards/update.py:10
-msgid "🔄Update"
-msgstr "🔄Оновити"
-
-#: app/keyboards/lists.py:23
-msgid "⬅️Back"
-msgstr "⬅️Назад"
-
-#: app/keyboards/lists.py:27
-msgid "Turn off"
-msgstr "Відключити"
-
-#: app/keyboards/lists.py:27
-msgid "Turn on"
-msgstr "Включити"
-
-#: app/keyboards/lists.py:28
-msgid "✏️Rename"
-msgstr "✏️Перейменувати"
-
-#: app/keyboards/lists.py:29
-msgid "❌Delete"
-msgstr "❌Видалити"
+#: app/keyboards/update.py:10
+msgid "🔄 Update"
+msgstr ""
 
 #: app/keyboards/week.py:10
 msgid "This week"
-msgstr "Ця неділя"
+msgstr ""
 
 #: app/keyboards/week.py:11
 msgid "Next week"
-msgstr "Наступна неділя"
+msgstr ""
+
+#: app/middlewares/admin.py:24
+msgid "Not enough rights🚫"
+msgstr ""
 
