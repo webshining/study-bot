@@ -28,7 +28,7 @@ async def inline_handler(query: InlineQuery, group_id):
             input_message_content=InputTextMessageContent(message_text=schedule_text),
             reply_markup=schedule_markup,
         )
-        call_schedule_text = _get_call_schedule_data()
+        call_schedule_text = await _get_call_schedule_data()
         call_schedule = InlineQueryResultArticle(
             id='2',
             title=_('Call schedule'),

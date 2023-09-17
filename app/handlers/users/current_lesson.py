@@ -6,6 +6,7 @@ from app.keyboards import get_update_markup
 from app.routers import user_router as router
 from loader import _, bot
 from utils import get_current_time, get_schedule
+
 from .select_group import group_handler
 
 
@@ -34,7 +35,7 @@ async def current_lesson_callback(call: CallbackQuery, group_id):
 
 
 async def _get_current_lesson_data(group_id: int, *args, **kwargs) -> (str, any):
-    timetable = get_schedule(group_id)
+    timetable = await get_schedule(group_id)
     text = _("It seems the servers are not responding, and there is no saved data for you🫡")
     if timetable:
         now = get_current_time()

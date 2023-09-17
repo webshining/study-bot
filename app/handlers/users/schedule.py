@@ -38,7 +38,7 @@ async def _get_schedule_data(group_id: int, shift: str = 'this', *args, **kwargs
     date = get_current_time()
     if shift == 'next':
         date += timedelta(weeks=1)
-    timetable = get_schedule(group_id, week_start_end(date))
+    timetable = await get_schedule(group_id, week_start_end(date))
     if timetable is None:
         text = _("It seems the servers are not responding, and there is no saved data for you🫡")
     elif timetable:
