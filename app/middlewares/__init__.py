@@ -9,6 +9,5 @@ from .user import UserMiddleware
 
 def setup_middleware(dp: Dispatcher):
     dp.update.middleware(UserMiddleware())
-    admin_router.message.middleware(AdminMiddleware())
     dp.update.middleware(i18n_middleware)
-    
+    admin_router.message.middleware(AdminMiddleware())

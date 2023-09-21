@@ -48,16 +48,13 @@ async def course_callback(call: CallbackQuery, state: FSMContext):
 
 @router.callback_query(lambda call: call.data.startswith('group'))
 async def group_callback(call: CallbackQuery, state: FSMContext, group_id, user):
-    if group_id != int(call.data[6:]):
-        user.status = 'user'
-        user.save()
-        if 'group' in call.message.chat.type:
-            if call.from_user.id in [i.user.id for i in await call.message.chat.get_administrators()]:
-                update_chat(call.message.chat.id, call.data[6:])
-            else:
-                update_chat(call.from_user.id, call.data[6:])
+    if 'group' in call.message.chat.type:
+        if call.from_user.id in [i.user.id for i in await call.message.chat.get_administrators()]:
+            update_chat(call.message.chat.id, call.data[6:])
         else:
             update_chat(call.from_user.id, call.data[6:])
+    else:
+        update_chat(call.from_user.id, call.data[6:])
     text, markup = (_("Success"), None)
     redirect = (await state.get_data()).get('redirect')
     if redirect:
