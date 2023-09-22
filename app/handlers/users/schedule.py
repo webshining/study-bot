@@ -1,4 +1,3 @@
-import calendar
 from datetime import timedelta
 
 from aiogram.filters import Command
@@ -10,6 +9,7 @@ from database.models import Day
 from database.services import get_days
 from loader import _, bot
 from utils import get_current_time
+from utils import weekdays
 
 
 @router.message(Command('schedule'))
@@ -46,7 +46,8 @@ def _get_schedule_text(days: list[Day]):
     text = ''
     for day in days:
         if day.subjects:
-            text += f'\n\n{calendar.day_name[day.day_id]}'
+            day_id = day.day_id
+            text += f'\n\n{weekdays[day_id if day_id <= 6 else day_id - 1]}'
             for i, subject in enumerate(day.subjects):
                 text += f'\n{i + 1}) <b>{subject.subject.name}</b>({subject.subject.audience})'
     return text

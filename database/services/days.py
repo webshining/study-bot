@@ -7,10 +7,10 @@ from ..models import Day, days_collection
 
 def get_days(week: int = None):
     days = days_collection.aggregate([
-        {"$unwind": {"path": "$subjects", "preserveNullAndEmptyArrays": True}},
+        {"$unwind": {"path": "$subjects"}},
         {"$lookup": {"from": "subjects", "localField": "subjects._id", "foreignField": "_id",
                      "as": "subjects.subject"}},
-        {"$unwind": {"path": "$subjects.subject", "preserveNullAndEmptyArrays": True}},
+        {"$unwind": {"path": "$subjects.subject"}},
         {"$group": {"_id": "$_id", "subjects": {"$push": "$subjects"}, "day_id": {"$first": "$day_id"}}},
         {"$sort": {"day_id": 1}},
         {"$project": {"subjects": {"$cond": {"if": {"$eq": ["$subjects", [{}]]}, "then": [], "else": "$subjects"}}}}
