@@ -8,7 +8,7 @@ def get_default_commands(lang: str = 'en'):
         BotCommand(command='/start', description=_('start message', locale=lang)),
         BotCommand(command='/schedule', description=_('get schedule', locale=lang)),
         BotCommand(command='/subjects', description=_('get subjects info', locale=lang)),
-        BotCommand(command='/current', description=_('current class', locale=lang)),
+        BotCommand(command='/current', description=_('current lesson', locale=lang)),
         BotCommand(command='/cancel', description=_('reset state', locale=lang)),
         BotCommand(command='/help', description=_('how is works', locale=lang)),
     ]

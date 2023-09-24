@@ -20,7 +20,6 @@ async def schedule_handler(message: Message):
 
 @router.callback_query(lambda call: call.data.startswith('schedule'))
 async def schedule_callback_handler(call: CallbackQuery):
-    await call.answer()
     text, markup = _get_schedule_data(call.data[9:])
     try:
         if call.inline_message_id:
@@ -29,23 +28,25 @@ async def schedule_callback_handler(call: CallbackQuery):
             await call.message.edit_text(text=text, reply_markup=markup)
     except:
         pass
-
-
-def _get_schedule_text(days: list[Day]):
-    text = ''
-    for day in days:
-        if day.subjects:
-            text += f'\n\n{calendar.day_name[day.day_id]}'
-            for si, subject in enumerate(day.subjects):
-                text += f'\n{si + 1}) <b>{subject.subject.name}</b>({subject.subject.audience})'
-    return text if text else _('Schedule is empty🫡')
+    await call.answer()
 
 
 def _get_schedule_data(shift: str = 'this'):
     _current_time = get_current_time()
     if shift == 'next':
         _current_time += timedelta(weeks=1)
-
-    text = _get_schedule_text(get_days(_current_time.isocalendar().week))
+    days = get_days(_current_time.isocalendar().week)
+    text = _get_schedule_text(days)
     markup = get_week_markup('schedule', shift)
     return text, markup
+
+
+def _get_schedule_text(days: list[Day]):
+    text = ''
+    for day in days:
+        if day.subjects:
+            subjects = sorted(day.subjects, key=lambda s: s.subject_order)
+            text += f'\n\n{calendar.day_name[day.day_id if day.day_id < 7 else day.day_id-7]}'
+            for si, subject in enumerate(subjects):
+                text += f'\n{subject.subject_order}) <b>{subject.subject.name}</b>({subject.subject.audience})'
+    return text if text else _('Schedule is empty🫡')

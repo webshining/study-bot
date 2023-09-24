@@ -1,3 +1,4 @@
+from datetime import datetime
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
@@ -32,18 +33,26 @@ async def current_callback_handler(call: CallbackQuery):
 def _get_current_data():
     _current_time = get_current_time()
     day = get_day_by_date(_current_time)
-    subjects = day.subjects
+    subjects = list(day.subjects)
     if not subjects:
         text = _('No class today')
     else:
         subjects = [s for s in subjects if s.time_end >= _current_time.time()]
+        subject = subjects[0] if subjects else None
         if not subjects:
             text = _('Classes are over')
-        elif _current_time >= subjects[0].time_start:
-            text, *other = _get_subject_data(subjects[0].subject)
-            text += _('\n\nClass ends at {} in {}').format(subjects[0].time_end, subjects[0].time_end - _current_time)
         else:
-            text = _('No class right now! Next class: {} at {} in {}').format(subjects[0].subject.name, subjects[0].time_start, subjects[0].time_start - _current_time)
-    
+            text, *other = _get_subject_data(subject.subject)
+            if subject.time_start <= get_current_time().time():
+                text += _("\n\nEnd at <b>{}</b> in <b>{}</b>").format(
+                    subject.time_end,
+                    str(datetime.combine(get_current_time().date(), subject.time_end) - _current_time).split('.')[0]
+                )
+            else:
+                text += _("\n\nStart at <b>{}</b> in <b>{}</b>").format(
+                    subject.time_start,
+                    str(datetime.combine(get_current_time().date(), subject.time_start) - _current_time).split('.')[0]
+                )
+
     markup = get_update_markup('current_update')
     return text, markup

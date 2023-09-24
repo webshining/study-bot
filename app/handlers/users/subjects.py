@@ -17,7 +17,7 @@ async def subjects_handler(message: Message):
 @router.callback_query(lambda call: call.data.startswith('subject'))
 async def subjects_callback_handler(call: CallbackQuery):
     await call.answer()
-    subject = get_subject(call.data[9:])
+    subject = get_subject(call.data[8:])
     text, markup = _get_subject_data(subject)
     if call.inline_message_id:
         await call.message.edit_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
