@@ -12,19 +12,12 @@ def get_subject(id: int) -> Subject or None:
 
 
 def delete_subject(id: int):
-    subject = get_subject(id)
-    subject.delete_instance()
+    Subject.delete().where(Subject.id == id).execute()
     return True
 
 
-def update_subject(id: int, name: str, audience: str, teacher: str, info: str):
-    subject = get_subject(id)
-    if not subject:
-        return None 
-    subject.name = name
-    subject.audience = audience
-    subject.teacher = teacher
-    subject.info = info
+def update_subject(id: int, name: str, audience: str, teacher: str, info: str = None):
+    subject = Subject(id=id, name=name, audience=audience, teacher=teacher, info=info)
     subject.save()
     return subject
 

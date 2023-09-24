@@ -14,7 +14,7 @@ class User(BaseModel):
     @property
     def statuses_to_edit(self):
         statuses = []
-        if self.status == 'admin':
+        if self.status in ('admin', 'super_admin'):
             statuses.extend(('user', 'banned'))
         if self.status == 'super_admin':
             statuses.extend(('admin', 'banned'))
