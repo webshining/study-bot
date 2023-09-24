@@ -3,7 +3,7 @@ version: "3.9"
 services:
   app:
     build: .
-    restart: always
+    restart: on-failure
     depends_on:
       - db
       - rd
@@ -20,28 +20,16 @@ services:
       - "4000:4000"
   rd:
     image: redis:alpine
-    restart: always
-    ports:
-      - "6379:6379"
+    restart: unless-stopped
   db:
-    image: postgres
-    restart: always
-    ports:
-      - "5432:5432"
+    image: postgres:alpine
+    restart: unless-stopped
     environment:
       POSTGRES_USER: webshining
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: study_bot
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: webshinings@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: artem8808123
-    ports:
-      - "80:80"
-      
+
 volumes:
   postgres_data:
