@@ -6,7 +6,7 @@ from app.keyboards import get_week_markup
 from app.routers import user_router as router
 from loader import _, bot
 from utils import (Day, get_current_time, get_schedule, timedelta,
-                   week_start_end, weekdays)
+                   week_start_end)
 
 from .select_group import group_handler
 
@@ -50,7 +50,10 @@ async def _get_schedule_data(group_id: int, shift: str = 'this', *args, **kwargs
 
 
 def _get_schedule_text(timetable: list[Day]):
+    weekdays = _('Monday Tuesday Wednesday Thursday Friday Saturday Sunday').split(" ")
+
     text = ''
+
     for day in timetable:
         if day.lessons:
             text += f'\n\n{weekdays[day.date.weekday()]}'
@@ -58,4 +61,5 @@ def _get_schedule_text(timetable: list[Day]):
                 period = lesson.periods[0]
                 teachers_name = ', '.join([p.teachersName for p in lesson.periods])
                 text += f'\n{lesson.number}) <b>{period.disciplineFullName}</b>\n({teachers_name})'
+
     return text

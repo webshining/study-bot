@@ -8,7 +8,7 @@ from app.keyboards import get_week_markup
 from app.routers import user_router as router
 from database.services import get_tasks
 from loader import _, bot
-from utils import get_current_time, week_start_end, weekdays
+from utils import get_current_time, week_start_end
 
 from .select_group import group_handler
 
@@ -49,8 +49,11 @@ async def _get_tasks_data(group_id, shift: str = "this", *args, **kwargs) -> (st
 
 
 def _get_tasks_text(tasks: list) -> str:
+    weekdays = _('Monday Tuesday Wednesday Thursday Friday Saturday Sunday').split(" ")
+    
     text = []
     i = 1
+    
     for task in tasks:
         t = f"\n\n{weekdays[task.date.weekday()]}"
         if t in text:
@@ -59,4 +62,5 @@ def _get_tasks_text(tasks: list) -> str:
             i = 1
             text.append(t)
         text.append(f"\n{i}) <b>{task.name}</b>\n{task.text}")
+    
     return "".join(text)

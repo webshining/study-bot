@@ -123,7 +123,8 @@ async def get_groups(facultyId: int, courseId: int) -> list[Group] or None:
         return sorted([Group(**i) for i in data], key=lambda g: g.name) if data else data
 
 
-async def get_schedule(groupId: int, date_range: list[date] = week_start_end()) -> list[Day] or None:
+async def get_schedule(groupId: int, date_range: list[date] = None) -> list[Day] or None:
+    date_range = date_range if date_range else week_start_end()
     try:
         date_start, date_end = [i.strftime("%Y-%m-%d") for i in date_range]
         async with aiohttp.ClientSession() as session:
