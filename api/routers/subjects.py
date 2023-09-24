@@ -1,22 +1,37 @@
 from fastapi import APIRouter, Depends
-from playhouse.shortcuts import model_to_dict
 
-from api.models import SubjectPatch
+from api.models import SubjectCreate, SubjectPatch
 from api.services import get_current_user, notfound
-from database.services import get_subject, get_subjects, update_subject
+from database.services import get_subject, get_subjects, update_subject, create_subject, delete_subject
 
-router = APIRouter(dependencies=[Depends(get_current_user)])
+router = APIRouter(dependencies=[])
+
 
 @router.get('/')
-async def subjects():
-    return [model_to_dict(s) for s in get_subjects()]
+async def _subjects():
+    subjects = get_subjects()
+    return [s.to_dict() for s in subjects]
+
 
 @router.get('/{id}')
-async def subject(id: int):
+async def _subject(id: int):
     subject = get_subject(id)
-    return model_to_dict(subject) if subject else notfound
+    return subject.to_dict() if subject else notfound
+
 
 @router.patch('/{id}')
-async def edit_subject(id: int, dto: SubjectPatch):
+async def _edit_subject(id: int, dto: SubjectPatch):
     subject = update_subject(id, dto.name, dto.audience, dto.teacher, dto.info)
-    return model_to_dict(subject) if subject else notfound
+    return subject.to_dict() if subject else notfound
+
+
+@router.post('/')
+async def _create_subject(dto: SubjectCreate):
+    subject = create_subject(name=dto.name, teacher=dto.teacher, audience=dto.audience, info=dto.info)
+    return subject.to_dict()
+
+
+@router.delete('/{id}')
+async def _delete_subject(id: int):
+    delete_subject(id)
+    return {"message": "Success"}
