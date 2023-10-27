@@ -12,8 +12,6 @@ def get_default_commands(lang: str = 'en'):
         BotCommand(command='/tasks', description=_('get tasks', locale=lang)),
         BotCommand(command='/select_group', description=_('select your group', locale=lang)),
         BotCommand(command='/cancel', description=_('cancel', locale=lang)),
-        BotCommand(command='/menu_off', description=_('menu off', locale=lang)),
-        BotCommand(command='/menu_on', description=_('menu on', locale=lang)),
     ]
     return commands
 
