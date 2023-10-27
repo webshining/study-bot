@@ -15,7 +15,7 @@ def headers():
     return {"Accept-Language": "uk", 'User-Agent': UserAgent().random}
 
 def save_to_file(filename: str, data: object):
-    json.dump(data, open(f'{DIR}/data/{filename}', "w"), indent=4, ensure_ascii=False)
+    json.dump(data, open(f'{DIR}/data/{filename}', "w", encoding="utf-8"), indent=4, ensure_ascii=False)
 
 
 def read_file(filename: str) -> any or None:
@@ -50,6 +50,7 @@ class Period(BaseModel):
     timeStart: datetime
     timeEnd: datetime
     teachersName: str
+    type: str = Field(alias="typeStr")
 
     @validator('timeStart', 'timeEnd', pre=True)
     def parse_time(cls, v):

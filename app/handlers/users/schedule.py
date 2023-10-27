@@ -60,6 +60,6 @@ def _get_schedule_text(timetable: list[Day]):
             for lesson in day.lessons:
                 period = lesson.periods[0]
                 teachers_name = ', '.join([p.teachersName for p in lesson.periods])
-                text += f'\n{lesson.number}) <b>{period.disciplineFullName}</b>\n({teachers_name})'
+                text += f'\n{lesson.number}) <b>{period.disciplineFullName}</b>[{period.type}]\n({teachers_name})'
 
     return text
