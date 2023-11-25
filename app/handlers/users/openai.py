@@ -13,9 +13,8 @@ async def openai_chat(message: Message):
     await bot.send_chat_action(message.chat.id, ChatAction.TYPING)
     try:
         response = await openai_client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-3.5-turbo-1106",
             messages=[
-                {"role": "system", "content": 'Your answers must be very short'},
                 {"role": "user", "content": message.text[1:]}
             ],
             temperature=0,
