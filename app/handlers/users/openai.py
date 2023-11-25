@@ -1,27 +1,36 @@
-import markdownify 
-from aiogram.types import Message
+import re
+
 from aiogram.enums import ChatAction, ParseMode
+from aiogram.types import Message
 
 from app.routers import user_router as router
-from loader import openai_client, bot, _
+from loader import _, bot, openai_client
 from utils import logger
 
 
 @router.message(lambda message: message.text.startswith("!"))
 async def openai_chat(message: Message):
-    _message = await message.answer(reply_to_message_id=message.message_id, text=_("It will take a few seconds"))
     await bot.send_chat_action(message.chat.id, ChatAction.TYPING)
+    text = await _get_openai_data(message.text)
+    await message.answer(text=text, parse_mode=ParseMode.MARKDOWN_V2)
+        
+    
+async def _get_openai_data(question: str) -> str:
+    ques = question[1:]
+    ques = f'{ques[:45]}...' if len(ques) > 50 else ques
+    ques = re.sub(r'[\_\*[\]()~>#\+\-=|{}\.!]', r'\\\g<0>', ques)
+    ques = '\n'.join([f'>{i}' for i in ques.split("\n")])
     try:
         response = await openai_client.chat.completions.create(
             model="gpt-3.5-turbo-1106",
             messages=[
-                {"role": "user", "content": message.text[1:]}
+                {"role": "system", "content": "Yout should use markdown to answer."},
+                {"role": "user", "content": question[1:]}
             ],
-            temperature=0,
         )
         answ = response.choices[0].message.content
-        ques = f'{message.text[1:45]}...' if len(message.text) > 50 else message.text[1:]
-        await bot.edit_message_text(chat_id=_message.chat.id, message_id=_message.message_id, text=f'`{ques}\n\n`{markdownify.markdownify(answ)}', parse_mode=ParseMode.MARKDOWN)
+        answ = re.sub(r'[\_\*[\]()~>#\+\-=|{}\.!]', r'\\\g<0>', answ)
+        return f'{ques}\n{answ}'
     except Exception as e:
         logger.error(e)
-        await bot.edit_message_text(chat_id=_message.chat.id, message_id=_message.message_id, text=_("Looks like I got an error, it will be fixed soon"), parse_mode=ParseMode.MARKDOWN)
+        return _("Looks like I got an error, it will be fixed soon")

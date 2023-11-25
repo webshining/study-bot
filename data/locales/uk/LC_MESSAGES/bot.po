@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-25 05:23+0200\n"
+"POT-Creation-Date: 2023-11-26 00:52+0200\n"
 "PO-Revision-Date: 2023-08-28 20:44+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
@@ -80,34 +80,6 @@ msgstr "Схоже сервер не відповідає, збережених 
 msgid "Call schedule is empty🫡"
 msgstr "Роздкладу немає🫡"
 
-#: app/handlers/users/create_task.py:28
-msgid "Enter text for <b>{}</b>:"
-msgstr "Введіть текст для <b>{}</b>:"
-
-#: app/handlers/users/create_task.py:35
-msgid "Enter task date:"
-msgstr "Введіть дату завдання:"
-
-#: app/handlers/users/create_task.py:45
-msgid "Invalid date format (YYYY-MM-DD)"
-msgstr "Невалідна дата (YYYY-MM-DD)"
-
-#: app/handlers/users/create_task.py:50
-msgid "Send files:"
-msgstr "Відправте файли:"
-
-#: app/handlers/users/create_task.py:69 app/keyboards/finish.py:10
-msgid "Finish"
-msgstr "Завершити"
-
-#: app/handlers/users/create_task.py:71 app/handlers/users/select_group.py:58
-msgid "Success"
-msgstr "Готово"
-
-#: app/handlers/users/create_task.py:78
-msgid "Enter task name:"
-msgstr "Введіть назву завдання:"
-
 #: app/handlers/users/current_lesson.py:14
 msgid "Current lesson 🔎"
 msgstr "Який зараз предмет 🔎"
@@ -162,11 +134,7 @@ msgstr "Завдання"
 msgid "get tasks"
 msgstr "завдання"
 
-#: app/handlers/users/openai.py:12
-msgid "It will take a few seconds"
-msgstr "Зачекайте пару секунд"
-
-#: app/handlers/users/openai.py:27
+#: app/handlers/users/openai.py:37
 msgid "Looks like I got an error, it will be fixed soon"
 msgstr "Схоже я отримав помилку, скоро це виправлять"
 
@@ -198,6 +166,10 @@ msgstr "Оберіть курс:"
 msgid "Select group:"
 msgstr "Оберіть групу:"
 
+#: app/handlers/users/select_group.py:58
+msgid "Success"
+msgstr "Готово"
+
 #: app/handlers/users/start.py:11
 msgid ""
 "Hello <b>{}</b>👋\n"
@@ -224,6 +196,10 @@ msgstr ""
 "Репозиторій: <b><a href=\"https://github.com/webshining/study-"
 "bot\">GitHub</a></b>"
 
+#: app/keyboards/finish.py:10
+msgid "Finish"
+msgstr "Завершити"
+
 #: app/keyboards/update.py:10
 msgid "🔄Update"
 msgstr "🔄Оновити"
@@ -241,4 +217,22 @@ msgstr "Наступний тиждень"
 
 #~ msgid "menu on"
 #~ msgstr "увімкнути меню"
+
+#~ msgid "Enter text for <b>{}</b>:"
+#~ msgstr "Введіть текст для <b>{}</b>:"
+
+#~ msgid "Enter task date:"
+#~ msgstr "Введіть дату завдання:"
+
+#~ msgid "Invalid date format (YYYY-MM-DD)"
+#~ msgstr "Невалідна дата (YYYY-MM-DD)"
+
+#~ msgid "Send files:"
+#~ msgstr "Відправте файли:"
+
+#~ msgid "Enter task name:"
+#~ msgstr "Введіть назву завдання:"
+
+#~ msgid "It will take a few seconds"
+#~ msgstr "Зачекайте пару секунд"
 

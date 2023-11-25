@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-25 05:23+0200\n"
+"POT-Creation-Date: 2023-11-26 00:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,34 +78,6 @@ msgstr ""
 msgid "Call schedule is empty🫡"
 msgstr ""
 
-#: app/handlers/users/create_task.py:28
-msgid "Enter text for <b>{}</b>:"
-msgstr ""
-
-#: app/handlers/users/create_task.py:35
-msgid "Enter task date:"
-msgstr ""
-
-#: app/handlers/users/create_task.py:45
-msgid "Invalid date format (YYYY-MM-DD)"
-msgstr ""
-
-#: app/handlers/users/create_task.py:50
-msgid "Send files:"
-msgstr ""
-
-#: app/handlers/users/create_task.py:69 app/keyboards/finish.py:10
-msgid "Finish"
-msgstr ""
-
-#: app/handlers/users/create_task.py:71 app/handlers/users/select_group.py:58
-msgid "Success"
-msgstr ""
-
-#: app/handlers/users/create_task.py:78
-msgid "Enter task name:"
-msgstr ""
-
 #: app/handlers/users/current_lesson.py:14
 msgid "Current lesson 🔎"
 msgstr ""
@@ -156,11 +128,7 @@ msgstr ""
 msgid "get tasks"
 msgstr ""
 
-#: app/handlers/users/openai.py:12
-msgid "It will take a few seconds"
-msgstr ""
-
-#: app/handlers/users/openai.py:27
+#: app/handlers/users/openai.py:37
 msgid "Looks like I got an error, it will be fixed soon"
 msgstr ""
 
@@ -192,6 +160,10 @@ msgstr ""
 msgid "Select group:"
 msgstr ""
 
+#: app/handlers/users/select_group.py:58
+msgid "Success"
+msgstr ""
+
 #: app/handlers/users/start.py:11
 msgid ""
 "Hello <b>{}</b>👋\n"
@@ -207,6 +179,10 @@ msgid ""
 "Creator: <b>@webshining</b>😉\n"
 "Repositofy: <b><a href=\"https://github.com/webshining/study-"
 "bot\">GitHub</a></b>"
+msgstr ""
+
+#: app/keyboards/finish.py:10
+msgid "Finish"
 msgstr ""
 
 #: app/keyboards/update.py:10
