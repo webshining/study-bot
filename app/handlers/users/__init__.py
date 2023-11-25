@@ -5,6 +5,5 @@ from .openai import router
 from .schedule import router
 from .select_group import router
 from .start import router
-from .tasks import router
 
 __all__ = ['router']

@@ -1,3 +1,4 @@
+from aiogram.enums import ParseMode
 from aiogram.types import (InlineQuery, InlineQueryResultArticle,
                            InputTextMessageContent)
 
@@ -6,19 +7,21 @@ from loader import _
 
 from .call_schedule import _get_call_schedule_data
 from .current_lesson import _get_current_lesson_data
+from .openai import _get_openai_data
 from .schedule import _get_schedule_data
-from .tasks import _get_tasks_data
 
 
 @router.inline_query()
 async def inline_handler(query: InlineQuery, group_id):
+    results = []
     if not group_id:
         no_group = InlineQueryResultArticle(
             id='1',
             title=_('You haven\'t selected a group yet🫡'),
             input_message_content=InputTextMessageContent(message_text=_('You haven\'t selected a group yet🫡')),
         )
-        await query.answer(results=[no_group], cache_time=1)
+        
+        results.append(no_group)
     else:
         schedule_text, schedule_markup = await _get_schedule_data(group_id)
         schedule = InlineQueryResultArticle(
@@ -43,13 +46,14 @@ async def inline_handler(query: InlineQuery, group_id):
             input_message_content=InputTextMessageContent(message_text=current_lesson_text),
             reply_markup=current_lesson_markup
         )
-        tasks_text, tasks_markup = await _get_tasks_data(group_id)
-        tasks = InlineQueryResultArticle(
-            id='4',
-            title=_('Tasks'),
-            description=_('get tasks'),
-            input_message_content=InputTextMessageContent(message_text=tasks_text),
-            reply_markup=tasks_markup
+        results.extend([schedule, call_schedule, current_lesson])
+    if query.query:
+        text = await _get_openai_data(query.query)
+        openai_chat = InlineQueryResultArticle(
+            id="5",
+            title="OpenAI Chat",
+            input_message_content=InputTextMessageContent(message_text=text, parse_mode=ParseMode.MARKDOWN_V2)
         )
+        results.append(openai_chat)
 
-        await query.answer(results=[schedule, call_schedule, current_lesson, tasks], cache_time=1)
+    await query.answer(results=results, cache_time=3)

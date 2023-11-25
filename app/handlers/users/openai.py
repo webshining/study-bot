@@ -8,15 +8,15 @@ from loader import _, bot, openai_client
 from utils import logger
 
 
-@router.message(lambda message: message.text.startswith("!"))
+@router.message(lambda message: message.text and message.text.startswith("!"))
 async def openai_chat(message: Message):
     await bot.send_chat_action(message.chat.id, ChatAction.TYPING)
-    text = await _get_openai_data(message.text)
+    text = await _get_openai_data(message.text[1:])
     await message.answer(text=text, parse_mode=ParseMode.MARKDOWN_V2)
-        
-    
+
+
 async def _get_openai_data(question: str) -> str:
-    ques = question[1:]
+    ques = question
     ques = f'{ques[:45]}...' if len(ques) > 50 else ques
     ques = re.sub(r'[\_\*[\]()~>#\+\-=|{}\.!]', r'\\\g<0>', ques)
     ques = '\n'.join([f'>{i}' for i in ques.split("\n")])
@@ -25,7 +25,7 @@ async def _get_openai_data(question: str) -> str:
             model="gpt-3.5-turbo-1106",
             messages=[
                 {"role": "system", "content": "Yout should use markdown to answer."},
-                {"role": "user", "content": question[1:]}
+                {"role": "user", "content": question}
             ],
         )
         answ = response.choices[0].message.content
