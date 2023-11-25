@@ -4,7 +4,6 @@ from aiogram.types import Message
 from app.commands import get_admins_commands, get_default_commands
 from app.routers import user_router as router
 from loader import _
-from app.keyboards import get_menu_markup
 
 
 @router.message(Command('start'))
@@ -18,4 +17,4 @@ async def start_handler(message: Message, user):
 
     text += _(
         '\n\nCreator: <b>@webshining</b>😉\nRepositofy: <b><a href="https://github.com/webshining/study-bot">GitHub</a></b>')
-    await message.answer(text, disable_web_page_preview=True, reply_markup=get_menu_markup())
+    await message.answer(text, disable_web_page_preview=True)

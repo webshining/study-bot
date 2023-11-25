@@ -1,5 +1,5 @@
 DATABASE_URL := $(shell python _get_database_url.py)
-MIGRATIONS_PATH := ./data/migrations
+MIGRATIONS_PATH := ./migrations
 LOCALES_PATH := ./data/locales
 LOCALES_DOMAIN := bot
 

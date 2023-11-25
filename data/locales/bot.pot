@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-16 02:59+0300\n"
+"POT-Creation-Date: 2023-11-25 05:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.12.1\n"
+"Generated-By: Babel 2.13.1\n"
 
 #: app/commands/default.py:8
 msgid "start message"
@@ -33,24 +33,12 @@ msgstr ""
 msgid "get current lesson"
 msgstr ""
 
-#: app/commands/default.py:12 app/handlers/users/inline.py:50
-msgid "get tasks"
-msgstr ""
-
-#: app/commands/default.py:13
+#: app/commands/default.py:12
 msgid "select your group"
 msgstr ""
 
-#: app/commands/default.py:14
+#: app/commands/default.py:13
 msgid "cancel"
-msgstr ""
-
-#: app/commands/default.py:15
-msgid "menu off"
-msgstr ""
-
-#: app/commands/default.py:16
-msgid "menu on"
 msgstr ""
 
 #: app/commands/super_admins.py:11
@@ -61,7 +49,7 @@ msgstr ""
 msgid "Canceled"
 msgstr ""
 
-#: app/handlers/admins/confirm_tasks.py:28 app/handlers/users/tasks.py:41
+#: app/handlers/admins/confirm_tasks.py:28 app/handlers/users/tasks.py:44
 msgid "Tasks is empty🫡"
 msgstr ""
 
@@ -73,14 +61,14 @@ msgstr ""
 msgid "Users is empty🫡"
 msgstr ""
 
-#: app/handlers/users/call_schedule.py:10 app/keyboards/menu.py:11
+#: app/handlers/users/call_schedule.py:10
 msgid "Call schedule 🔔"
 msgstr ""
 
 #: app/handlers/users/call_schedule.py:19
-#: app/handlers/users/current_lesson.py:38 app/handlers/users/schedule.py:43
-#: app/handlers/users/select_group.py:19 app/handlers/users/select_group.py:31
-#: app/handlers/users/select_group.py:44
+#: app/handlers/users/current_lesson.py:39 app/handlers/users/schedule.py:43
+#: app/handlers/users/select_group.py:20 app/handlers/users/select_group.py:32
+#: app/handlers/users/select_group.py:45
 msgid ""
 "It seems the servers are not responding, and there is no saved data for "
 "you🫡"
@@ -110,8 +98,7 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-#: app/handlers/users/create_task.py:71 app/handlers/users/menu.py:11
-#: app/handlers/users/menu.py:16 app/handlers/users/select_group.py:60
+#: app/handlers/users/create_task.py:71 app/handlers/users/select_group.py:58
 msgid "Success"
 msgstr ""
 
@@ -119,33 +106,33 @@ msgstr ""
 msgid "Enter task name:"
 msgstr ""
 
-#: app/handlers/users/current_lesson.py:13 app/keyboards/menu.py:12
+#: app/handlers/users/current_lesson.py:14
 msgid "Current lesson 🔎"
 msgstr ""
 
-#: app/handlers/users/current_lesson.py:24 app/handlers/users/inline.py:18
+#: app/handlers/users/current_lesson.py:25 app/handlers/users/inline.py:18
 #: app/handlers/users/inline.py:19 app/handlers/users/schedule.py:26
-#: app/handlers/users/tasks.py:26
+#: app/handlers/users/tasks.py:27
 msgid "You haven't selected a group yet🫡"
 msgstr ""
 
-#: app/handlers/users/current_lesson.py:45
-msgid "Now <b>{}</b>"
-msgstr ""
-
 #: app/handlers/users/current_lesson.py:46
-msgid ""
-"\n"
-"End in <b>{}</b>"
+msgid "Now <b>{}</b>"
 msgstr ""
 
 #: app/handlers/users/current_lesson.py:47
 msgid ""
 "\n"
+"End in <b>{}</b>"
+msgstr ""
+
+#: app/handlers/users/current_lesson.py:48
+msgid ""
+"\n"
 "Start in <b>{}</b>"
 msgstr ""
 
-#: app/handlers/users/current_lesson.py:50
+#: app/handlers/users/current_lesson.py:51
 msgid "No more lessons today🫡"
 msgstr ""
 
@@ -165,7 +152,19 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
-#: app/handlers/users/schedule.py:15 app/keyboards/menu.py:10
+#: app/handlers/users/inline.py:50
+msgid "get tasks"
+msgstr ""
+
+#: app/handlers/users/openai.py:12
+msgid "It will take a few seconds"
+msgstr ""
+
+#: app/handlers/users/openai.py:27
+msgid "Looks like I got an error, it will be fixed soon"
+msgstr ""
+
+#: app/handlers/users/schedule.py:15
 msgid "Schedule 📖"
 msgstr ""
 
@@ -173,23 +172,27 @@ msgstr ""
 msgid "Schedule is empty🫡"
 msgstr ""
 
-#: app/handlers/users/select_group.py:14 app/keyboards/menu.py:13
+#: app/handlers/users/schedule.py:53 app/handlers/users/tasks.py:52
+msgid "Monday Tuesday Wednesday Thursday Friday Saturday Sunday"
+msgstr ""
+
+#: app/handlers/users/select_group.py:15
 msgid "Select Group 👥"
 msgstr ""
 
-#: app/handlers/users/select_group.py:16
+#: app/handlers/users/select_group.py:17
 msgid "Select faculty:"
 msgstr ""
 
-#: app/handlers/users/select_group.py:32
+#: app/handlers/users/select_group.py:33
 msgid "Select course:"
 msgstr ""
 
-#: app/handlers/users/select_group.py:45
+#: app/handlers/users/select_group.py:46
 msgid "Select group:"
 msgstr ""
 
-#: app/handlers/users/start.py:12
+#: app/handlers/users/start.py:11
 msgid ""
 "Hello <b>{}</b>👋\n"
 "I am a diary bot\n"
@@ -197,7 +200,7 @@ msgid ""
 "Commands:</b>"
 msgstr ""
 
-#: app/handlers/users/start.py:19
+#: app/handlers/users/start.py:18
 msgid ""
 "\n"
 "\n"
@@ -216,9 +219,5 @@ msgstr ""
 
 #: app/keyboards/week.py:11
 msgid "Next week"
-msgstr ""
-
-#: utils/time.py:16
-msgid "Monday Tuesday Wednesday Thursday Friday Saturday Sunday"
 msgstr ""
 
