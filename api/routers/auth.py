@@ -5,8 +5,8 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from api.services import (delete_token, generate_tokens, get_current_user,
-                          is_telegram, unauthorized)
-from data.config import REFRESH_TOKEN_EXPIRE_MINUTES
+                          is_telegram, not_enough_rights, unauthorized)
+from data.config import FRONTEND_URL, REFRESH_TOKEN_EXPIRE_MINUTES
 from database.services import get_user
 from loader import bot
 
@@ -16,30 +16,29 @@ templates = Jinja2Templates(directory="api/templates")
 
 
 @router.get('/')
-async def login(request: Request, redirect: str = ""):
+async def login(request: Request, status: str = FRONTEND_URL):
     bot_username = (await bot.get_me()).username
     return templates.TemplateResponse('login.html', {"bot_username": bot_username,
                                                      "redirect": request.url_for('login_redirect').include_query_params(
-                                                         redirect=redirect), "request": request})
+                                                         status=status), "request": request})
 
 
 @router.get('/redirect')
-async def login_redirect(id: int, redirect: str, request: Request):
+async def login_redirect(id: int, request: Request, status: str = FRONTEND_URL):
     if is_telegram(dict(request.query_params)):
         user = get_user(id)
         if not user:
-            return unauthorized
+            return RedirectResponse(f'{status}#{json.dumps({"detail": unauthorized.detail})}')
+        if user.status not in ("admin", "super_admin"):
+            return RedirectResponse(f'{status}#{json.dumps({"detail": not_enough_rights.detail})}')
         access_token, refresh_token = await generate_tokens({'id': id}, {'id': id})
         data = {"user": user.to_dict(), "accessToken": access_token}
-        if redirect:
-            response = RedirectResponse(f'{redirect}#{json.dumps(data)}')
-        else:
-            response = JSONResponse(data)
+        response = RedirectResponse(f'{status}#{json.dumps(data)}')
         response.set_cookie(key='refreshToken', value=refresh_token, max_age=REFRESH_TOKEN_EXPIRE_MINUTES * 60,
-                            httponly=True, samesite='none')
+                            httponly=True, samesite='none', secure=True)
         return response
     else:
-        return unauthorized
+        return RedirectResponse(f'{status}#{json.dumps({"detail": unauthorized.detail})}')
 
 
 @router.get('/refresh')
@@ -52,12 +51,12 @@ async def refresh(request: Request):
     access_token, refresh_token = await generate_tokens({'id': user.id}, {'id': user.id})
     response = JSONResponse({'user': user.to_dict(), 'accessToken': access_token})
     response.set_cookie(key='refreshToken', value=refresh_token, httponly=True,
-                        max_age=REFRESH_TOKEN_EXPIRE_MINUTES * 60, samesite='none')
+                        max_age=REFRESH_TOKEN_EXPIRE_MINUTES * 60, samesite='none', secure=True)
     return response
 
 
 @router.get('/logout')
 async def logout():
-    response = JSONResponse({'ok': True})
+    response = JSONResponse({'message': "ok"})
     response.delete_cookie(key='refreshToken', secure=True, httponly=True, samesite='none')
     return response

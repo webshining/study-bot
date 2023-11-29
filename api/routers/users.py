@@ -1,11 +1,9 @@
-from typing import Annotated
+from fastapi import APIRouter, Depends
 
-from fastapi import APIRouter, Body, Depends
-
-from api.services import get_current_user, notfound, not_enough_rights
 from api.models import UserPatch
-from database.services import get_user, get_users, update_user_status
+from api.services import get_current_user, not_enough_rights, notfound
 from database.models import User
+from database.services import get_user, get_users, update_user_status
 
 router = APIRouter(dependencies=[Depends(get_current_user)])
 

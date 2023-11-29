@@ -17,7 +17,9 @@ def create_user(id: int, name: str, username: str = None) -> User:
 
 
 def update_user(id: int, name: str, username: str = None) -> User:
-    user = User(id=id, name=name, username=username)
+    user = get_user(id)
+    user.name = name
+    user.username = username
     user.save()
     return user
 

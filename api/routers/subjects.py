@@ -2,9 +2,10 @@ from fastapi import APIRouter, Depends
 
 from api.models import SubjectCreate, SubjectPatch
 from api.services import get_current_user, notfound
-from database.services import get_subject, get_subjects, update_subject, create_subject, delete_subject
+from database.services import (create_subject, delete_subject, get_subject,
+                               get_subjects, update_subject)
 
-router = APIRouter(dependencies=[])
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
 
 @router.get('/')

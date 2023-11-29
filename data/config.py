@@ -8,9 +8,10 @@ env.read_env()
 
 DIR = Path(__file__).absolute().parent.parent
 
-TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', default=None)
-
-ADMINS = env.list('ADMINS', subcast=int, default=[])
+TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN')
+FRONTEND_URL = env.str('FRONTEND_URL', default="http://localhost:3000")
+PORT = env.int("PORT", default=4000)
+HOST = env.str("HOST", default="0.0.0.0")
 
 DB_USER = env.str('DB_USER', default=None)
 DB_NAME = env.str('DB_NAME', default=None)

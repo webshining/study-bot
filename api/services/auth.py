@@ -13,7 +13,7 @@ from data.config import (ACCESS_SECRET_KEY, ACCESS_TOKEN_EXPIRE_MINUTES,
 from database.services import get_user
 from loader import redis
 
-from .exceptions import unauthorized, not_enough_rights
+from .exceptions import not_enough_rights, unauthorized
 
 oauth2_scheme = OAuth2AuthorizationCodeBearer(tokenUrl='/api/auth/redirect', authorizationUrl='/api/auth')
 
@@ -53,7 +53,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme), refresh: bool = 
 def is_telegram(data: dict) -> bool:
     try:
         hash = data['hash']
-        del data['redirect']
+        del data['status']
         del data['hash']
         sorted_data = dict(sorted(data.items()))
         data_check_string = '\n'.join('='.join(i) for i in sorted_data.items()).encode()
