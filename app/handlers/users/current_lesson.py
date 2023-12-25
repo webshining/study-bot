@@ -36,8 +36,9 @@ async def current_lesson_callback(call: CallbackQuery, group_id):
 
 async def _get_current_lesson_data(group_id: int, *args, **kwargs) -> (str, any):
     timetable = await get_schedule(group_id)
-    text = _("It seems the servers are not responding, and there is no saved data for you🫡")
-    if timetable:
+    if timetable is None:
+        text = _("It seems the servers are not responding, and there is no saved data for you🫡")
+    elif timetable:
         now = get_current_time()
         today = [i for i in timetable if i.date == now.date()]
         lessons = [i for i in today[0].lessons if i and i.periods[0].timeEnd.time() > now.time()] if today else None
@@ -49,5 +50,7 @@ async def _get_current_lesson_data(group_id: int, *args, **kwargs) -> (str, any)
                 '\nStart in <b>{}</b>').format(str(current.timeStart - now).split(".")[0])
         else:
             text = _("No more lessons today🫡")
+    else:
+        text = _("No more lessons today🫡")
     markup = get_update_markup('current')
     return text, markup

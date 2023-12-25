@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-26 00:52+0200\n"
+"POT-Creation-Date: 2023-12-25 18:16+0200\n"
 "PO-Revision-Date: 2023-08-28 20:44+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
@@ -17,21 +17,21 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.13.1\n"
+"Generated-By: Babel 2.14.0\n"
 
 #: app/commands/default.py:8
 msgid "start message"
 msgstr "почати"
 
-#: app/commands/default.py:9 app/handlers/users/inline.py:27
+#: app/commands/default.py:9 app/handlers/users/inline.py:30
 msgid "get schedule"
 msgstr "отримати розклад"
 
-#: app/commands/default.py:10 app/handlers/users/inline.py:35
+#: app/commands/default.py:10 app/handlers/users/inline.py:38
 msgid "get call schedule"
 msgstr "дзвінки"
 
-#: app/commands/default.py:11 app/handlers/users/inline.py:42
+#: app/commands/default.py:11 app/handlers/users/inline.py:45
 msgid "get current lesson"
 msgstr "яка пара зараз"
 
@@ -51,7 +51,7 @@ msgstr "список користувачів [admin]"
 msgid "Canceled"
 msgstr "Завершено"
 
-#: app/handlers/admins/confirm_tasks.py:28 app/handlers/users/tasks.py:44
+#: app/handlers/admins/confirm_tasks.py:28
 msgid "Tasks is empty🫡"
 msgstr "Список завдань порожній🫡"
 
@@ -68,7 +68,7 @@ msgid "Call schedule 🔔"
 msgstr "Дзвінки 🔔"
 
 #: app/handlers/users/call_schedule.py:19
-#: app/handlers/users/current_lesson.py:39 app/handlers/users/schedule.py:43
+#: app/handlers/users/current_lesson.py:40 app/handlers/users/schedule.py:43
 #: app/handlers/users/select_group.py:20 app/handlers/users/select_group.py:32
 #: app/handlers/users/select_group.py:45
 msgid ""
@@ -84,17 +84,16 @@ msgstr "Роздкладу немає🫡"
 msgid "Current lesson 🔎"
 msgstr "Який зараз предмет 🔎"
 
-#: app/handlers/users/current_lesson.py:25 app/handlers/users/inline.py:18
-#: app/handlers/users/inline.py:19 app/handlers/users/schedule.py:26
-#: app/handlers/users/tasks.py:27
+#: app/handlers/users/current_lesson.py:25 app/handlers/users/inline.py:20
+#: app/handlers/users/inline.py:21 app/handlers/users/schedule.py:26
 msgid "You haven't selected a group yet🫡"
 msgstr "Ви ще не обрали групу🫡"
 
-#: app/handlers/users/current_lesson.py:46
+#: app/handlers/users/current_lesson.py:47
 msgid "Now <b>{}</b>"
 msgstr "Зараз <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:47
+#: app/handlers/users/current_lesson.py:48
 msgid ""
 "\n"
 "End in <b>{}</b>"
@@ -102,7 +101,7 @@ msgstr ""
 "\n"
 "Кінець через <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:48
+#: app/handlers/users/current_lesson.py:49
 msgid ""
 "\n"
 "Start in <b>{}</b>"
@@ -110,31 +109,24 @@ msgstr ""
 "\n"
 "Початок через <b>{}</b>"
 
-#: app/handlers/users/current_lesson.py:51
+#: app/handlers/users/current_lesson.py:52
+#: app/handlers/users/current_lesson.py:54
 msgid "No more lessons today🫡"
 msgstr "На сьогодня пари закінчились🫡"
 
-#: app/handlers/users/inline.py:26
+#: app/handlers/users/inline.py:29
 msgid "Schedule"
 msgstr "Розклад"
 
-#: app/handlers/users/inline.py:34
+#: app/handlers/users/inline.py:37
 msgid "Call schedule"
 msgstr "Дзвінки"
 
-#: app/handlers/users/inline.py:41
+#: app/handlers/users/inline.py:44
 msgid "Current lesson"
 msgstr "Який зараз предмет"
 
-#: app/handlers/users/inline.py:49
-msgid "Tasks"
-msgstr "Завдання"
-
-#: app/handlers/users/inline.py:50
-msgid "get tasks"
-msgstr "завдання"
-
-#: app/handlers/users/openai.py:37
+#: app/handlers/users/openai.py:36
 msgid "Looks like I got an error, it will be fixed soon"
 msgstr "Схоже я отримав помилку, скоро це виправлять"
 
@@ -146,7 +138,7 @@ msgstr "Розклад 📖"
 msgid "Schedule is empty🫡"
 msgstr "Роздкладу немає🫡"
 
-#: app/handlers/users/schedule.py:53 app/handlers/users/tasks.py:52
+#: app/handlers/users/schedule.py:53
 msgid "Monday Tuesday Wednesday Thursday Friday Saturday Sunday"
 msgstr "Понеділок Вівторок Середа Четвер П'ятниця Субота Неділя"
 
@@ -235,4 +227,10 @@ msgstr "Наступний тиждень"
 
 #~ msgid "It will take a few seconds"
 #~ msgstr "Зачекайте пару секунд"
+
+#~ msgid "Tasks"
+#~ msgstr "Завдання"
+
+#~ msgid "get tasks"
+#~ msgstr "завдання"
 
