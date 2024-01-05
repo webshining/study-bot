@@ -15,12 +15,12 @@ def headers():
     return {"Accept-Language": "uk", 'User-Agent': UserAgent().random}
 
 def save_to_file(filename: str, data: object):
-    json.dump(data, open(f'{DIR}/data/{filename}', "w", encoding="utf-8"), indent=4, ensure_ascii=False)
+    json.dump(data, open(f'{DIR}/save/{filename}', "w", encoding="utf-8"), indent=4, ensure_ascii=False)
 
 
 def read_file(filename: str) -> any or None:
     try:
-        return json.load(open(f'{DIR}/data/{filename}'))
+        return json.load(open(f'{DIR}/save/{filename}'))
     except:
         return None
 
@@ -84,7 +84,7 @@ async def get_faculties() -> list[Faculty] or None:
     try:
         async with aiohttp.ClientSession() as session:
             async with session.post('https://mia.mobil.knute.edu.ua/list/faculties', 
-                                    headers=headers()) as res:
+                                    headers=headers(), timeout=1.5) as res:
                 faculties = [Faculty(**i) for i in await res.json()]
                 save_to_file('faculties.json', await res.json())
                 return faculties
@@ -99,7 +99,7 @@ async def get_courses(facultyId: int) -> list[Course] or None:
         async with aiohttp.ClientSession() as session:
             async with session.post('https://mia.mobil.knute.edu.ua/list/courses', 
                                     data={"facultyId": facultyId}, 
-                                    headers=headers()) as res:
+                                    headers=headers(), timeout=1.5) as res:
                 courses = [Course(**i) for i in await res.json()]
                 save_to_file('courses.json', await res.json())
                 return courses
@@ -114,7 +114,7 @@ async def get_groups(facultyId: int, courseId: int) -> list[Group] or None:
         async with aiohttp.ClientSession() as session:
             async with session.post('https://mia.mobil.knute.edu.ua/list/groups', 
                                     data={"facultyId": facultyId, "course": courseId}, 
-                                    headers=headers()) as res:
+                                    headers=headers(), timeout=1.5) as res:
                 groups = sorted([Group(**i) for i in await res.json()], key=lambda g: g.name)
                 save_to_file('groups.json', await res.json())
                 return groups
@@ -131,7 +131,7 @@ async def get_schedule(groupId: int, date_range: list[date] = None) -> list[Day]
         async with aiohttp.ClientSession() as session:
             async with session.post('https://mia.mobil.knute.edu.ua/time-table/group', 
                                     data={"groupId": groupId, "dateStart": date_start, "dateEnd": date_end}, 
-                                    headers=headers()) as res:
+                                    headers=headers(), timeout=1.5) as res:
                 timetable = [Day(**i) for i in await res.json() if
                             [l for l in i['lessons'] if [p for p in l['periods'] if p['timeStart']]]]
                 save_to_file(f'{groupId}.json', await res.json())
@@ -147,7 +147,7 @@ async def get_timetable_call() -> list[Call] or None:
     try:
         async with aiohttp.ClientSession() as session:
             async with session.post('https://mia.mobil.knute.edu.ua/time-table/call-schedule', 
-                                    headers=headers()) as res:
+                                    headers=headers(), timeout=1.5) as res:
                 save_to_file('call.json', await res.json())
                 return [Call(**i) for i in await res.json()]
     except Exception as e:

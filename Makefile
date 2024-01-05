@@ -6,6 +6,9 @@ LOCALES_DOMAIN := bot
 
 run:
 	./bin/entrypoint.sh
+setup:
+	cp .env.ren .env && \
+	pip install -r requirements.txt
 pw_create:
 	pw_migrate create --auto --database ${DATABASE_URL} --directory ${MIGRATIONS_PATH} migrate
 pw_migrate:

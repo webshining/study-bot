@@ -16,6 +16,8 @@ services:
       RD_DB: 5
       RD_HOST: rd
       RD_PORT: 6379
+    volumes:
+      - save:/app/save
   rd:
     image: redis:alpine
     restart: unless-stopped
@@ -33,3 +35,4 @@ services:
       
 volumes:
   postgres_data:
+  save:

@@ -15,14 +15,14 @@ async def on_shutdown():
     logger.info('Bot shutting down!')
 
     
-async def main():
+def main():
     setup_middleware(dp)
     setup_handlers(dp)
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
-    await dp.start_polling(bot)
+    dp.run_polling(bot)
 
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    main()
     
