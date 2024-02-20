@@ -2,7 +2,7 @@ LOCALES_PATH := ./data/locales
 LOCALES_DOMAIN := bot
 
 run:
-	./bin/entrypoint.sh
+	python main.py
 pybabel_extract: 
 	pybabel extract --input-dirs=. -o $(LOCALES_PATH)/$(LOCALES_DOMAIN).pot
 pybabel_init: 

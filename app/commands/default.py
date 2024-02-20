@@ -7,8 +7,7 @@ def get_default_commands(lang: str = 'en'):
     commands = [
         BotCommand(command='/start', description=_('start message', locale=lang)),
         BotCommand(command='/schedule', description=_('get schedule', locale=lang)),
-        BotCommand(command='/subjects', description=_('get subjects info', locale=lang)),
-        BotCommand(command='/current', description=_('get current lesson', locale=lang)),
+        BotCommand(command='/group', description=_('get group info', locale=lang)),
         BotCommand(command='/cancel', description=_('cancel', locale=lang)),
     ]
     return commands

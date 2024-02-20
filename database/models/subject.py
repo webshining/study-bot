@@ -1,15 +1,21 @@
-from pydantic import BaseModel, Field
+from pydantic import Field, BaseModel
 
-from loader import db
-from .mongo import PydanticObjectId
+from .base import Base
 
 
-class Subject(BaseModel):
-    id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id") or None
+class SubjectFile(BaseModel):
+    file_id: str
+    name: str
+
+
+class Subject(Base):
+    id: int = Field(alias="_id", default_factory=int)
     name: str
     audience: str
     teacher: str
-    info: str
+    info: str | None = Field(None)
+    group: int
+    files: list[SubjectFile] = Field([])
 
 
-subjects_collection = db['subjects']
+Subject.set_collection("subjects")

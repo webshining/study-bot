@@ -7,7 +7,7 @@ from loader import _
 
 
 def get_current_time(time_zone: str = TIMEZONE) -> datetime:
-    return datetime.now(timezone(time_zone)).replace(tzinfo=None)
+    return datetime.now(timezone(time_zone)).replace(tzinfo=None, microsecond=False)
 
 
 def str_to_time(string: str, format: str) -> datetime:

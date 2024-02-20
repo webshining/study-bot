@@ -1,16 +1,25 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
 
-from loader import db
-
-from .mongo import PydanticObjectId
+from .base import Base
 
 
-class User(BaseModel):
-    id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id") or None
-    user_id: int
+class User(Base):
+    id: int = Field(alias="_id", default_factory=int)
     name: str
-    username: str or None
-    status: str
+    username: str | None = Field(None)
+    status: str = Field("user")
+    group: int | None = Field(None)
+
+    def is_admin(self):
+        return self.status == "admin"
+
+    @classmethod
+    async def get_or_create(cls, id: int, name: str, username: str = None):
+        if await cls.get(id):
+            user = await cls.update(id, name=name, username=username)
+        else:
+            user = await cls.create(id=id, name=name, username=username, group=None)
+        return user
 
 
-users_collection = db['users']
+User.set_collection("users")

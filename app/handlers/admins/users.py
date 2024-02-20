@@ -1,27 +1,26 @@
+import csv
+import io
+
 from aiogram.filters import Command
-from aiogram.types import Message
+from aiogram.types import Message, BufferedInputFile
 
 from app.routers import admin_router as router
-from database.services import get_users
-from loader import _
+from database.models import User
 
 
 @router.message(Command('users'))
 async def _users(message: Message):
-    text, markup = _get_users_data()
-    await message.answer(text, reply_markup=markup)
+    file = await _get_users_data()
+    await message.answer_document(BufferedInputFile(file, 'users.csv'))
 
 
-def _get_users_data():
-    users = get_users()
-    if not users:
-        return _('Users is empty🫡'), None
-    text = ''
-    for user in users:
-        text += f'\n{"--" * 15}'
-        for key, value in user.dict().items():
-            if key == 'username' and value:
-                text += f'\n|{key}: <tg-spoiler><b>@{value}</b></tg-spoiler>'
-            else:
-                text += f'\n|{key}: <b>{value}</b>'
-    return text, None
+async def _get_users_data():
+    file = io.StringIO()
+    writer = csv.writer(file)
+    writer.writerow(list(User.__annotations__.keys()))
+    for user in await User.get_all():
+        writer.writerow(list(user.dict().values()))
+    file.seek(0)
+    file = io.BytesIO(file.getvalue().encode())
+    file.seek(0)
+    return file.getvalue()

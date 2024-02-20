@@ -1,3 +1,5 @@
-from .day import Day, days_collection
-from .subject import Subject, subjects_collection
-from .user import User, users_collection
+from .group import Group
+from .subject import Subject
+from .task import Task
+from .timetable import Timetable, TimetableDay
+from .user import User

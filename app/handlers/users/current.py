@@ -1,24 +1,28 @@
 from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from app.keyboards import get_update_markup
 from app.routers import user_router as router
-from database.services import get_day_by_date
+from app.states import GroupState
+from database.models import Timetable
 from loader import _, bot
 from utils import get_current_time
-
-from .subjects import _get_subject_data
+from .group import _get_subject_text
 
 
 @router.message(Command('current'))
-async def current_handler(message: Message):
-    text, markup = _get_current_data()
+async def current_handler(message: Message, user, state: FSMContext):
+    if not user.group:
+        await message.answer(_("You are not a member of the group yet, enter a name to create a new one:"))
+        return await state.set_state(GroupState.create)
+    text, markup = await _get_current_data(user.group)
     await message.answer(text, reply_markup=markup)
 
 
 @router.callback_query(lambda call: call.data.startswith('current_update'))
-async def current_callback_handler(call: CallbackQuery):
-    text, markup = _get_current_data()
+async def current_callback_handler(call: CallbackQuery, user):
+    text, markup = await _get_current_data(user.group)
     try:
         if call.inline_message_id:
             return await bot.edit_message_text(text=text, reply_markup=markup, inline_message_id=call.inline_message_id)
@@ -28,24 +32,22 @@ async def current_callback_handler(call: CallbackQuery):
     await call.answer()
 
 
-def _get_current_data():
+async def _get_current_data(group: int):
     _current_time = get_current_time()
-    day = get_day_by_date(_current_time)
-    subjects = day.subjects
-    if not subjects:
+    timetable = await Timetable.get(group)
+    day_id = _current_time.weekday() if _current_time.isocalendar().week % 2 == 0 else _current_time.weekday() + 7
+    day = next(iter([i for i in timetable.days if i.day_id == day_id]))
+    subject = next(iter([i for i in day.subjects if i.time_end >= _current_time]), None)
+    if not subject:
         text = _('No class today')
     else:
-        subjects = [s for s in subjects if s.time_end.time() >= _current_time.time()]
-        if not subjects:
-            text = _('Classes are over')
-        elif _current_time >= subjects[0].time_start:
-            text, *other = _get_subject_data(subjects[0].subject)
-            text += _('\n\nClass ends at {} in {}').format(subjects[0].time_end, subjects[0].time_end - _current_time)
+        if _current_time >= subject.time_start:
+            text = _get_subject_text(subject.subject)
+            text += _('\n\nClass ends at {} in {}').format(subject.time_end.time(), subject.time_end - _current_time)
         else:
-            text = _('No class right now! Next class: <b>{}</b> at {} in {}').format(subjects[0].subject.name,
-                                                                                     subjects[0].time_start,
-                                                                                     subjects[
-                                                                                         0].time_start - _current_time)
+            text = (_('No class right now! Next class:\n\n{}\n\nat {} in {}')
+                    .format(_get_subject_text(subject.subject), subject.time_start.time(),
+                            subject.time_start - _current_time))
 
     markup = get_update_markup('current')
     return text, markup
