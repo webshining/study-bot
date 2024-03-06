@@ -58,6 +58,7 @@ async def _group_subjects(call: CallbackQuery, user: User, state: FSMContext):
 async def _group_subject(call: CallbackQuery, user: User, state: FSMContext):
     if call.data[8:].startswith("delete"):
         await Subject.delete({"_id": int(call.data.split("_")[-1])})
+        await call.message.delete()
     else:
         pass
     await call.answer()
